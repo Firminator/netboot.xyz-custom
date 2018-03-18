@@ -15,15 +15,15 @@ item --key x dasboot-main-menu_exit  e(X)it and return to Netboot.xyz menu
 item --key r reboot                  (R)eboot
 choose dasboot-main-menu_choice || goto error
 echo ${cls}
-chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
-goto dasboot-main-menu
+goto ${dasboot-main-menu_choice}
+goto dasboot-main-menu_exit
 
 :bios-submenu
 chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 goto dasboot-main-menu
 
 :diagnostic-submenu
-echo chain diagnostic-submenu.ipxe || goto error
+chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
@@ -43,7 +43,8 @@ prompt
 goto dasboot-main-menu
 
 :dasboot-main-menu_exit
-exit
+chain utils.ipxe
+#exit
 
 :reboot
 reboot
