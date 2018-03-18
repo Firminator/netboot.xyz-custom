@@ -6,13 +6,13 @@
 :dasboot-main-menu
 clear dasboot-main-menu_choice
 menu DasBoot
-item --key b bios-submenu        (B)IOS Updates
-item --key d diagnostic-submenu  (D)iagnostic Tools
-item --key f firmware-submenu    (F)irmware Updates
-item --key s systeminfo-submenu  (S)ystem Information
-item --key w wiping-submenu      (W)iping / Media Sanitation
-item --key x exit                e(X)it and return to Netboot.xyz menu
-item --key r reboot              (R)eboot
+item --key b bios-submenu            (B)IOS Updates
+item --key d diagnostic-submenu      (D)iagnostic Tools
+item --key f firmware-submenu        (F)irmware Updates
+item --key s systeminfo-submenu      (S)ystem Information
+item --key w wiping-submenu          (W)iping / Media Sanitation
+item --key x dasboot-main-menu_exit  e(X)it and return to Netboot.xyz menu
+item --key r reboot                  (R)eboot
 choose dasboot-main-menu_choice || goto error
 echo ${cls}
 chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
@@ -42,7 +42,7 @@ echo chain wiping-submenu.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
-:exit
+:dasboot-main-menu_exit
 exit
 
 :reboot
