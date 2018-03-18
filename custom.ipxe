@@ -46,7 +46,7 @@ prompt
 goto dasboot-main-menu
 
 :netboot
-chain https://github.com/antonym/netboot.xyz/blob/master/src/menu.ipxe || goto error
+chain chain --autofree https://boot.netboot.xyz/menu.ipxe || goto error
 
 :local
 echo Booting from local disks ...
