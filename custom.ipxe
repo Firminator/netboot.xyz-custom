@@ -19,8 +19,7 @@ goto ${dasboot-main-menu_choice} || goto error
 goto dasboot-main-menu
 
 :bios-submenu
-echo chain bios-submenu.ipxe || goto error
-prompt
+chain bios-submenu.ipxe || goto error
 goto dasboot-main-menu
 
 :diagnostic-submenu
