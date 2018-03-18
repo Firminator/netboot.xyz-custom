@@ -21,19 +21,29 @@ goto ${dasboot-main-menu_choice}
 goto dasboot-main-menu_exit
 
 :bios-submenu
-echo bios-submenu.ipxe || goto error
+echo Loading bios-submenu.ipxe || goto error
+prompt
+goto dasboot-main-menu
 
 :diagnostic-submenu
 echo diagnostic-submenu.ipxe || goto error
+prompt
+goto dasboot-main-menu
 
 :firmware-submenu
 echo firmware-submneu.ipxe || goto error
+prompt
+goto dasboot-main-menu
 
 :systeminfo-submenu
 echo systeminfo-submenu.ipxe || goto error
+prompt
+goto dasboot-main-menu
 
 :wiping-submenu
 echo wiping-submenu.ipxe || goto error
+prompt
+goto dasboot-main-menu
 
 :netboot
 chain https://github.com/antonym/netboot.xyz/master/menu.ipxe || goto error
