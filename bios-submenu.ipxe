@@ -2,12 +2,35 @@
 ###
 ### netboot.xyz-custom menu
 ###
+
+goto ${dasboot-main-menu_choice} ||
+
+:bios-submenu
+clear bios-submenu_choice
+menu DasBoot - BIOS Updates
+
 # 74 characters max
 item --gap ============================== BIOS Updates ===============================
-#item --gap -- -------------------------       BIOS        ------------------------------
-#item --gap --             -------------------------       BIOS        ------------------------------
+#tem --gap -- -------------------------       BIOS        ------------------------------
+#tem --gap --             -------------------------       BIOS        ------------------------------
 #tem --gap --             -------------------------    Diagnostics    ------------------------------
 #tem --gap --             -------------------------     Firmware      ------------------------------
 #tem --gap --             -------------------------    Sanitation     ------------------------------
 #tem --gap --             -------------------------      SysInfo      ------------------------------
 #tem --gap --             -------------------------       Tools       ------------------------------
+item --key d bios-submenu-dell   (D)ellEMC
+item --key h bios-submenu-hp     (H)ewlett-Packard
+item --key l bios-submenu-lenovo (L)enovo
+item --key x exit                e(X)it and return to Netboot.xyz menu
+choose bios-submenu_choice || goto error
+echo ${cls}
+goto ${bios-submenu} || goto error
+goto bios-submenu
+
+:exit
+exit
+
+:error
+echo Error occured, press any key to return to DasBoot - BIOS Updates menu ...
+prompt
+goto bios-submenu
