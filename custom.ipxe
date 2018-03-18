@@ -13,34 +13,33 @@ item --key s systeminfo-submenu  (S)ystem Information
 item --key w wiping-submenu      (W)iping / Media Sanitation
 item --key x exit                e(X)it and return to Netboot.xyz menu
 item --key r reboot              (R)eboot
-
 choose dasboot-main-menu_choice || goto error
 echo ${cls}
-goto ${dasboot-main-menu_choice}
-#goto dasboot-main-menu_exit
+goto ${dasboot-main-menu_choice} || goto error
+goto dasboot-main-menu
 
 :bios-submenu
-echo Loading bios-submenu.ipxe || goto error
+echo chain bios-submenu.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
 :diagnostic-submenu
-echo diagnostic-submenu.ipxe || goto error
+echo chain diagnostic-submenu.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
 :firmware-submenu
-echo firmware-submenu.ipxe || goto error
+echo chain firmware-submenu.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
 :systeminfo-submenu
-echo systeminfo-submenu.ipxe || goto error
+echo chain systeminfo-submenu.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
 :wiping-submenu
-echo wiping-submenu.ipxe || goto error
+echo chain wiping-submenu.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
