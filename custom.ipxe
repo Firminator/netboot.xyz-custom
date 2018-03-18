@@ -3,10 +3,49 @@
 ### netboot.xyz-custom menu
 ###
 
-:start
-echo Hello world!
-sleep 10
-goto custom_exit
+:dasboot-main-menu
+clear dasboot-main-menu_choice
+menu DasBoot
+item --key b bios-submenu        (B)IOS Updates
+item --key d diagnostic-submenu  (D)iagnostic Tools
+item --key f firmware-submenu    (F)irmware Updates
+item --key s systeminfo-submenu  (S)ystem Information
+item --key w wiping-submenu      (W)iping / Media Sanitation
+item --key x netboot             Exit and load the (N)etboot.xyz main menu
+item --key x local               Exit and continue with (L)ocal BIOS boot
+item --key r reboot              (R)eboot
 
-:custom_exit
-exit 0
+choose dasboot-main-menu_choice || goto error
+echo ${cls}
+goto ${dasboot-main-menu_choice}
+goto dasboot-main-menu_exit
+
+:bios-submenu
+echo bios-submenu.ipxe || goto error
+
+:diagnostic-submenu
+echo diagnostic-submenu.ipxe || goto error
+
+:firmware-submenu
+echo firmware-submneu.ipxe || goto error
+
+:systeminfo-submenu
+echo systeminfo-submenu.ipxe || goto error
+
+:wiping-submenu
+echo wiping-submenu.ipxe || goto error
+
+:netboot
+chain https://github.com/antonym/netboot.xyz/master/menu.ipxe || goto error
+
+:local
+echo Booting from local disks ...
+exit
+
+:reboot
+reboot
+
+:error
+echo Error occured, press any key to return to DasBoot main menu ...
+prompt
+goto dasboot-main-menu
