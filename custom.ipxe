@@ -3,20 +3,45 @@
 ### netboot.xyz-custom menu
 ###
 
+
+### Set a background picture
+### console --picture http://boot.ipxe.org/ipxe.png
+
+### Set a background picture with margins
+console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
+
+### Check if CPU supports 64-bit operation ("long mode")
+#cpuid --ext 29 && set cpuarch x86_64 || set cpuarch i386
+
+iseq ${buildarch} i386 && set cpuarch i386 ||
+iseq ${buildarch} x86_64 && set cpuarch x86_64 ||
+iseq ${buildarch} arm64 && set cpuarch arm64 ||
+iseq ${platform} pcbios && set fwplatform BIOS ||
+iseq ${platform} efi && set fwplatform UEFI ||
+iseq ${platform} efi && set fwplatform UEFI ||
+
+
+# Permanently require trusted images
+imgtrust --permanent   
+
+  
 :dasboot-main-menu
-clear dasboot-main-menu_choice
-menu DasBoot
+#clear dasboot-main-menu_choice
+menu DasBoot 2018-03-18
+item --gap ${manufacturer} ${product} --- CPU architecture: {cpuarch} --- FW Platform: {fwplatform} Mode
+item
 item --key b bios-submenu            (B)IOS Updates
 item --key d diagnostic-submenu      (D)iagnostic Tools
 item --key f firmware-submenu        (F)irmware Updates
-item --key s systeminfo-submenu      (S)ystem Information
+item --key i systeminfo-submenu      System (I)nformation
 item --key w wiping-submenu          (W)iping / Media Sanitation
-item --key x dasboot-main-menu_exit  e(X)it and return to Netboot.xyz menu
+item --key x exit                    e(X)it and return to Netboot.xyz menu
+item --key s shell                   Drop to iPXE (S)hell
 item --key r reboot                  (R)eboot
-choose dasboot-main-menu_choice || goto error
-echo ${cls}
-goto ${dasboot-main-menu_choice}
-goto dasboot-main-menu_exit
+choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto error
+#echo ${cls}
+#goto ${dasboot-main-menu_choice}
+#goto exit
 
 :bios-submenu
 chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
@@ -42,14 +67,19 @@ echo chain wiping-submenu.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
-:dasboot-main-menu_exit
+:exit
 chain utils.ipxe
 #exit
+
+:shell
+echo Type 'exit' to get the back to the menu
+shell
+goto dasboot-main-menu
 
 :reboot
 reboot
 
 :error
-echo Error occured, press any key to return to DasBoot main menu ...
+echo Error occured, press any key to return to main menu ...
 prompt
 goto dasboot-main-menu
