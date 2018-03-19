@@ -67,8 +67,8 @@ prompt
 goto dasboot-main-menu
 
 :exit
-chain utils.ipxe
-#exit
+#chain menu.ipxe
+exit
 
 :shell
 echo Type 'exit' to get the back to the menu
