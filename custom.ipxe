@@ -25,8 +25,8 @@ iseq ${platform} efi && set fwplatform UEFI ||
   
 :dasboot-main-menu
 #clear dasboot-main-menu_choice
-menu DasBoot 2018-03-18
-item --gap ${manufacturer} ${product} --- CPU architecture: {cpuarch} --- FW Platform: {fwplatform} Mode
+menu *** DasBoot 2018-03-18 ***
+item --gap ${manufacturer} ${product} * CPU: ${cpuarch} * FW Platform: ${fwplatform} Mode * RAM: ${memsize} MB
 item
 item --key b bios-submenu            (B)IOS Updates
 item --key d diagnostic-submenu      (D)iagnostic Tools
