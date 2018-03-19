@@ -36,7 +36,7 @@ item --key f firmware-submenu        (F)irmware Updates
 item --key i systeminfo-submenu      System (I)nformation
 item --key w wiping-submenu          (W)iping / Media Sanitation
 item
-item --key x exit                    e(X)it and return to Netboot.xyz menu
+item --key x exit                    e(X)it and go back to netboot menu
 item --key s shell                   Drop to iPXE (S)hell
 item --key r reboot                  (R)eboot
 choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto error
@@ -70,8 +70,8 @@ prompt
 goto dasboot-main-menu
 
 :exit
-chain menu.ipxe
-#exit
+#if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
+exit
 
 :shell
 echo Type 'exit' to get the back to the menu
