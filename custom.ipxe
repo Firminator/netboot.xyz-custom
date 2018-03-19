@@ -42,11 +42,12 @@ choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto erro
 #goto exit
 
 :bios-submenu
-chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
+echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
+prompt
 goto dasboot-main-menu
 
 :diagnostic-submenu
-chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
+echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
