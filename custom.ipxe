@@ -5,10 +5,10 @@
 
 
 ### Set a background picture
-### console --picture http://boot.ipxe.org/ipxe.png
+console --picture http://boot.ipxe.org/ipxe.png
 
 ### Set a background picture with margins
-console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
+### console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
 
 ### Check if CPU supports 64-bit operation ("long mode")
 #cpuid --ext 29 && set cpuarch x86_64 || set cpuarch i386
