@@ -4,10 +4,10 @@
 ###
 
 
-### Set a background picture
-console --picture http://boot.ipxe.org/ipxe.png
+### Set a background picture * Not enabled in netboot.xyz build
+### console --picture http://boot.ipxe.org/ipxe.png
 
-### Set a background picture with margins
+### Set a background picture with margins * Not enabled in netboot.xyz build
 ### console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
 
 ### Check if CPU supports 64-bit operation ("long mode")
@@ -19,8 +19,8 @@ iseq ${buildarch} arm64 && set cpuarch arm64 ||
 iseq ${platform} pcbios && set fwplatform BIOS ||
 iseq ${platform} efi && set fwplatform UEFI ||
 
-# Permanently require trusted images
-# imgtrust --permanent
+### Permanently require trusted images
+#imgtrust --permanent
 
   
 :dasboot-main-menu
