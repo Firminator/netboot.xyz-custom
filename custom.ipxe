@@ -26,7 +26,10 @@ iseq ${platform} efi && set fwplatform UEFI ||
 :dasboot-main-menu
 #clear dasboot-main-menu_choice
 menu *** DasBoot 2018-03-18 ***
-item --gap ${manufacturer} ${product} * CPU: ${cpuarch} * FW Platform: ${fwplatform} Mode * RAM: ${memsize} MB
+item --gap ${manufacturer} ${product} in ${fwplatform} Mode * CPU architecture: ${cpuarch}
+###
+#tem --gap RAM: ${memsize} MB * Not enabled in netboot.xyz build
+###
 item
 item --key b bios-submenu            (B)IOS Updates
 item --key d diagnostic-submenu      (D)iagnostic Tools
