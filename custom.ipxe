@@ -14,28 +14,29 @@
 #cpuid --ext 29 && set cpuarch x86_64 || set cpuarch i386
 
 iseq ${buildarch} i386 && set cpuarch i386 ||
+iseq ${buildarch} i386 && set cpuarch_text 32bit ||
 iseq ${buildarch} x86_64 && set cpuarch x86_64 ||
+iseq ${buildarch} x86_64 && set cpuarch_text 64bit ||
 iseq ${buildarch} arm64 && set cpuarch arm64 ||
+iseq ${buildarch} arm64 && set cpuarch_text 64bit ARM ||
 iseq ${platform} pcbios && set fwplatform BIOS ||
 iseq ${platform} efi && set fwplatform UEFI ||
 
 ### Permanently require trusted images
 #imgtrust --permanent
-
   
 :dasboot-main-menu
 #clear dasboot-main-menu_choice
 menu *** DasBoot 2018-03-18 ***
-item --gap ${manufacturer} ${product} in ${fwplatform} Mode * CPU architecture: ${cpuarch}
-###
-#tem --gap RAM: ${memsize} MB * Not enabled in netboot.xyz build
-###
+item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} CPU and ${memsize} MB RAM
+#tem --gap ${NIC} ${MAC}
 item
 item --key b bios-submenu            (B)IOS Updates
 item --key d diagnostic-submenu      (D)iagnostic Tools
 item --key f firmware-submenu        (F)irmware Updates
 item --key i systeminfo-submenu      System (I)nformation
 item --key w wiping-submenu          (W)iping / Media Sanitation
+item
 item --key x exit                    e(X)it and return to Netboot.xyz menu
 item --key s shell                   Drop to iPXE (S)hell
 item --key r reboot                  (R)eboot
