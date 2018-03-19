@@ -18,11 +18,9 @@ iseq ${buildarch} x86_64 && set cpuarch x86_64 ||
 iseq ${buildarch} arm64 && set cpuarch arm64 ||
 iseq ${platform} pcbios && set fwplatform BIOS ||
 iseq ${platform} efi && set fwplatform UEFI ||
-iseq ${platform} efi && set fwplatform UEFI ||
-
 
 # Permanently require trusted images
-imgtrust --permanent   
+# imgtrust --permanent
 
   
 :dasboot-main-menu
