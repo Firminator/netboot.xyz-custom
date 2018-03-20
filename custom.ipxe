@@ -91,10 +91,10 @@ imgfree pciids.ipxe
 goto dasboot-main-menu
 
 :systeminfo-hdt
-chain hdt.c32 || got error
-#module hdt/modules.alias || goto error
-#module hdt/pci.ids || goto error
-#boot || goto error
+kernel hdt.c32 || goto error
+module modules.alias || goto error
+module pci.ids || goto error
+boot || goto error
 goto dasboot-main-menu
 
 :bios-submenu
