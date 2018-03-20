@@ -29,7 +29,7 @@ set spaces4:hex 20:20:20:20
 set spaces8:hex 20:20:20:20:20:20:20:20
 set spaces2 ${spaces2:string}
 set spaces4 ${spaces4:string}
-set spaces8 ${spaces4:string}
+set spaces8 ${spaces8:string}
   
 :dasboot-main-menu
 #clear dasboot-main-menu_choice
@@ -40,11 +40,12 @@ item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} C
 item --key p systeminfo-lspci        extended hardware info (UEFI): Salstar.sk's lspci w/ updated (P)CI.IDs
 #item --key h systeminfo-hdt                                (BIOS): (H)DT
 item
+item
 item --gap NetBoot:
-item --key d diagnostic-submenu      ${spaces8} (D)iagnostic Tools
-item --key b bios-submenu            ${spaces8} (B)IOS Updates
-item --key f firmware-submenu        ${spaces8} (F)irmware Updates
-item --key w wiping-submenu          ${spaces8} (W)iping/Media Sanitation Tools
+item --key d diagnostic-submenu      ${spaces8}(D)iagnostic Tools
+item --key b bios-submenu            ${spaces8}(B)IOS Updates
+item --key f firmware-submenu        ${spaces8}(F)irmware Updates
+item --key w wiping-submenu          ${spaces8}(W)iping/Media Sanitation Tools
 item
 item
 item --gap Other:
@@ -70,30 +71,25 @@ prompt
 goto dasboot-main-menu
 
 :systeminfo-lspci_pciscan_found
-
-#set spaces2:hex 20:20
-#set spaces4:hex 20:20:20:20
-
-###
-imgfetch https://boot.salstar.sk/pciids.ipxe || goto error
-#isset ${sigs} || goto skip_verify
-imgverify https://boot.salstar.sk/pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto error
-#:skip_verify
-
+### HTTPS fails; not sure why
+imgfetch http://boot.salstar.sk/pciids.ipxe || goto error
+imgverify http://boot.salstar.sk/pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto error
 clear addr
 menu PCI device list
-:scan pciscan addr || goto systeminfo-lspci_pciscan_done
-  clear ven
-  clear dev
-  set vendor ${pci/${addr}.0.2}
-  set device ${pci/${addr}.2.2}
-  chain pciids.ipxe
-  item --gap ${addr:busdevfn} ${spaces4:string} ${ven}
-  item b${addr:busdevfn} ${spaces2:string} ${vendor}:${device} ${dev}
-  goto scan
-:systeminfo-lspci_pciscan_done
-choose press_enter ||
 
+:systeminfo-lspci_pciscan
+pciscan addr || goto systeminfo-lspci_pciscan_done
+clear ven
+clear dev
+set vendor ${pci/${addr}.0.2}
+set device ${pci/${addr}.2.2}
+chain pciids.ipxe
+item --gap ${addr:busdevfn} ${spaces4} ${ven}
+item b${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
+goto systeminfo-lspci_pciscan
+  
+:systeminfo-lspci_pciscan_done
+#choose press_enter ||
 imgfree pciids.ipxe
 goto dasboot-main-menu
 
