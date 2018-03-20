@@ -91,7 +91,7 @@ item b${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
 goto systeminfo-lspci_pciscan
   
 :systeminfo-lspci_pciscan_done
-#choose press_enter ||
+choose press_enter ||
 imgfree pciids.ipxe
 goto dasboot-main-menu
 
