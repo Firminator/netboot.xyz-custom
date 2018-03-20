@@ -30,8 +30,8 @@ item
 item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} CPU
 #and ${memsize} MB RAM * Not enabled in netboot.xyz build
 #tem --gap ${NIC} ${MAC}
-item --key i systeminfo-lspci        more SysInfo: List all (P)CI devices
-item --key i systeminfo-hdt          more SysInfo: (H)DT
+item --key i systeminfo-lspci        UEFI (and BIOS): Salstar's (P)CI device list
+item --key i systeminfo-hdt          BIOS-only: (H)DT
 item 
 item --key d diagnostic-submenu      (D)iagnostic Tools
 item --key b bios-submenu            (B)IOS Updates
@@ -48,10 +48,40 @@ choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto erro
 #goto exit
 
 :systeminfo-lspci
-echo lspci
+echo Salstar.sk's iPXE lspci w/ updated pci.ids
 prompt
-imgverify lspci.ipxe ${sigs}lspci.ipxe.sig || goto error
-chain lspci.ipxe || goto error
+# copied from http://boot.salstar.sk/lspci.ipxe and slightly modified
+clear addr
+pciscan addr && goto systeminfo-lspci_pciscan_found ||
+echo Missing "pciscan" command. Recompile ipxe with CMD_PCI.
+exit
+:systeminfo-lspci_pciscan_found
+
+set spaces2:hex 20:20
+set spaces4:hex 20:20:20:20
+
+###
+imgfetch http://boot.salstar.sk/pciids.ipxe
+#isset ${sigs} || goto skip_verify
+imgverify http://boot.salstar.sk/pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig ||
+#:skip_verify
+
+clear addr
+menu PCI device list
+:scan pciscan addr || goto systeminfo-lspci_pciscan_done
+  clear ven
+  clear dev
+  set vendor ${pci/${addr}.0.2}
+  set device ${pci/${addr}.2.2}
+  chain pciids.ipxe
+  item --gap ${addr:busdevfn} ${spaces4:string} ${ven}
+  item b${addr:busdevfn} ${spaces2:string} ${vendor}:${device} ${dev}
+  goto scan
+:systeminfo-lspci_pciscan_done
+choose press_enter ||
+
+imgfree pciids.ipxe
+exit
 goto dasboot-main-menu
 
 :systeminfo-hdt
