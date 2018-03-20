@@ -93,7 +93,7 @@ goto dasboot-main-menu
 
 :systeminfo-hdt
 kernel hdt/hdt.c32 || goto error
-initrd modules=modules.alias pciids=pci.ids || goto error
+initrd modules=https://raw.githubusercontent.com/Firminator/netboot.xyz-custom/master/hdt/modules.alias pciids=https://raw.githubusercontent.com/Firminator/netboot.xyz-custom/master/hdt/pci.ids || goto error
 boot || goto error
 goto dasboot-main-menu
 
