@@ -75,7 +75,6 @@ imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
 clear addr
 menu boot.salstar.sk's lspci with updated PCI.IDs (2018-03-15)
 item --gap PCI Device List:
-item
 :systeminfo-lspci_pciscan
 pciscan addr || goto systeminfo-lspci_pciscan_done
 clear ven
