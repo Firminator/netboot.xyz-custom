@@ -37,7 +37,7 @@ menu *** DasBoot 2018-03-18 ***
 item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} CPU
 #and ${memsize} MB RAM * Not enabled in netboot.xyz build
 #tem --gap ${NIC} ${MAC}
-item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI device
+item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI devices with lspci
 item --key h systeminfo-hdt          BIOS-only${spaces4}: (H)DT
 item
 item
@@ -92,7 +92,7 @@ goto dasboot-main-menu
 
 :systeminfo-hdt
 kernel hdt/hdt.c32 || goto error
-initrd modules=hdt/modules.alias pciids=pci.ids || goto error
+initrd modules=modules.alias pciids=pci.ids || goto error
 boot || goto error
 goto dasboot-main-menu
 
