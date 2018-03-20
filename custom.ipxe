@@ -70,8 +70,8 @@ goto dasboot-main-menu
 
 :systeminfo-lspci_pciscan_found
 ### HTTPS fails; not sure why
-imgfetch http://boot.salstar.sk/pciids.ipxe || goto error
-imgverify http://boot.salstar.sk/pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig ||
+imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
+imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 prompt
 clear addr
 menu PCI device list
@@ -136,6 +136,16 @@ goto dasboot-main-menu
 
 :reboot
 reboot
+
+:failed_download
+echo
+echo Failed to download a file.
+goto error
+
+:failed_verify
+echo
+echo Failed to verify a file.
+goto error
 
 :error
 echo Error occured, press any key to return to main menu ...
