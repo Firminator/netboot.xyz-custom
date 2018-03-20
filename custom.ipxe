@@ -54,7 +54,7 @@ goto dasboot-main-menu
 
 :systeminfo-hdt
 echo hdt
-kernel hdt.c32
+kernel hdt/hdt.c32
 boot
 goto dasboot-main-menu
 
