@@ -50,12 +50,16 @@ choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto erro
 :systeminfo-lspci
 echo lspci
 prompt
+imgverify lspci.ipxe ${sigs}lspci.ipxe.sig || goto error
+chain lspci.ipxe || goto error
 goto dasboot-main-menu
 
 :systeminfo-hdt
 echo hdt
-kernel hdt/hdt.c32
-boot
+prompt
+kernel hdt/hdt.c32 || goto error
+append modules_alias=hdt/modules.alias hdt/pciids=pci.ids || goto error
+boot || goto error
 goto dasboot-main-menu
 
 :bios-submenu
