@@ -26,8 +26,10 @@ iseq ${platform} efi && set fwplatform UEFI ||
 ### Indent
 set spaces2:hex 20:20
 set spaces4:hex 20:20:20:20
+set spaces8:hex 20:20:20:20:20:20:20:20
 set spaces2 ${spaces2:string}
 set spaces4 ${spaces4:string}
+set spaces8 ${spaces4:string}
   
 :dasboot-main-menu
 #clear dasboot-main-menu_choice
@@ -35,19 +37,21 @@ menu *** DasBoot 2018-03-18 ***
 item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} CPU
 #and ${memsize} MB RAM * Not enabled in netboot.xyz build
 #tem --gap ${NIC} ${MAC}
-item --key p systeminfo-lspci        extended hardware info (UEFI): Salstar's (P)CI device list
-#item --key h systeminfo-hdt                                 (BIOS): (H)DT
+item --key p systeminfo-lspci        extended hardware info (UEFI): Salstar.sk's lspci w/ updated (P)CI.IDs
+#item --key h systeminfo-hdt                                (BIOS): (H)DT
 item
-item --gap ${spaces2} DasBoot - NetBooting Diagnostics, BIOS, Firmware and Media Sanitation
-item --key d diagnostic-submenu      ${spaces4} (D)iagnostic Tools
-item --key b bios-submenu            ${spaces4} (B)IOS Updates
-item --key f firmware-submenu        ${spaces4} (F)irmware Updates
-item --key w wiping-submenu          ${spaces4} (W)iping / Media Sanitation
+item --gap NetBoot:
+item --key d diagnostic-submenu      ${spaces8} (D)iagnostic Tools
+item --key b bios-submenu            ${spaces8} (B)IOS Updates
+item --key f firmware-submenu        ${spaces8} (F)irmware Updates
+item --key w wiping-submenu          ${spaces8} (W)iping/Media Sanitation Tools
 item
-item --key x exit                    ${spaces4} (C)hangelog
-item --key x exit                    ${spaces4} e(X)it and go back to netboot menu
-item --key s shell                   ${spaces4} drop to iPXE (S)hell
-item --key r reboot                  ${spaces4} (R)eboot
+item
+item --gap Other:
+item --key c exit                    (C)hangelog
+item --key x exit                    e(X)it and go back to netboot menu
+item --key s shell                   drop to iPXE (S)hell
+item --key r reboot                  (R)eboot
 
 choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto error
 #echo ${cls}
@@ -55,10 +59,10 @@ choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto erro
 #goto exit
 
 :systeminfo-lspci
-echo Salstar.sk's iPXE lspci w/ updated pci.ids
+### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified for it to work w/ netboot.xyz-custom/dasboot
+### see also http://ipxe.org/cmd/pciscan
+echo 
 prompt
-# copied from http://boot.salstar.sk/lspci.ipxe and slightly modified for it to work w/ netboot.xyz-custom/dasboot
-# 
 clear addr
 pciscan addr && goto systeminfo-lspci_pciscan_found ||
 echo Missing "pciscan" command. Recompile ipxe with CMD_PCI.
@@ -71,9 +75,9 @@ goto dasboot-main-menu
 #set spaces4:hex 20:20:20:20
 
 ###
-imgfetch http://boot.salstar.sk/pciids.ipxe
+imgfetch https://boot.salstar.sk/pciids.ipxe || goto error
 #isset ${sigs} || goto skip_verify
-imgverify http://boot.salstar.sk/pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig ||
+imgverify https://boot.salstar.sk/pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto error
 #:skip_verify
 
 clear addr
@@ -91,7 +95,6 @@ menu PCI device list
 choose press_enter ||
 
 imgfree pciids.ipxe
-exit
 goto dasboot-main-menu
 
 :systeminfo-hdt
