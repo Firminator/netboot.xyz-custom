@@ -37,8 +37,8 @@ menu *** DasBoot 2018-03-18 ***
 item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} CPU
 #and ${memsize} MB RAM * Not enabled in netboot.xyz build
 #tem --gap ${NIC} ${MAC}
-item --key p systeminfo-lspci        extended hardware info (UEFI): Salstar.sk's lspci w/ updated (P)CI.IDs
-#item --key h systeminfo-hdt                                (BIOS): (H)DT
+item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI device
+item --key h systeminfo-hdt          BIOS-only    : (H)DT
 item
 item
 item --gap NetBoot:
@@ -73,7 +73,7 @@ imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
 ### verify fails; not sure why
 ### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 clear addr
-menu PCI device list
+menu PCI Device List using boot.salstar.sk's lspci with updated PCI.IDs (2018-03-15)
 :systeminfo-lspci_pciscan
 pciscan addr || goto systeminfo-lspci_pciscan_done
 clear ven
@@ -90,10 +90,8 @@ imgfree pciids.ipxe
 goto dasboot-main-menu
 
 :systeminfo-hdt
-echo hdt
-prompt
 kernel hdt/hdt.c32 || goto error
-append modules_alias=hdt/modules.alias hdt/pciids=pci.ids || goto error
+initrd modules_alias=hdt/modules.alias hdt/pciids=pci.ids || goto error
 boot || goto error
 goto dasboot-main-menu
 
