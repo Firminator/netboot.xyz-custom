@@ -73,7 +73,8 @@ imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
 ### verify fails; not sure why
 ### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 clear addr
-menu PCI Device List using boot.salstar.sk's lspci with updated PCI.IDs (2018-03-15)
+menu PCI Device List
+menu (using boot.salstar.sk's lspci with updated PCI.IDs from 2018-03-15)
 :systeminfo-lspci_pciscan
 pciscan addr || goto systeminfo-lspci_pciscan_done
 clear ven
@@ -91,7 +92,7 @@ goto dasboot-main-menu
 
 :systeminfo-hdt
 kernel hdt/hdt.c32 || goto error
-initrd modules_alias=hdt/modules.alias hdt/pciids=pci.ids || goto error
+initrd modules=hdt/modules.alias pciids=pci.ids || goto error
 boot || goto error
 goto dasboot-main-menu
 
