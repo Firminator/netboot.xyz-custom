@@ -27,14 +27,12 @@ iseq ${platform} efi && set fwplatform UEFI ||
 #clear dasboot-main-menu_choice
 menu *** DasBoot 2018-03-18 ***
 item
-item --gap System Information
-item --gap ==================
 item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} CPU
 #and ${memsize} MB RAM * Not enabled in netboot.xyz build
 #tem --gap ${NIC} ${MAC}
-item --key i systeminfo-lspci        List all (P)CI devices
-item --key i systeminfo-hdt          (H)DT
-item --gap ==================
+item --key i systeminfo-lspci        more SysInfo: List all (P)CI devices
+item --key i systeminfo-hdt          more SysInfo: (H)DT
+item 
 item --key d diagnostic-submenu      (D)iagnostic Tools
 item --key b bios-submenu            (B)IOS Updates
 item --key f firmware-submenu        (F)irmware Updates
@@ -56,7 +54,8 @@ goto dasboot-main-menu
 
 :systeminfo-hdt
 echo hdt
-prompt
+kernel hdt.c32
+boot
 goto dasboot-main-menu
 
 :bios-submenu
