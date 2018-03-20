@@ -26,23 +26,38 @@ iseq ${platform} efi && set fwplatform UEFI ||
 :dasboot-main-menu
 #clear dasboot-main-menu_choice
 menu *** DasBoot 2018-03-18 ***
+item
+item --gap System Information
+item --gap ==================
 item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} CPU
 #and ${memsize} MB RAM * Not enabled in netboot.xyz build
 #tem --gap ${NIC} ${MAC}
-item
-item --key b bios-submenu            (B)IOS Updates
+item --key i systeminfo-lspci        List all (P)CI devices
+item --key i systeminfo-hdt          (H)DT
+item --gap ==================
 item --key d diagnostic-submenu      (D)iagnostic Tools
+item --key b bios-submenu            (B)IOS Updates
 item --key f firmware-submenu        (F)irmware Updates
-item --key i systeminfo-submenu      System (I)nformation
 item --key w wiping-submenu          (W)iping / Media Sanitation
 item
 item --key x exit                    e(X)it and go back to netboot menu
-item --key s shell                   Drop to iPXE (S)hell
+item --key s shell                   drop to iPXE (S)hell
 item --key r reboot                  (R)eboot
+
 choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto error
 #echo ${cls}
 #goto ${dasboot-main-menu_choice}
 #goto exit
+
+:systeminfo-lspci
+echo lspci
+prompt
+goto dasboot-main-menu
+
+:systeminfo-hdt
+echo hdt
+prompt
+goto dasboot-main-menu
 
 :bios-submenu
 echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
@@ -59,11 +74,6 @@ echo chain firmware-submenu.ipxe || goto error
 prompt
 goto dasboot-main-menu
 
-:systeminfo-submenu
-echo chain systeminfo-submenu.ipxe || goto error
-prompt
-goto dasboot-main-menu
-
 :wiping-submenu
 echo chain wiping-submenu.ipxe || goto error
 prompt
@@ -74,7 +84,7 @@ goto dasboot-main-menu
 exit
 
 :shell
-echo Type 'exit' to get the back to the menu
+echo Type 'exit' to return to the menu
 shell
 goto dasboot-main-menu
 
