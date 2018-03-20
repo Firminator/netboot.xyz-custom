@@ -38,7 +38,7 @@ item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} C
 #and ${memsize} MB RAM * Not enabled in netboot.xyz build
 #tem --gap ${NIC} ${MAC}
 item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI device
-item --key h systeminfo-hdt          BIOS-only    : (H)DT
+item --key h systeminfo-hdt          BIOS-only${spaces4}: (H)DT
 item
 item
 item --gap NetBoot:
