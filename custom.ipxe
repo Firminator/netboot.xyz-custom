@@ -91,7 +91,9 @@ imgfree pciids.ipxe
 goto dasboot-main-menu
 
 :systeminfo-hdt
-kernel hdt/hdt.c32 modules=hdt/modules.alias pciids=hdt/pci.ids || goto error
+kernel hdt.c32
+module hdt/modules.alias || goto error
+module hdt/pci.ids || goto error
 boot || goto error
 goto dasboot-main-menu
 
