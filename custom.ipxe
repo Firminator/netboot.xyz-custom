@@ -20,12 +20,12 @@
 	### The build architecture does not necessarily represent the architecture of the machine on which iPXE is running.
 	### In particular, a version of iPXE built for i386 may be running on a 64-bit machine.
 		cpuid --ext 29 && set cpuarch x86_64 || set cpuarch i386
-		iseq ${cpuarch} x86_64 && set cpuarch_text 64-bit x86 CPU || set cpuarch_text 32-bit x86 CPU
+		iseq ${cpuarch} x86_64 && set cpuarch_text 64-bit CPU || set cpuarch_text 32-bit CPU
 	### ARM
 		iseq ${buildarch} arm64 && set cpuarch arm64 ||
-		iseq ${buildarch} arm64 && set cpuarch_text 64bit ARM ||
+		iseq ${buildarch} arm64 && set cpuarch_text 64bit ARM CPU ||
 		iseq ${buildarch} arm32 && set cpuarch arm32 ||
-		iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM ||
+		iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM CPU ||
 
 ### Permanently require trusted images
 	### imgtrust --permanent
@@ -40,8 +40,9 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
-	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text} CPU
-	item --gap ${cpuarch_text} CPU * Network card: ${NIC} ${MAC} 
+	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
+	item --gap NIC 0 - ${net0/chip}: VEN${pci/${net0/busloc}.0.2}:DEV${pci/${net0/busloc}.2.2} * ${net0/mac}
+	item --gap NIC 1 - ${net1/chip}: VEN${pci/${net1/busloc}.0.2}:DEV${pci/${net1/busloc}.2.2} * ${net1/mac}
 	#tem --gap iPXE build for: ${buildarch}
 	item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI devices with lspci
 	item --key h systeminfo-hdt          BIOS-only${spaces4}: (H)DT
