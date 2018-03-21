@@ -55,11 +55,11 @@
 	item --key r reboot                  ${spaces2}(R)eboot
 	item
 	item --gap Info:
-	item --gap NIC 0 - ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2} ${net0/mac} ${net0/chip} 
-	item --gap NIC 1 - ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2} ${net1/mac} ${net1/chip}
-	item --key n systeminfo-network      Detailed (N)etwork card info
-	item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI devices with lspci
-	item --key h systeminfo-hdt          BIOS-only${spaces4}: List devices with (H)DT
+	item --gap ${spaces2}NIC 0 - ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2} ${net0/mac} ${net0/chip} 
+	item --gap ${spaces2}NIC 1 - ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2} ${net1/mac} ${net1/chip}
+	item --key n systeminfo-network      ${spaces2}Detailed (N)etwork card info
+	item --key p systeminfo-lspci        ${spaces2}BIOS and UEFI: List all (P)CI devices with lspci
+	item --key h systeminfo-hdt          ${spaces2}BIOS-only${spaces4}: List devices with (H)DT
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
 	### You may therefore wish to always handle failures of the choose command.
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
