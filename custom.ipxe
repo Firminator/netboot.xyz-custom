@@ -97,17 +97,14 @@ goto dasboot-main-menu
 
 :info-network
 	menu Network Information
-	item --gap ${spaces2}NIC 0 - ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2}
-	item
+	item --gap NIC 0 - ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2}
 	item
 	item --gap Driver:
 	item chip ${spaces2}${net0/chip}
 	item --gap MAC:
 	item mac ${spaces2}${net0/mac}
 	item --gap IP/mask:
-	item ip ${spaces2}${net0/ip}
-	item --gap Netmask:
-	item netmask ${spaces2}${net0/netmask}
+	item ip ${spaces2}${net0/ip}/${net0/netmask}
 	item --gap Gateway:
 	item gw ${spaces2}${net0/gateway}
 	item --gap Domain:
@@ -124,15 +121,12 @@ goto dasboot-main-menu
 	item
 	item --gap ${spaces2}NIC 1 - ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2} ${net1/mac}
 	item
-	item
 	item --gap Driver:
 	item chip ${spaces2}${net1/chip}
 	item --gap MAC:
 	item mac ${spaces2}${net1/mac}
 	item --gap IP/mask:
-	item ip ${spaces2}${net1/ip}
-	item --gap Netmask:
-	item netmask ${spaces2}${net1/netmask}
+	item ip ${spaces2}${net1/ip}/${net1/netmask}
 	item --gap Gateway:
 	item gw ${spaces2}${net1/gateway}
 	item --gap Domain:
