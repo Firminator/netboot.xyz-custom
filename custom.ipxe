@@ -39,11 +39,11 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
-	item --gap ===========================================================================
+	#tem --gap ===========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-lspci   - Identify all (P)CI devices
 	item --key n info-network - List (N)etwork information
-	#item --gap ===========================================================================
+	item --gap ===========================================================================
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
