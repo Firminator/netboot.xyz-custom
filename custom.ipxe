@@ -39,11 +39,11 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
-	item --gap =======================================================================+
+	item --gap =========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan - Identify all (P)CI devices
 	item --key n info-network - Show (N)etwork information
-	item --gap ========================================================================+
+	item --gap =========================================================================
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
@@ -107,7 +107,7 @@
 	item --gap Choose a different NIC:
 	item --key 0 info-network-nic0 - NIC (0)
 	item --key 1 info-network-nic1 - NIC (1)
-	item --key 2 info-network-nic2 - NIC (2)
+	#tem --key 2 info-network-nic2 - NIC (2)
 	item
 	item
 	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
@@ -131,7 +131,7 @@
 	item --gap Choose a different NIC:
 	item --key 0 info-network-nic0 - NIC (0)
 	item --key 1 info-network-nic1 - NIC (1)
-	item --key 2 info-network-nic2 - NIC (2)
+	#tem --key 2 info-network-nic2 - NIC (2)
 	item
 	item
 	item --gap NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
@@ -174,12 +174,12 @@
 #	item --gap bootfile${spaces2} : ${net2/filename}
 #	choose --default info-network-nic0 info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
 	
-:info-hdt
-	kernel hdt.c32 || goto error
-	module modules.alias || goto error
-	module pci.ids || goto error
-	boot || goto error
-	goto dasboot-main-menu
+#:info-hdt
+#	kernel hdt.c32 || goto error
+#	module modules.alias || goto error
+#	module pci.ids || goto error
+#	boot || goto error
+#	goto dasboot-main-menu
 
 :bios-submenu
 	echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
