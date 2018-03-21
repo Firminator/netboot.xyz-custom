@@ -19,13 +19,13 @@
 	### Don't use ${buildarch} as this just shows the version of iPXE was compiled for and which is served from DHCP.
 	### The build architecture does not necessarily represent the architecture of the machine on which iPXE is running.
 	### In particular, a version of iPXE built for i386 may be running on a 64-bit machine.
-		cpuid --ext 29 && set cpuarch x86_64 || set cpuarch i386
-		iseq ${cpuarch} x86_64 && set cpuarch_text 64-bit CPU || set cpuarch_text 32-bit CPU
+	cpuid --ext 29 && set cpuarch x86_64 || set cpuarch i386
+	iseq ${cpuarch} x86_64 && set cpuarch_text 64-bit CPU || set cpuarch_text 32-bit CPU
 	### ARM
-		iseq ${buildarch} arm64 && set cpuarch arm64 ||
-		iseq ${buildarch} arm64 && set cpuarch_text 64bit ARM CPU ||
-		iseq ${buildarch} arm32 && set cpuarch arm32 ||
-		iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM CPU ||
+	iseq ${buildarch} arm64 && set cpuarch arm64 ||
+	iseq ${buildarch} arm64 && set cpuarch_text 64bit ARM CPU ||
+	iseq ${buildarch} arm32 && set cpuarch arm32 ||
+	iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM CPU ||
 
 ### Permanently require trusted images
 	### imgtrust --permanent
@@ -41,6 +41,10 @@
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
+	item --key p info-lspci        ${spaces2}- Identify all (P)CI devices
+	item --key n info-network      ${spaces2}- List (N)etwork information
+	#tem --key h info-hdt          ${spaces2}- BIOS-only: identify all devices with (H)DT
+	item
 	item
 	item --gap NetBoot:
 	item --key d diagnostic-submenu      ${spaces2}(D)iagnostic Tools
@@ -48,32 +52,27 @@
 	item --key f firmware-submenu        ${spaces2}(F)irmware Updates
 	item --key w wiping-submenu          ${spaces2}(W)iping/Media Sanitation Tools
 	item
-	item --gap Other:
-	item --key c changelog               ${spaces2}(C)hangelog
-	item --key x exit                    ${spaces2}e(X)it and go back to netboot menu
-	item --key s shell                   ${spaces2}drop to iPXE (S)hell
-	item --key r reboot                  ${spaces2}(R)eboot
 	item
-	item --gap Info:
-	item --gap ${spaces2}NIC 0 - ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2} ${net0/mac} ${net0/chip} 
-	item --gap ${spaces2}NIC 1 - ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2} ${net1/mac} ${net1/chip}
-	item --key n systeminfo-network      ${spaces2}Detailed (N)etwork card info
-	item --key p systeminfo-lspci        ${spaces2}BIOS and UEFI: List all (P)CI devices with lspci
-	item --key h systeminfo-hdt          ${spaces2}BIOS-only${spaces4}: List devices with (H)DT
+	item --gap Other:
+	item --key l changelog               ${spaces2}Change(L)og
+	item --key c reboot                  ${spaces2}Exit and (C)hain into boot.salstar.sk menu
+	item --key x exit                    ${spaces2}E(X)it and return to boot.netboot.xyz menu
+	item --key s shell                   ${spaces2}Drop to iPXE (S)hell
+	item --key r reboot                  ${spaces2}(R)eboot
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
 	### You may therefore wish to always handle failures of the choose command.
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
 	choose --default changelog dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto dasboot-main-menu
 
-:systeminfo-lspci
+:info-lspci
 ### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified for it to work w/ netboot.xyz-custom/dasboot
 ### see also http://ipxe.org/cmd/pciscan
 clear addr
-pciscan addr && goto systeminfo-lspci_pciscan_found ||
+pciscan addr && goto info-lspci_pciscan_found ||
 echo Missing "pciscan" command. Recompile ipxe with CMD_PCI.
 prompt
 goto dasboot-main-menu
-:systeminfo-lspci_pciscan_found
+:info-lspci_pciscan_found
 ### HTTPS fails; not sure why
 imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
 ### verify fails; not sure why
@@ -81,8 +80,8 @@ imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
 clear addr
 menu boot.salstar.sk's lspci with updated PCI.IDs (2018-03-15)
 item --gap PCI Device List:
-:systeminfo-lspci_pciscan
-pciscan addr || goto systeminfo-lspci_pciscan_done
+:info-lspci_pciscan
+pciscan addr || goto info-lspci_pciscan_done
 clear ven
 clear dev
 set vendor ${pci/${addr}.0.2}
@@ -90,13 +89,66 @@ set device ${pci/${addr}.2.2}
 chain pciids.ipxe
 item --gap ${addr:busdevfn} ${spaces4} ${ven}
 item b${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
-goto systeminfo-lspci_pciscan
-:systeminfo-lspci_pciscan_done
+goto info-lspci_pciscan
+:info-lspci_pciscan_done
 choose press_enter ||
 imgfree pciids.ipxe
 goto dasboot-main-menu
 
-:systeminfo-hdt
+:info-network
+	menu Network Information
+	item --gap ${spaces2}NIC 0 - ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2}
+	item
+	item
+	item --gap Driver:
+	item chip ${spaces2}${net0/chip}
+	item --gap MAC:
+	item mac ${spaces2}${net0/mac}
+	item --gap IP/mask:
+	item ip ${spaces2}${net0/ip}
+	item --gap Netmask:
+	item netmask ${spaces2}${net0/netmask}
+	item --gap Gateway:
+	item gw ${spaces2}${net0/gateway}
+	item --gap Domain:
+	item domain ${spaces2}${net0/domain}
+	item --gap DNS:
+	item dns ${spaces2}${net0/dns}
+	item --gap DHCP server:
+	item dhcpserver ${spaces2}${net0/dhcp-server}
+	item --gap DHCP Next-server:
+	item nextserver ${spaces2}${next-server}
+	item --gap DHCP iPXE Filename:
+	item filename ${spaces2}${net0/filename}
+	item
+	item
+	item --gap ${spaces2}NIC 1 - ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2} ${net1/mac}
+	item
+	item
+	item --gap Driver:
+	item chip ${spaces2}${net1/chip}
+	item --gap MAC:
+	item mac ${spaces2}${net1/mac}
+	item --gap IP/mask:
+	item ip ${spaces2}${net1/ip}
+	item --gap Netmask:
+	item netmask ${spaces2}${net1/netmask}
+	item --gap Gateway:
+	item gw ${spaces2}${net1/gateway}
+	item --gap Domain:
+	item domain ${spaces2}${net1/domain}
+	item --gap DNS:
+	item dns ${spaces2}${net1/dns}
+	item --gap DHCP server:
+	item dhcpserver ${spaces2}${net1/dhcp-server}
+	item --gap DHCP Next-server:
+	item nextserver ${spaces2}${next-server}
+	item --gap DHCP iPXE Filename:
+	item filename ${spaces2}${net1/filename}
+	choose empty ||
+	goto dasboot-main-menu
+
+:info-hdt
 	kernel hdt.c32 || goto error
 	module modules.alias || goto error
 	module pci.ids || goto error
