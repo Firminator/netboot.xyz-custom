@@ -39,11 +39,11 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
-	#tem --gap ===========================================================================
+	item --gap ===========================================================================+
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-lspci   - Identify all (P)CI devices
 	item --key n info-network - List (N)etwork information
-	item --gap ===========================================================================
+	item --gap ===========================================================================+
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
@@ -56,7 +56,7 @@
 	item
 	item --gap Other:
 	item --key c changelog              ${spaces2}(C)hangelog
-	item --key e chain                  ${spaces2}(E)xit and chain into boot.salstar.sk menu
+	item --key o other                  ${spaces2}(O)ther iPXE boot menus
 	item --key s shell                  ${spaces2}Drop to iPXE (S)hell
 	item --key r reboot                 ${spaces2}(R)eboot
 	item
@@ -107,6 +107,7 @@ goto dasboot-main-menu
 	item --key 1 info-network-nic1 - NIC (1)
 	item --key 2 info-network-nic2 - NIC (2)
 	item
+	item
 	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
 	item --gap ${spaces4}Driver : ${net0/chip}
 	item --gap ${spaces4}MAC${spaces4}: ${net0/mac}
@@ -115,6 +116,7 @@ goto dasboot-main-menu
 	item --gap ${spaces4}Gateway: ${net0/gateway}
 	item --gap ${spaces4}Domain : ${net0/domain}
 	item --gap ${spaces4}DNS${spaces4}: ${net0/dns}
+	item
 	item
 	item --gap DHCP
 	item --gap server${spaces4} : ${net0/dhcp-server}
@@ -129,6 +131,7 @@ goto dasboot-main-menu
 	item --key 1 info-network-nic1 - NIC (1)
 	item --key 2 info-network-nic2 - NIC (2)
 	item
+	item
 	item --gap NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
 	item --gap ${spaces4}Driver : ${net1/chip}
 	item --gap ${spaces4}MAC${spaces4}: ${net1/mac}
@@ -137,6 +140,7 @@ goto dasboot-main-menu
 	item --gap ${spaces4}Gateway: ${net1/gateway}
 	item --gap ${spaces4}Domain : ${net1/domain}
 	item --gap ${spaces4}DNS${spaces4}: ${net1/dns}
+	item
 	item
 	item --gap DHCP
 	item --gap server${spaces4} : ${net1/dhcp-server}
@@ -153,19 +157,19 @@ goto dasboot-main-menu
 	item
 	item
 	item --gap NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
-	item --gap ${spaces4}Driver       : ${net2/chip}
+	item --gap ${spaces4}Driver : ${net2/chip}
 	item --gap ${spaces4}MAC${spaces4}: ${net2/mac}
 	item --gap ${spaces4}IP${spaces4} : ${net2/ip}
-	item --gap ${spaces4}Netmask      : ${net2/netmask}
-	item --gap ${spaces4}Gateway      : ${net2/gateway}
-	item --gap ${spaces4}Domain       : ${net2/domain}
+	item --gap ${spaces4}Netmask: ${net2/netmask}
+	item --gap ${spaces4}Gateway: ${net2/gateway}
+	item --gap ${spaces4}Domain : ${net2/domain}
 	item --gap ${spaces4}DNS${spaces4}: ${net2/dns}
 	item
 	item
 	item --gap DHCP
-	item --gap server${spaces4}       : ${net0/dhcp-server}
-	item --gap Next-server            : ${next-server}
-	item --gap bootfile${spaces2}     : ${net0/filename}
+	item --gap server${spaces4} : ${net2/dhcp-server}
+	item --gap Next-server: ${next-server}
+	item --gap bootfile${spaces2} : ${net2/filename}
 	choose --default info-network-nic0 info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
 	
 :info-hdt
@@ -200,11 +204,11 @@ goto dasboot-main-menu
 	prompt
 	goto dasboot-main-menu
 
-:chain
+:other
 	### if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
-	echo chain https://boot.salstar.sk/boot.ipxe #or menu.ipxe
+	echo chaining into other iPXE boot menus (e.g. https://boot.salstar.sk/boot.ipxe #or menu.ipxe)
 	prompt
-	goto dasboot-main-menu
+	goto exit
 
 :exit
 	### if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
