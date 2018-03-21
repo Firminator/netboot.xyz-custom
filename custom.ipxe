@@ -39,26 +39,28 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
-	item --gap =========================================================================+
+	item --gap =======================================================================+
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-lspci   - Identify all (P)CI devices
+	item --key p info-pciscan - Identify all (P)CI devices
 	item --key n info-network - Show (N)etwork information
-	item --gap ==========================================================================+
+	item --gap ========================================================================+
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
-	item --gap NetBoot:
-	item --key d diagnostic-submenu     ${spaces2}(D)iagnostic Tools
-	item --key b bios-submenu           ${spaces2}(B)IOS Updates
-	item --key f firmware-submenu       ${spaces2}(F)irmware Updates
-	item --key w wiping-submenu         ${spaces2}(W)iping/Media Sanitation Tools
+	item --gap Boot:
+	item --key d diagnostic-submenu     ${spaces2}(D)iagnostic Tools              # Das
+	item --key b bios-submenu           ${spaces2}(B)IOS Updates                  # Boot
+	item --key f firmware-submenu       ${spaces2}(F)irmware Updates              # Firmware
+	item --key w wiping-submenu         ${spaces2}(W)iping/Media Sanitation Tools # Wiping
 	item
 	item
 	item --gap Other:
-	item --key c changelog              ${spaces2}(C)hangelog
-	item --key o other                  ${spaces2}(O)ther iPXE boot menus
-	item --key s shell                  ${spaces2}Drop to iPXE (S)hell
-	#tem --key r reboot                 ${spaces2}(R)eboot
+	#tem --key r reboot                 ${spaces2}(R)eboot                        # R
+	item --key o other                  ${spaces2}(O)ther iPXE boot menus         # O
+	item --key c changelog              ${spaces2}(C)hangelog                     # C
+	#tem --key k rocks                  ${spaces2}(K)                             # K
+	item --key s shell                  ${spaces2}(S)hell                         # S
+	
 	item
 	item --gap Press ESC anywhere to return to the previous menu.
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
@@ -66,36 +68,36 @@
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
 	choose --default changelog dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto dasboot-main-menu
 
-:info-lspci
-### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified for it to work w/ netboot.xyz-custom/dasboot
-### see also http://ipxe.org/cmd/pciscan
-clear addr
-pciscan addr && goto info-lspci_pciscan_found ||
-echo Missing "pciscan" command. Recompile ipxe with CMD_PCI.
-prompt
-goto dasboot-main-menu
-:info-lspci_pciscan_found
-### HTTPS fails; not sure why
-imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
-### verify fails; not sure why
-### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
-clear addr
-menu boot.salstar.sk's lspci with updated PCI.IDs (2018-03-15)
-item --gap PCI Device List:
-:info-lspci_pciscan
-pciscan addr || goto info-lspci_pciscan_done
-clear ven
-clear dev
-set vendor ${pci/${addr}.0.2}
-set device ${pci/${addr}.2.2}
-chain pciids.ipxe
-item --gap ${addr:busdevfn} ${spaces4} ${ven}
-item b${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
-goto info-lspci_pciscan
-:info-lspci_pciscan_done
-choose press_enter ||
-imgfree pciids.ipxe
-goto dasboot-main-menu
+:info-pciscan
+	### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified for it to work w/ netboot.xyz-custom/dasboot
+	### see also http://ipxe.org/cmd/pciscan
+	clear addr
+	pciscan addr && goto info-pciscan_found ||
+	echo Missing "pciscan" command. Recompile iPXE with CMD_PCI.
+	prompt
+	goto dasboot-main-menu
+	:info-pciscan_found
+		### HTTPS fails; not sure why
+		imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
+		### verify fails; not sure why
+		### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
+		clear addr
+		menu boot.salstar.sk's PCIscan using latest PCI.IDs (2018-03-15)
+		item --gap PCI Device List:
+		:info-pciscan_loop
+			pciscan addr || goto info-pciscan_done
+			clear ven
+			clear dev
+			set vendor ${pci/${addr}.0.2}
+			set device ${pci/${addr}.2.2}
+			chain pciids.ipxe
+			item --gap ${addr:busdevfn} ${spaces4} ${ven}
+			item b${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
+			goto info-pciscan_loop
+	:info-pciscan_done
+		choose press_enter ||
+		imgfree pciids.ipxe
+		goto dasboot-main-menu
 
 :info-network
 	goto info-network-nic0
@@ -146,31 +148,31 @@ goto dasboot-main-menu
 	item --gap server${spaces4} : ${net1/dhcp-server}
 	item --gap Next-server: ${next-server}
 	item --gap bootfile${spaces2} : ${net1/filename}
-	choose --default info-network-nic2 info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
+	choose --default info-network-nic0 info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
 
-:info-network-nic2
-	menu Device and Network Information for NIC 2
-	item --gap Choose a different NIC:
-	item --key 0 info-network-nic0 - NIC (0)
-	item --key 1 info-network-nic1 - NIC (1)
-	item --key 2 info-network-nic2 - NIC (2)
-	item
-	item
-	item --gap NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
-	item --gap ${spaces4}Driver : ${net2/chip}
-	item --gap ${spaces4}MAC${spaces4}: ${net2/mac}
-	item --gap ${spaces4}IP${spaces4} : ${net2/ip}
-	item --gap ${spaces4}Netmask: ${net2/netmask}
-	item --gap ${spaces4}Gateway: ${net2/gateway}
-	item --gap ${spaces4}Domain : ${net2/domain}
-	item --gap ${spaces4}DNS${spaces4}: ${net2/dns}
-	item
-	item
-	item --gap DHCP
-	item --gap server${spaces4} : ${net2/dhcp-server}
-	item --gap Next-server: ${next-server}
-	item --gap bootfile${spaces2} : ${net2/filename}
-	choose --default info-network-nic0 info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
+#:info-network-nic2
+#	menu Device and Network Information for NIC 2
+#	item --gap Choose a different NIC:
+#	item --key 0 info-network-nic0 - NIC (0)
+#	item --key 1 info-network-nic1 - NIC (1)
+#	item --key 2 info-network-nic2 - NIC (2)
+#	item
+#	item
+#	item --gap NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
+#	item --gap ${spaces4}Driver : ${net2/chip}
+#	item --gap ${spaces4}MAC${spaces4}: ${net2/mac}
+#	item --gap ${spaces4}IP${spaces4} : ${net2/ip}
+#	item --gap ${spaces4}Netmask: ${net2/netmask}
+#	item --gap ${spaces4}Gateway: ${net2/gateway}
+#	item --gap ${spaces4}Domain : ${net2/domain}
+#	item --gap ${spaces4}DNS${spaces4}: ${net2/dns}
+#	item
+#	item
+#	item --gap DHCP
+#	item --gap server${spaces4} : ${net2/dhcp-server}
+#	item --gap Next-server: ${next-server}
+#	item --gap bootfile${spaces2} : ${net2/filename}
+#	choose --default info-network-nic0 info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
 	
 :info-hdt
 	kernel hdt.c32 || goto error
@@ -210,10 +212,6 @@ goto dasboot-main-menu
 	prompt
 	goto exit
 
-:exit
-	### if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
-	exit
-
 :shell
 	echo Type 'exit' to return to the menu
 	shell
@@ -236,3 +234,6 @@ goto dasboot-main-menu
 	echo Error occured, press any key to return to main menu ...
 	prompt
 	goto dasboot-main-menu
+
+:exit
+	exit
