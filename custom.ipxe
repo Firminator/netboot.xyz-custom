@@ -39,11 +39,11 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
-	item --gap +==========================================================================+
+	item --gap ===========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-lspci   - Identify all (P)CI devices
 	item --key n info-network - List (N)etwork information
-	item --gap ==========================================================================
+	item --gap ===========================================================================
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
@@ -55,11 +55,11 @@
 	item
 	item
 	item --gap Other:
-	item --key l changelog              ${spaces2}Change(L)og
-	item --key c chain                  ${spaces2}Exit and (C)hain into boot.salstar.sk menu
-	item --key x exit                   ${spaces2}E(X)it and return to boot.netboot.xyz menu
+	item --key c changelog              ${spaces2}(C)hangelog
+	item --key e chain                  ${spaces2}(E)xit and chain into boot.salstar.sk menu
 	item --key s shell                  ${spaces2}Drop to iPXE (S)hell
 	item --key r reboot                 ${spaces2}(R)eboot
+	item exit                           ${spaces2}Press ESC anywhere to return to previous menu
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
 	### You may therefore wish to always handle failures of the choose command.
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
@@ -98,33 +98,32 @@ goto dasboot-main-menu
 
 :info-network
 	menu Network Information
-	item --gap Detailed Network and Device Information for:
+	item --gap Detailed device and network information for:
 	item --key 0 info-network-nic0 - NIC (0)
 	item --key 1 info-network-nic1 - NIC (1)
 	item --key 2 info-network-nic2 - NIC (2)
 	choose info-network_choice && goto ${info-network_choice} || goto dasboot-main-menu
 
 :info-network-nic0
-	menu Network Information and Device Information for NIC 0
+	menu Device and Network Information for NIC 0
 	item --gap Choose another NIC:
 	item --key 0 info-network-nic0 - NIC (0)
 	item --key 1 info-network-nic1 - NIC (1)
 	item --key 2 info-network-nic2 - NIC (2)
 	item
 	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item
-	item --gap Driver : ${net0/chip}
-	item --gap MAC${spaces4}: ${net0/mac}
-	item --gap IP${spaces4} : ${net0/ip}
-	item --gap Netmask: ${net0/netmask}
-	item --gap Gateway: ${net0/gateway}
-	item --gap Domain : ${net0/domain}
-	item --gap DNS${spaces4}: ${net0/dns}
+	item --gap ${spaces4} Driver : ${net0/chip}
+	item --gap ${spaces4} MAC${spaces4}: ${net0/mac}
+	item --gap ${spaces4} IP${spaces4} : ${net0/ip}
+	item --gap ${spaces4} Netmask: ${net0/netmask}
+	item --gap ${spaces4} Gateway: ${net0/gateway}
+	item --gap ${spaces4} Domain : ${net0/domain}
+	item --gap ${spaces4} DNS${spaces4}: ${net0/dns}
 	item
 	item --gap DHCP settings
-	item --gap server${spaces2} : ${net0/dhcp-server}
-	item --gap Next-server$: ${next-server}
-	item --gap bootfile: ${net0/filename}
+	item --gap server${spaces4}${spaces2}: ${net0/dhcp-server}
+	item --gap Next-server: ${next-server}
+	item --gap bootfile${spaces4}: ${net0/filename}
 	choose info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
 
 :info-network-nic1
