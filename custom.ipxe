@@ -3,7 +3,6 @@
 ### netboot.xyz-custom menu
 ###
 
-
 ### Set a background picture * Not enabled in netboot.xyz build
 	### console --picture http://boot.ipxe.org/ipxe.png
 
@@ -41,24 +40,24 @@
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-lspci        - Identify all (P)CI devices
-	item --key n info-network      - List (N)etwork information
-	#tem --key h info-hdt          ${spaces2}- BIOS-only: identify all devices with (H)DT
+	item --key p info-lspci             - Identify all (P)CI devices
+	item --key n info-network           - List (N)etwork information
+	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
 	item --gap NetBoot:
-	item --key d diagnostic-submenu      ${spaces2}(D)iagnostic Tools
-	item --key b bios-submenu            ${spaces2}(B)IOS Updates
-	item --key f firmware-submenu        ${spaces2}(F)irmware Updates
-	item --key w wiping-submenu          ${spaces2}(W)iping/Media Sanitation Tools
+	item --key d diagnostic-submenu     ${spaces2}(D)iagnostic Tools
+	item --key b bios-submenu           ${spaces2}(B)IOS Updates
+	item --key f firmware-submenu       ${spaces2}(F)irmware Updates
+	item --key w wiping-submenu         ${spaces2}(W)iping/Media Sanitation Tools
 	item
 	item
 	item --gap Other:
-	item --key l changelog               ${spaces2}Change(L)og
-	item --key c reboot                  ${spaces2}Exit and (C)hain into boot.salstar.sk menu
-	item --key x exit                    ${spaces2}E(X)it and return to boot.netboot.xyz menu
-	item --key s shell                   ${spaces2}Drop to iPXE (S)hell
-	item --key r reboot                  ${spaces2}(R)eboot
+	item --key l changelog              ${spaces2}Change(L)og
+	item --key c reboot                 ${spaces2}Exit and (C)hain into boot.salstar.sk menu
+	item --key x exit                   ${spaces2}E(X)it and return to boot.netboot.xyz menu
+	item --key s shell                  ${spaces2}Drop to iPXE (S)hell
+	item --key r reboot                 ${spaces2}(R)eboot
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
 	### You may therefore wish to always handle failures of the choose command.
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
@@ -97,16 +96,14 @@ goto dasboot-main-menu
 
 :info-network
 	menu Network Information
-	item --gap NIC 0 - ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2}
+	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:DEV${pci/${net0/busloc}.2.2})
 	item
 	item --gap Driver:
 	item chip ${spaces2}${net0/chip}
 	item --gap MAC:
 	item mac ${spaces2}${net0/mac}
-	item --gap IP/mask:
-	item ip ${spaces2}${net0/ip}/${net0/netmask}
-	item --gap Gateway:
-	item gw ${spaces2}${net0/gateway}
+	item --gap IP / Netmask / Gateway:
+	item ip ${spaces2}${net0/ip} / ${net0/netmask} / ${net0/gateway}
 	item --gap Domain:
 	item domain ${spaces2}${net0/domain}
 	item --gap DNS:
@@ -118,16 +115,14 @@ goto dasboot-main-menu
 	item --gap DHCP iPXE Filename:
 	item filename ${spaces2}${net0/filename}
 	item
-	item --gap ${spaces2}NIC 1 - ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2} ${net1/mac}
+	item --gap ${spaces2}NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
 	item
 	item --gap Driver:
 	item chip ${spaces2}${net1/chip}
 	item --gap MAC:
 	item mac ${spaces2}${net1/mac}
-	item --gap IP/mask:
-	item ip ${spaces2}${net1/ip}/${net1/netmask}
-	item --gap Gateway:
-	item gw ${spaces2}${net1/gateway}
+	item --gap IP / Netmask / Gateway:
+	item ip ${spaces2}${net1/ip} / ${net1/netmask} / ${net1/gateway}
 	item --gap Domain:
 	item domain ${spaces2}${net1/domain}
 	item --gap DNS:
