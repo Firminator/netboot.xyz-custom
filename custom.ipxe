@@ -48,22 +48,18 @@
 	item --key f firmware-submenu        ${spaces2}(F)irmware Updates
 	item --key w wiping-submenu          ${spaces2}(W)iping/Media Sanitation Tools
 	item
-	item
 	item --gap Other:
 	item --key c changelog               ${spaces2}(C)hangelog
 	item --key x exit                    ${spaces2}e(X)it and go back to netboot menu
 	item --key s shell                   ${spaces2}drop to iPXE (S)hell
 	item --key r reboot                  ${spaces2}(R)eboot
 	item
-	item
 	item --gap Info:
-	item --gap NIC 0 - VEN${pci/${net0/busloc}.0.2}:DEV${pci/${net0/busloc}.2.2} * ${net0/mac} * Driver ${net0/chip} 
-	item --gap NIC 1 - VEN${pci/${net1/busloc}.0.2}:DEV${pci/${net1/busloc}.2.2} * ${net1/mac} * Driver ${net1/chip}
-	item --key n systeminfo-network      (N)etwork card info
+	item --gap NIC 0 - ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2} ${net0/mac} ${net0/chip} 
+	item --gap NIC 1 - ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2} ${net1/mac} ${net1/chip}
+	item --key n systeminfo-network      Detailed (N)etwork card info
 	item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI devices with lspci
 	item --key h systeminfo-hdt          BIOS-only${spaces4}: List devices with (H)DT
-		item
-
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
 	### You may therefore wish to always handle failures of the choose command.
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
