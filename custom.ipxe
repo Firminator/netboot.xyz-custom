@@ -96,7 +96,8 @@ goto dasboot-main-menu
 
 :info-network
 	menu Network Information
-	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:DEV${pci/${net0/busloc}.2.2})
+	item
+	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
 	item
 	item --gap Driver:
 	item chip ${spaces2}${net0/chip}
