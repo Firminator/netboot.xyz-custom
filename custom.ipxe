@@ -59,7 +59,8 @@
 	item --key e chain                  ${spaces2}(E)xit and chain into boot.salstar.sk menu
 	item --key s shell                  ${spaces2}Drop to iPXE (S)hell
 	item --key r reboot                 ${spaces2}(R)eboot
-	item exit                           ${spaces2}Press ESC anywhere to return to previous menu
+	item
+	item --gap                          ${spaces2}Press ESC anywhere to return to previous menu
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
 	### You may therefore wish to always handle failures of the choose command.
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
@@ -97,15 +98,54 @@ imgfree pciids.ipxe
 goto dasboot-main-menu
 
 :info-network
-	menu Network Information
-	item --gap Detailed device and network information for:
-	item --key 0 info-network-nic0 - NIC (0)
-	item --key 1 info-network-nic1 - NIC (1)
-	item --key 2 info-network-nic2 - NIC (2)
-	choose info-network_choice && goto ${info-network_choice} || goto dasboot-main-menu
+	goto :info-network-nic0
 
 :info-network-nic0
 	menu Device and Network Information for NIC 0
+	item --gap Choose a different NIC:
+	item --key 0 info-network-nic0 - NIC (0)
+	item --key 1 info-network-nic1 - NIC (1)
+	item --key 2 info-network-nic2 - NIC (2)
+	item
+	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item --gap ${spaces4}Driver : ${net0/chip}
+	item --gap ${spaces4}MAC${spaces4}: ${net0/mac}
+	item --gap ${spaces4}IP${spaces4} : ${net0/ip}
+	item --gap ${spaces4}Netmask: ${net0/netmask}
+	item --gap ${spaces4}Gateway: ${net0/gateway}
+	item --gap ${spaces4}Domain : ${net0/domain}
+	item --gap ${spaces4}DNS${spaces4}: ${net0/dns}
+	item
+	item --gap DHCP
+	item --gap server${spaces4} : ${net0/dhcp-server}
+	item --gap Next-server: ${next-server}
+	item --gap bootfile${spaces2} : ${net0/filename}
+	choose --default info-network-nic1 info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
+	
+:info-network-nic1
+	menu Device and Network Information for NIC 1
+	item --gap Choose a different NIC:
+	item --key 0 info-network-nic0 - NIC (0)
+	item --key 1 info-network-nic1 - NIC (1)
+	item --key 2 info-network-nic2 - NIC (2)
+	item
+	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item --gap ${spaces4}Driver : ${net0/chip}
+	item --gap ${spaces4}MAC${spaces4}: ${net0/mac}
+	item --gap ${spaces4}IP${spaces4} : ${net0/ip}
+	item --gap ${spaces4}Netmask: ${net0/netmask}
+	item --gap ${spaces4}Gateway: ${net0/gateway}
+	item --gap ${spaces4}Domain : ${net0/domain}
+	item --gap ${spaces4}DNS${spaces4}: ${net0/dns}
+	item
+	item --gap DHCP
+	item --gap server${spaces4} : ${net0/dhcp-server}
+	item --gap Next-server: ${next-server}
+	item --gap bootfile${spaces2} : ${net0/filename}
+	choose --default info-network-nic2 info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
+
+:info-network-nic2
+	menu Device and Network Information for NIC 2
 	item --gap Choose another NIC:
 	item --key 0 info-network-nic0 - NIC (0)
 	item --key 1 info-network-nic1 - NIC (1)
@@ -124,52 +164,8 @@ goto dasboot-main-menu
 	item --gap server${spaces4} : ${net0/dhcp-server}
 	item --gap Next-server: ${next-server}
 	item --gap bootfile${spaces2} : ${net0/filename}
-	choose info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
-
-:info-network-nic1
-	menu Network Information and Device Information for NIC 1
-	item --gap Choose another NIC:
-	item --key 0 info-network-nic0 - NIC (0)
-	item --key 1 info-network-nic1 - NIC (1)
-	item --key 2 info-network-nic2 - NIC (2)
-	item
-	item --gap NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
-	item
-	item --gap Driver         : ${net1/chip}
-	item --gap MAC            : ${net1/mac}
-	item --gap IP             : ${net1/ip}
-	item --gap Netmask        : ${net1/netmask}
-	item --gap Gateway        : ${net1/gateway}
-	item --gap Domain         : ${net1/domain}
-	item --gap DNS            : ${net1/dns}
-	item --gap DHCP settings
-	item --gap   server       : ${net1/dhcp-server}
-	item --gap   Next-server  : ${next-server}
-	item --gap   iPXE Filename: ${net1/filename}
-	choose info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
-
-:info-network-nic2
-	menu Network Information and Device Information for NIC 2
-	item --gap Choose another NIC:
-	item --key 0 info-network-nic0 - NIC (0)
-	item --key 1 info-network-nic1 - NIC (1)
-	item --key 2 info-network-nic2 - NIC (2)
-	item
-	item --gap NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
-	item
-	item --gap Driver         : ${net2/chip}
-	item --gap MAC            : ${net2/mac}
-	item --gap IP             : ${net2/ip}
-	item --gap Netmask        : ${net2/netmask}
-	item --gap Gateway        : ${net2/gateway}
-	item --gap Domain         : ${net2/domain}
-	item --gap DNS            : ${net2/dns}
-	item --gap DHCP settings
-	item --gap   server       : ${net2/dhcp-server}
-	item --gap   Next-server  : ${next-server}
-	item --gap   iPXE Filename: ${net2/filename}
-	choose info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
-
+	choose --default info-network-nic0 info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
+	
 :info-hdt
 	kernel hdt.c32 || goto error
 	module modules.alias || goto error
