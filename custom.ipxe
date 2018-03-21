@@ -68,8 +68,16 @@
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
 	choose --default changelog dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto dasboot-main-menu
 
+### this label is licensed under GPLv2
 :info-pciscan
 	### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified for it to work w/ netboot.xyz-custom/dasboot
+	### boot.salstar.sk is GPLv2 ( https://tldrlegal.com/license/gnu-general-public-license-v2 )
+	### GPLv2 musts:
+	### 	Include or Instruct how to get Original -> http://boot.salstar.sk/lspci.ipxe
+	### 	Disclose Source (if distributing an .exe or .bin): doesn't apply
+	###	Include Copyright: this part is GPLv2
+	###	State Changes: label names
+	###	Include License: todo	
 	### see also http://ipxe.org/cmd/pciscan
 	clear addr
 	pciscan addr && goto info-pciscan_found ||
