@@ -39,11 +39,11 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
-	item --gap ===========================================================================+
+	item --gap =========================================================================+
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-lspci   - Identify all (P)CI devices
-	item --key n info-network - List (N)etwork information
-	item --gap ===========================================================================+
+	item --key n info-network - Show (N)etwork information
+	item --gap ==========================================================================+
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
@@ -58,7 +58,7 @@
 	item --key c changelog              ${spaces2}(C)hangelog
 	item --key o other                  ${spaces2}(O)ther iPXE boot menus
 	item --key s shell                  ${spaces2}Drop to iPXE (S)hell
-	item --key r reboot                 ${spaces2}(R)eboot
+	#tem --key r reboot                 ${spaces2}(R)eboot
 	item
 	item --gap Press ESC anywhere to return to the previous menu.
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
