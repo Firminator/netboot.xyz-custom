@@ -39,7 +39,7 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
-	item --gap ==========================================================================
+	item --gap +==========================================================================+
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-lspci   - Identify all (P)CI devices
 	item --key n info-network - List (N)etwork information
@@ -47,13 +47,11 @@
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
-	item
 	item --gap NetBoot:
 	item --key d diagnostic-submenu     ${spaces2}(D)iagnostic Tools
 	item --key b bios-submenu           ${spaces2}(B)IOS Updates
 	item --key f firmware-submenu       ${spaces2}(F)irmware Updates
 	item --key w wiping-submenu         ${spaces2}(W)iping/Media Sanitation Tools
-	item
 	item
 	item
 	item --gap Other:
@@ -115,18 +113,18 @@ goto dasboot-main-menu
 	item
 	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
 	item
-	item --gap Driver${spaces8} : ${net0/chip}
-	item --gap MAC${spaces8}${spaces4}: ${net0/mac}
-	item --gap IP${spaces8}${spaces4} : ${net0/ip}
-	item --gap Netmask${spaces8}: ${net0/netmask}
-	item --gap Gateway${spaces8}: ${net0/gateway}
-	item --gap Domain${spaces8} : ${net0/domain}
-	item --gap DNS${spaces8}${spaces4}: ${net0/dns}
+	item --gap Driver : ${net0/chip}
+	item --gap MAC${spaces4}: ${net0/mac}
+	item --gap IP${spaces4} : ${net0/ip}
+	item --gap Netmask: ${net0/netmask}
+	item --gap Gateway: ${net0/gateway}
+	item --gap Domain : ${net0/domain}
+	item --gap DNS${spaces4}: ${net0/dns}
 	item
 	item --gap DHCP settings
-	item --gap ${spaces2}server${spaces4}${spaces2} : ${net0/dhcp-server}
-	item --gap ${spaces2}Next-server${spaces2} : ${next-server}
-	item --gap ${spaces2}iPXE Filename: ${net0/filename}
+	item --gap server${spaces2} : ${net0/dhcp-server}
+	item --gap Next-server$: ${next-server}
+	item --gap bootfile: ${net0/filename}
 	choose info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
 
 :info-network-nic1
