@@ -37,8 +37,8 @@
 	set spaces4 ${spaces4:string}
 	set spaces8 ${spaces8:string}
   
-:dasboot-main-menu ### DasBoot Main Menu
-	menu DasBoot v6.00.xx (2018-03-21)
+:dasboot-main-menu 
+	menu DasBoot v6.00.00 (2018-03-21)
 	item --gap =========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan - Identify all (P)CI devices
@@ -181,12 +181,12 @@
 #	boot || goto error
 #	goto dasboot-main-menu
 
-:bios-submenu
+:diagnostic-submenu
 	echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 	prompt
 	goto dasboot-main-menu
-	
-:diagnostic-submenu
+
+:bios-submenu
 	echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 	prompt
 	goto dasboot-main-menu
@@ -201,10 +201,8 @@
 	prompt
 	goto dasboot-main-menu
 
-:changelog
-	echo chain changelog.ipxe
-	prompt
-	goto dasboot-main-menu
+:reboot
+	reboot
 
 :other
 	### if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
@@ -212,13 +210,18 @@
 	prompt
 	goto exit
 
+:changelog
+	echo chain changelog.ipxe
+	prompt
+	goto dasboot-main-menu
+
+:rocks
+	goto dasboot-main-menu
+
 :shell
 	echo Type 'exit' to return to the menu
 	shell
 	goto dasboot-main-menu
-
-:reboot
-	reboot
 
 :failed_download
 	echo
