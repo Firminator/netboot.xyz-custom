@@ -39,10 +39,14 @@
   
 :dasboot-main-menu ### DasBoot Main Menu
 	menu DasBoot v6.00.xx (2018-03-21)
+	item --gap ==========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-lspci             - Identify all (P)CI devices
-	item --key n info-network           - List (N)etwork information
+	item --gap ==========================================================================
+	item --key p info-lspci   |- Identify all (P)CI devices
+	item --key n info-network |- List (N)etwork information
+	item --gap ==========================================================================
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
+	item
 	item
 	item
 	item --gap NetBoot:
@@ -52,9 +56,11 @@
 	item --key w wiping-submenu         ${spaces2}(W)iping/Media Sanitation Tools
 	item
 	item
+	item
+	item
 	item --gap Other:
 	item --key l changelog              ${spaces2}Change(L)og
-	item --key c reboot                 ${spaces2}Exit and (C)hain into boot.salstar.sk menu
+	item --key c chain                  ${spaces2}Exit and (C)hain into boot.salstar.sk menu
 	item --key x exit                   ${spaces2}E(X)it and return to boot.netboot.xyz menu
 	item --key s shell                  ${spaces2}Drop to iPXE (S)hell
 	item --key r reboot                 ${spaces2}(R)eboot
@@ -96,46 +102,77 @@ goto dasboot-main-menu
 
 :info-network
 	menu Network Information
+	item --gap Detailed Network and Device Information for:
+	item --key 0 info-network-nic0 - NIC (0)
+	item --key 1 info-network-nic1 - NIC (1)
+	item --key 2 info-network-nic2 - NIC (2)
+	choose info-network_choice && goto ${info-network_choice} || goto dasboot-main-menu
+
+:info-network-nic0
+	menu Network Information and Device Information for NIC 0
+	item --gap Choose another NIC:
+	item --key 0 info-network-nic0 - NIC (0)
+	item --key 1 info-network-nic1 - NIC (1)
+	item --key 2 info-network-nic2 - NIC (2)
 	item
 	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
 	item
-	item --gap Driver:
-	item chip ${spaces2}${net0/chip}
-	item --gap MAC:
-	item mac ${spaces2}${net0/mac}
-	item --gap IP / Netmask / Gateway:
-	item ip ${spaces2}${net0/ip} / ${net0/netmask} / ${net0/gateway}
-	item --gap Domain:
-	item domain ${spaces2}${net0/domain}
-	item --gap DNS:
-	item dns ${spaces2}${net0/dns}
-	item --gap DHCP server:
-	item dhcpserver ${spaces2}${net0/dhcp-server}
-	item --gap DHCP Next-server:
-	item nextserver ${spaces2}${next-server}
-	item --gap DHCP iPXE Filename:
-	item filename ${spaces2}${net0/filename}
+	item --gap Driver         : ${net0/chip}
+	item --gap MAC            : ${net0/mac}
+	item --gap IP             : ${net0/ip}
+	item --gap Netmask        : ${net0/netmask}
+	item --gap Gateway        : ${net0/gateway}
+	item --gap Domain         : ${net0/domain}
+	item --gap DNS            : ${net0/dns}
+	item --gap DHCP settings
+	item --gap   server       : ${net0/dhcp-server}
+	item --gap   Next-server  : ${next-server}
+	item --gap   iPXE Filename: ${net0/filename}
+	choose info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
+
+:info-network-nic1
+	menu Network Information and Device Information for NIC 1
+	item --gap Choose another NIC:
+	item --key 0 info-network-nic0 - NIC (0)
+	item --key 1 info-network-nic1 - NIC (1)
+	item --key 2 info-network-nic2 - NIC (2)
 	item
-	item --gap ${spaces2}NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	item --gap NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
 	item
-	item --gap Driver:
-	item chip ${spaces2}${net1/chip}
-	item --gap MAC:
-	item mac ${spaces2}${net1/mac}
-	item --gap IP / Netmask / Gateway:
-	item ip ${spaces2}${net1/ip} / ${net1/netmask} / ${net1/gateway}
-	item --gap Domain:
-	item domain ${spaces2}${net1/domain}
-	item --gap DNS:
-	item dns ${spaces2}${net1/dns}
-	item --gap DHCP server:
-	item dhcpserver ${spaces2}${net1/dhcp-server}
-	item --gap DHCP Next-server:
-	item nextserver ${spaces2}${next-server}
-	item --gap DHCP iPXE Filename:
-	item filename ${spaces2}${net1/filename}
-	choose empty ||
-	goto dasboot-main-menu
+	item --gap Driver         : ${net1/chip}
+	item --gap MAC            : ${net1/mac}
+	item --gap IP             : ${net1/ip}
+	item --gap Netmask        : ${net1/netmask}
+	item --gap Gateway        : ${net1/gateway}
+	item --gap Domain         : ${net1/domain}
+	item --gap DNS            : ${net1/dns}
+	item --gap DHCP settings
+	item --gap   server       : ${net1/dhcp-server}
+	item --gap   Next-server  : ${next-server}
+	item --gap   iPXE Filename: ${net1/filename}
+	choose info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
+
+:info-network-nic2
+	menu Network Information and Device Information for NIC 2
+	item --gap Choose another NIC:
+	item --key 0 info-network-nic0 - NIC (0)
+	item --key 1 info-network-nic1 - NIC (1)
+	item --key 2 info-network-nic2 - NIC (2)
+	item
+	item --gap NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
+	item
+	item --gap Driver         : ${net2/chip}
+	item --gap MAC            : ${net2/mac}
+	item --gap IP             : ${net2/ip}
+	item --gap Netmask        : ${net2/netmask}
+	item --gap Gateway        : ${net2/gateway}
+	item --gap Domain         : ${net2/domain}
+	item --gap DNS            : ${net2/dns}
+	item --gap DHCP settings
+	item --gap   server       : ${net2/dhcp-server}
+	item --gap   Next-server  : ${next-server}
+	item --gap   iPXE Filename: ${net2/filename}
+	choose info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
 
 :info-hdt
 	kernel hdt.c32 || goto error
@@ -166,6 +203,12 @@ goto dasboot-main-menu
 
 :changelog
 	echo chain changelog.ipxe
+	prompt
+	goto dasboot-main-menu
+
+:chain
+	### if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
+	echo chain https://boot.salstar.sk/boot.ipxe #or menu.ipxe
 	prompt
 	goto dasboot-main-menu
 
