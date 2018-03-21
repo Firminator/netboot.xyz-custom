@@ -60,7 +60,7 @@
 	item --key s shell                  ${spaces2}Drop to iPXE (S)hell
 	item --key r reboot                 ${spaces2}(R)eboot
 	item
-	item exit                           ${spaces2}Press ESC anywhere to return to previous menu
+	item --gap Press ESC anywhere to return to the previous menu.
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
 	### You may therefore wish to always handle failures of the choose command.
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
