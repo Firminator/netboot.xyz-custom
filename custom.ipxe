@@ -129,41 +129,43 @@ goto dasboot-main-menu
 	item --key 1 info-network-nic1 - NIC (1)
 	item --key 2 info-network-nic2 - NIC (2)
 	item
-	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item --gap ${spaces4}Driver : ${net0/chip}
-	item --gap ${spaces4}MAC${spaces4}: ${net0/mac}
-	item --gap ${spaces4}IP${spaces4} : ${net0/ip}
-	item --gap ${spaces4}Netmask: ${net0/netmask}
-	item --gap ${spaces4}Gateway: ${net0/gateway}
-	item --gap ${spaces4}Domain : ${net0/domain}
-	item --gap ${spaces4}DNS${spaces4}: ${net0/dns}
+	item --gap NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	item --gap ${spaces4}Driver : ${net1/chip}
+	item --gap ${spaces4}MAC${spaces4}: ${net1/mac}
+	item --gap ${spaces4}IP${spaces4} : ${net1/ip}
+	item --gap ${spaces4}Netmask: ${net1/netmask}
+	item --gap ${spaces4}Gateway: ${net1/gateway}
+	item --gap ${spaces4}Domain : ${net1/domain}
+	item --gap ${spaces4}DNS${spaces4}: ${net1/dns}
 	item
 	item --gap DHCP
-	item --gap server${spaces4} : ${net0/dhcp-server}
+	item --gap server${spaces4} : ${net1/dhcp-server}
 	item --gap Next-server: ${next-server}
-	item --gap bootfile${spaces2} : ${net0/filename}
+	item --gap bootfile${spaces2} : ${net1/filename}
 	choose --default info-network-nic2 info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
 
 :info-network-nic2
 	menu Device and Network Information for NIC 2
-	item --gap Choose another NIC:
+	item --gap Choose a different NIC:
 	item --key 0 info-network-nic0 - NIC (0)
 	item --key 1 info-network-nic1 - NIC (1)
 	item --key 2 info-network-nic2 - NIC (2)
 	item
-	item --gap NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item --gap ${spaces4}Driver : ${net0/chip}
-	item --gap ${spaces4}MAC${spaces4}: ${net0/mac}
-	item --gap ${spaces4}IP${spaces4} : ${net0/ip}
-	item --gap ${spaces4}Netmask: ${net0/netmask}
-	item --gap ${spaces4}Gateway: ${net0/gateway}
-	item --gap ${spaces4}Domain : ${net0/domain}
-	item --gap ${spaces4}DNS${spaces4}: ${net0/dns}
+	item
+	item --gap NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
+	item --gap ${spaces4}Driver       : ${net2/chip}
+	item --gap ${spaces4}MAC${spaces4}: ${net2/mac}
+	item --gap ${spaces4}IP${spaces4} : ${net2/ip}
+	item --gap ${spaces4}Netmask      : ${net2/netmask}
+	item --gap ${spaces4}Gateway      : ${net2/gateway}
+	item --gap ${spaces4}Domain       : ${net2/domain}
+	item --gap ${spaces4}DNS${spaces4}: ${net2/dns}
+	item
 	item
 	item --gap DHCP
-	item --gap server${spaces4} : ${net0/dhcp-server}
-	item --gap Next-server: ${next-server}
-	item --gap bootfile${spaces2} : ${net0/filename}
+	item --gap server${spaces4}       : ${net0/dhcp-server}
+	item --gap Next-server            : ${next-server}
+	item --gap bootfile${spaces2}     : ${net0/filename}
 	choose --default info-network-nic0 info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
 	
 :info-hdt
