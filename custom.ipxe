@@ -27,7 +27,6 @@
 		iseq ${buildarch} arm32 && set cpuarch arm32 ||
 		iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM ||
 
-
 ### Permanently require trusted images
 	### imgtrust --permanent
 
@@ -40,12 +39,10 @@
 	set spaces8 ${spaces8:string}
   
 :dasboot-main-menu ### DasBoot Main Menu
-	menu *** DasBoot 2018-03-18 ***
+	menu DasBoot v6.00.xx (2018-03-21)
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text} CPU
-	item --gap ${cpuarch_text} CPU
-	### and ${memsize} MB RAM * Not enabled in netboot.xyz build
-	iPXE build for: ${buildarch}
-	#tem --gap ${NIC} ${MAC}
+	item --gap ${cpuarch_text} CPU * Network card: ${NIC} ${MAC} 
+	#tem --gap iPXE build for: ${buildarch}
 	item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI devices with lspci
 	item --key h systeminfo-hdt          BIOS-only${spaces4}: (H)DT
 	item
