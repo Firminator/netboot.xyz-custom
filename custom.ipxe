@@ -5,59 +5,66 @@
 
 
 ### Set a background picture * Not enabled in netboot.xyz build
-### console --picture http://boot.ipxe.org/ipxe.png
+	### console --picture http://boot.ipxe.org/ipxe.png
 
 ### Set a background picture with margins * Not enabled in netboot.xyz build
-### console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
+	### console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
 
-### Check CPU architecture and if BIOS or UEFI is used
-iseq ${buildarch} i386 && set cpuarch i386 ||
-iseq ${buildarch} i386 && set cpuarch_text 32bit ||
-iseq ${buildarch} x86_64 && set cpuarch x86_64 ||
-iseq ${buildarch} x86_64 && set cpuarch_text 64bit ||
-iseq ${buildarch} arm64 && set cpuarch arm64 ||
-iseq ${buildarch} arm64 && set cpuarch_text 64bit ARM ||
-iseq ${platform} pcbios && set fwplatform BIOS ||
-iseq ${platform} efi && set fwplatform UEFI ||
+### Check if BIOS or UEFI is used
+	iseq ${platform} pcbios && set fwplatform BIOS ||
+	iseq ${platform} efi && set fwplatform UEFI ||
+
+### Check CPU architecture
+	### x86: You can use the cpuid command to determine the architecture of the current machine
+	### Don't use ${buildarch} as this just shows the version of iPXE was compiled for and which is served from DHCP.
+	### The build architecture does not necessarily represent the architecture of the machine on which iPXE is running.
+	### In particular, a version of iPXE built for i386 may be running on a 64-bit machine.
+		cpuid --ext 29 && set cpuarch x86_64 || set cpuarch i386
+		iseq ${cpuarch} x86_64 && set cpuarch_text 64-bit x86 CPU || set cpuarch_text 32-bit x86 CPU
+	### ARM
+		iseq ${buildarch} arm64 && set cpuarch arm64 ||
+		iseq ${buildarch} arm64 && set cpuarch_text 64bit ARM ||
+		iseq ${buildarch} arm32 && set cpuarch arm32 ||
+		iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM ||
+
 
 ### Permanently require trusted images
-#imgtrust --permanent
+	### imgtrust --permanent
 
-### Indent
-set spaces2:hex 20:20
-set spaces4:hex 20:20:20:20
-set spaces8:hex 20:20:20:20:20:20:20:20
-set spaces2 ${spaces2:string}
-set spaces4 ${spaces4:string}
-set spaces8 ${spaces8:string}
+### Define Indent
+	set spaces2:hex 20:20
+	set spaces4:hex 20:20:20:20
+	set spaces8:hex 20:20:20:20:20:20:20:20
+	set spaces2 ${spaces2:string}
+	set spaces4 ${spaces4:string}
+	set spaces8 ${spaces8:string}
   
-:dasboot-main-menu
-#clear dasboot-main-menu_choice
-menu *** DasBoot 2018-03-18 ***
-item --gap ${manufacturer} ${product} in ${fwplatform} Mode w/ ${cpuarch_text} CPU
-#and ${memsize} MB RAM * Not enabled in netboot.xyz build
-#tem --gap ${NIC} ${MAC}
-item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI devices with lspci
-item --key h systeminfo-hdt          BIOS-only${spaces4}: (H)DT
-item
-item
-item --gap NetBoot:
-item --key d diagnostic-submenu      ${spaces2}(D)iagnostic Tools
-item --key b bios-submenu            ${spaces2}(B)IOS Updates
-item --key f firmware-submenu        ${spaces2}(F)irmware Updates
-item --key w wiping-submenu          ${spaces2}(W)iping/Media Sanitation Tools
-item
-item
-item --gap Other:
-item --key c exit                    ${spaces2}(C)hangelog
-item --key x exit                    ${spaces2}e(X)it and go back to netboot menu
-item --key s shell                   ${spaces2}drop to iPXE (S)hell
-item --key r reboot                  ${spaces2}(R)eboot
-
-choose dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto error
-#echo ${cls}
-#goto ${dasboot-main-menu_choice}
-#goto exit
+:dasboot-main-menu ### DasBoot Main Menu
+	menu *** DasBoot 2018-03-18 ***
+	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text} CPU
+	item --gap ${cpuarch_text} CPU
+	### and ${memsize} MB RAM * Not enabled in netboot.xyz build
+	iPXE build for: ${buildarch}
+	#tem --gap ${NIC} ${MAC}
+	item --key p systeminfo-lspci        BIOS and UEFI: List all (P)CI devices with lspci
+	item --key h systeminfo-hdt          BIOS-only${spaces4}: (H)DT
+	item
+	item
+	item --gap NetBoot:
+	item --key d diagnostic-submenu      ${spaces2}(D)iagnostic Tools
+	item --key b bios-submenu            ${spaces2}(B)IOS Updates
+	item --key f firmware-submenu        ${spaces2}(F)irmware Updates
+	item --key w wiping-submenu          ${spaces2}(W)iping/Media Sanitation Tools
+	item
+	item
+	item --gap Other:
+	item --key c changelog               ${spaces2}(C)hangelog
+	item --key x exit                    ${spaces2}e(X)it and go back to netboot menu
+	item --key s shell                   ${spaces2}drop to iPXE (S)hell
+	item --key r reboot                  ${spaces2}(R)eboot
+	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
+	### You may therefore wish to always handle failures of the choose command. For example:
+	choose --default changelog dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto dasboot-main-menu
 
 :systeminfo-lspci
 ### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified for it to work w/ netboot.xyz-custom/dasboot
@@ -91,60 +98,60 @@ imgfree pciids.ipxe
 goto dasboot-main-menu
 
 :systeminfo-hdt
-kernel hdt.c32 || goto error
-module modules.alias || goto error
-module pci.ids || goto error
-boot || goto error
-goto dasboot-main-menu
+	kernel hdt.c32 || goto error
+	module modules.alias || goto error
+	module pci.ids || goto error
+	boot || goto error
+	goto dasboot-main-menu
 
 :bios-submenu
-echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
-prompt
-goto dasboot-main-menu
-
+	echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
+	prompt
+	goto dasboot-main-menu
+	
 :diagnostic-submenu
-echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
-prompt
-goto dasboot-main-menu
+	echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
+	prompt
+	goto dasboot-main-menu
 
 :firmware-submenu
-echo chain firmware-submenu.ipxe || goto error
-prompt
-goto dasboot-main-menu
+	echo chain firmware-submenu.ipxe || goto error
+	prompt
+	goto dasboot-main-menu
 
 :wiping-submenu
-echo chain wiping-submenu.ipxe || goto error
-prompt
-goto dasboot-main-menu
+	echo chain wiping-submenu.ipxe || goto error
+	prompt
+	goto dasboot-main-menu
 
 :changelog
-echo chain changelog.ipxe
-prompt
-goto dasboot-main-menu
+	echo chain changelog.ipxe
+	prompt
+	goto dasboot-main-menu
 
 :exit
-#if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
-exit
+	### if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
+	exit
 
 :shell
-echo Type 'exit' to return to the menu
-shell
-goto dasboot-main-menu
+	echo Type 'exit' to return to the menu
+	shell
+	goto dasboot-main-menu
 
 :reboot
-reboot
+	reboot
 
 :failed_download
-echo
-echo Failed to download a file.
-goto error
+	echo
+	echo Failed to download a file.
+	goto error
 
 :failed_verify
-echo
-echo Failed to verify a file.
-goto error
+	echo
+	echo Failed to verify a file.
+	goto error
 
 :error
-echo Error occured, press any key to return to main menu ...
-prompt
-goto dasboot-main-menu
+	echo Error occured, press any key to return to main menu ...
+	prompt
+	goto dasboot-main-menu
