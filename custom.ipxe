@@ -212,7 +212,7 @@ kernel memdisk
 #imgfetch http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #boot memtest86+-5.01.bin.gz
 # initrd memtest86+-5.01.iso || goto error
-initrd memtest86-4.3.7.iso || goto error
+initrd memtest4.iso || goto error
 imgargs memdisk iso raw || goto error
 boot || goto error
 # https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
