@@ -201,10 +201,12 @@ imgstat || goto error
 prompt
 	### http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 	### http://ipxe.org/appnote/memtest
-# https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/
+	### https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/
+kernel memdisk iso bigraw || goto error
+initrd memtest5.iso || goto error
+boot
 #boot http://boot.ipxe.org/memtest.bin
 #boot memtest4 || goto error
-kernel memdisk
 	### Latest Pre-Compiled Bootable Binary of stale Memtest: http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 	### Latest Pre-Compiled Bootable ISO of stale Memtest   : http://www.memtest.org/download/5.01/memtest86+-5.01.iso.gz
 	### Latest Pre-Compiled Floppy package of stale Memtest : http://www.memtest.org/download/5.01/memtest86+-5.01.floppy.zip
@@ -214,9 +216,7 @@ kernel memdisk
 #initrd http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #imgfetch http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #boot memtest86+-5.01.bin.gz
-initrd memtest5.iso || goto error
 #initrd memtest4.iso || goto error
-imgargs memdisk iso bigraw || goto error
 boot || goto error
 # https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 # https://www.memtest86.com/downloads/memtest86-4.3.7-iso.tar.gz
