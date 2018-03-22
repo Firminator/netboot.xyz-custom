@@ -197,7 +197,7 @@ echo boot memtest86
 prompt
 # http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 # http://ipxe.org/appnote/memtest
-kernel memdisk
+kernel memdisk603
 # Latest Pre-Compiled Bootable Binary of stale Memtest: http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 # Latest Pre-Compiled Bootable ISO of stale Memtest   : http://www.memtest.org/download/5.01/memtest86+-5.01.iso.gz
 # Latest Pre-Compiled Floppy package of stale Memtest : http://www.memtest.org/download/5.01/memtest86+-5.01.floppy.zip
