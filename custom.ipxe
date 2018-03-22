@@ -203,7 +203,16 @@ prompt
 	### http://ipxe.org/appnote/memtest
 	### https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/
 # http://ipxe.org/cfg/vram states: chain -a http://boot.ipxe.org/memtest.0 onepass onefail && goto ok || goto bad
-boot https://boot.ipxe.org/memtest501.0
+#	.0    PXE bootstrap program (NBP) [PXELINUX only]
+#	.bin  "CD boot sector" [ISOLINUX only]
+#	.bs   Boot sector [SYSLINUX only]
+#	.bss  Boot sector, DOS superblock will be patched in [SYSLINUX only]
+#	.c32  COM32 image (32-bit COMBOOT)
+#	.cbt  COMBOOT image (not runnable from DOS)
+#	.com  COMBOOT image (runnable from DOS)
+#	.img  Disk image [ISOLINUX only]
+boot https://boot.ipxe.org/memtest501.0 onepass onefail && goto dasboot-main-menu || goto error
+
 # kernel memdisk iso bigraw || goto error
 # initrd memtest5.iso || goto error
 # boot
@@ -217,9 +226,10 @@ boot https://boot.ipxe.org/memtest501.0
 #initrd http://www.memtest86.com/downloads/memtest86-4.3.7-floppy.tar.gz
 #initrd http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #imgfetch http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
+#carefull! apparantly there is a bug with +/PLUS in the filename. Great this invalidates all the tests
 #boot memtest86+-5.01.bin.gz
 #initrd memtest4.iso || goto error
-boot || goto error
+# boot || goto error
 # https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 # https://www.memtest86.com/downloads/memtest86-4.3.7-iso.tar.gz
 # https://www.memtest86.com/downloads/memtest86-4.3.7-floppy.tar.gz
