@@ -40,7 +40,8 @@
 ### Define ClearScreen
 	### http://www.isthe.com/chongo/tech/comp/ansi_escapes.html
 
-:dasboot-main-menu 
+:dasboot-main-menu
+imgfree
 	menu DasBoot v6.00.00 (2018-03-21)
 	item --gap =========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
