@@ -202,9 +202,11 @@ prompt
 	### http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 	### http://ipxe.org/appnote/memtest
 	### https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/
-kernel memdisk iso bigraw || goto error
-initrd memtest5.iso || goto error
-boot
+# http://ipxe.org/cfg/vram states: chain -a http://boot.ipxe.org/memtest.0 onepass onefail && goto ok || goto bad
+boot https://boot.ipxe.org/memtest501.0
+# kernel memdisk iso bigraw || goto error
+# initrd memtest5.iso || goto error
+# boot
 #boot http://boot.ipxe.org/memtest.bin
 #boot memtest4 || goto error
 	### Latest Pre-Compiled Bootable Binary of stale Memtest: http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
