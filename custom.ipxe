@@ -194,10 +194,10 @@
 
 :diagnostic-submenu
 echo boot memtest86
-echo ${imgstat}
-imgfree
+echo ${imgstat} || goto error
+imgfree || goto error
+echo ${imgstat} || goto error
 prompt
-echo ${imgstat}
 	### http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 	### http://ipxe.org/appnote/memtest
 kernel memdisk
@@ -211,6 +211,7 @@ kernel memdisk
 #imgfetch http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #boot memtest86+-5.01.bin.gz
 initrd memtestp.bin || goto error
+boot || goto error
 # imgargs memdisk raw 
 # https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 # https://www.memtest86.com/downloads/memtest86-4.3.7-iso.tar.gz
