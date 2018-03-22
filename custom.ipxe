@@ -190,9 +190,13 @@
 #	goto dasboot-main-menu
 
 :diagnostic-submenu
-	echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
-	prompt
-	goto dasboot-main-menu
+#https://www.memtest86.com/downloads/memtest86-4.3.7-floppy.tar.gz
+echo boot memtest
+prompt
+chain https://boot.ipxe.org/memtest || goto error
+# https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
+prompt
+goto dasboot-main-menu
 
 :bios-submenu
 	echo https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
