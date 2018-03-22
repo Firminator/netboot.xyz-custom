@@ -194,10 +194,13 @@
 
 :diagnostic-submenu
 echo boot memtest86
+echo ${imgstat}
+imgfree
 prompt
+echo ${imgstat}
 	### http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 	### http://ipxe.org/appnote/memtest
-# kernel memdisk603
+kernel memdisk
 	### Latest Pre-Compiled Bootable Binary of stale Memtest: http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 	### Latest Pre-Compiled Bootable ISO of stale Memtest   : http://www.memtest.org/download/5.01/memtest86+-5.01.iso.gz
 	### Latest Pre-Compiled Floppy package of stale Memtest : http://www.memtest.org/download/5.01/memtest86+-5.01.floppy.zip
@@ -207,11 +210,7 @@ prompt
 #initrd http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #imgfetch http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #boot memtest86+-5.01.bin.gz
-imgstat
-imgfree
-imgstat
-prompt
-chain memtestp.bin || goto error
+initrd memtestp.bin || goto error
 # imgargs memdisk raw 
 # https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 # https://www.memtest86.com/downloads/memtest86-4.3.7-iso.tar.gz
