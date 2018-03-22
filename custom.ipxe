@@ -36,7 +36,10 @@
 	set spaces2 ${spaces2:string}
 	set spaces4 ${spaces4:string}
 	set spaces8 ${spaces8:string}
-  
+
+### Define ClearScreen
+	### http://www.isthe.com/chongo/tech/comp/ansi_escapes.html
+
 :dasboot-main-menu 
 	menu DasBoot v6.00.00 (2018-03-21)
 	item --gap =========================================================================
@@ -190,25 +193,24 @@
 #	goto dasboot-main-menu
 
 :diagnostic-submenu
-# https://boot.ipxe.org/memtest*versions
+echo boot memtest86
+prompt
+# http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 # http://ipxe.org/appnote/memtest
-
+kernel memdisk
 # Latest Pre-Compiled Bootable Binary of stale Memtest: http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 # Latest Pre-Compiled Bootable ISO of stale Memtest   : http://www.memtest.org/download/5.01/memtest86+-5.01.iso.gz
 # Latest Pre-Compiled Floppy package of stale Memtest : http://www.memtest.org/download/5.01/memtest86+-5.01.floppy.zip
-echo boot memtest86
-prompt
-
+# https://boot.ipxe.org/memtest*versions
+# https://boot.ipxe.org/memtest.bin
+initrd http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
+imgargs memdisk raw 
+boot
+# https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 # https://www.memtest86.com/downloads/memtest86-4.3.7-iso.tar.gz
 # https://www.memtest86.com/downloads/memtest86-4.3.7-floppy.tar.gz
 # https://www.memtest86.com/downloads/memtest86-4.3.7-usb.tar.gz
 # https://www.memtest86.com/technical.htm#network
-
-kernel memdisk
-initrd http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
-#https://boot.ipxe.org/memtest.bin || goto error
-boot
-# https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 goto dasboot-main-menu
 
 :bios-submenu
