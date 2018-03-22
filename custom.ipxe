@@ -207,6 +207,7 @@ prompt
 #initrd http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #imgfetch http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 #boot memtest86+-5.01.bin.gz
+imgstat
 imgfree
 imgstat
 prompt
