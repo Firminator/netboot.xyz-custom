@@ -216,7 +216,7 @@ kernel memdisk
 #boot memtest86+-5.01.bin.gz
 initrd memtest5.iso || goto error
 #initrd memtest4.iso || goto error
-imgargs memdisk iso || goto error
+imgargs memdisk iso bigraw || goto error
 boot || goto error
 # https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/${dasboot-main-menu_choice}.ipxe || goto error
 # https://www.memtest86.com/downloads/memtest86-4.3.7-iso.tar.gz
