@@ -201,7 +201,7 @@ prompt
 	### http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 	### http://ipxe.org/appnote/memtest
 # https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/
-kernel memdisk604
+kernel memdisk
 	### Latest Pre-Compiled Bootable Binary of stale Memtest: http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
 	### Latest Pre-Compiled Bootable ISO of stale Memtest   : http://www.memtest.org/download/5.01/memtest86+-5.01.iso.gz
 	### Latest Pre-Compiled Floppy package of stale Memtest : http://www.memtest.org/download/5.01/memtest86+-5.01.floppy.zip
