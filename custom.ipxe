@@ -4,10 +4,10 @@
 ###
 
 ### Set a background picture * Not enabled in netboot.xyz build
-	### console --picture http://boot.ipxe.org/ipxe.png
+    #console --picture http://boot.ipxe.org/ipxe.png
 
 ### Set a background picture with margins * Not enabled in netboot.xyz build
-	### console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
+    #console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
 
 ### Check if BIOS or UEFI is used
 	iseq ${platform} pcbios && set fwplatform BIOS ||
@@ -27,7 +27,7 @@
 	iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM CPU ||
 
 ### Permanently require trusted images
-	### imgtrust --permanent
+	#imgtrust --permanent
 
 ### Define Indent
 	set spaces2:hex 20:20
@@ -38,10 +38,9 @@
 	set spaces8 ${spaces8:string}
 
 ### Define ClearScreen
-	### http://www.isthe.com/chongo/tech/comp/ansi_escapes.html
+	#http://www.isthe.com/chongo/tech/comp/ansi_escapes.html
 
 :dasboot-main-menu
-imgfree
 	menu DasBoot v6.00.00 (2018-03-21)
 	item --gap =========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
@@ -72,16 +71,8 @@ imgfree
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
 	choose --default changelog dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto dasboot-main-menu
 
-### this label is licensed under GPLv2
 :info-pciscan
-	### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified for it to work w/ netboot.xyz-custom/dasboot
-	### boot.salstar.sk is GPLv2 ( https://tldrlegal.com/license/gnu-general-public-license-v2 )
-	### GPLv2 musts:
-	### 	Include or Instruct how to get Original -> http://boot.salstar.sk/lspci.ipxe
-	### 	Disclose Source (if distributing an .exe or .bin): doesn't apply
-	###	Include Copyright: this part is GPLv2
-	###	State Changes: label names
-	###	Include License: todo	
+	### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified
 	### see also http://ipxe.org/cmd/pciscan
 	clear addr
 	pciscan addr && goto info-pciscan_found ||
@@ -104,11 +95,10 @@ imgfree
 			set device ${pci/${addr}.2.2}
 			chain pciids.ipxe
 			item --gap ${addr:busdevfn} ${spaces4} ${ven}
-			item b${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
+			item ${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
 			goto info-pciscan_loop
 	:info-pciscan_done
 		choose press_enter ||
-		imgfree pciids.ipxe
 		goto dasboot-main-menu
 
 :info-network
