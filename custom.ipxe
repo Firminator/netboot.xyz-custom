@@ -120,8 +120,8 @@
 	item --gap ${horiline}
 	#tem --gap ==========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
-	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
+	item --key p info-pciscan -- ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
+	item --key n info-network -- ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap ==========================================================
 	#tem --key r info-retrieved                              = Show Fetched Images (imgstat) =
