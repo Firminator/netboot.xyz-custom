@@ -112,7 +112,7 @@
 	iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM CPU ||
 
 :dasboot-main-menu
-	menu ${redfg}${menuname} ${menuvers} ${menudate}
+	menu ${greenfg}${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
 	#tem --gap ==========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
@@ -121,10 +121,10 @@
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap =======================================================================
 	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
-	item --key r retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4} = ${spaces2}(r) imgstat${spaces2}=
+	item --key r retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8} =${spaces2}(r) imgstat${spaces2}=
 	#tem --key k discard                                =  Discard All Images (imgfree) =
-	item --key k discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4} =${spaces2}(k) imgfree${spaces2} =
-	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4}===========
+	item --key k discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8} =${spaces2}(k) imgfree${spaces2}=
+	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4}===============
 	item --key d diagnostic-submenu     ${spaces2}${redfg}D${whitefg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${redfg}B${whitefg}IOS Updates                  # Boot
 	item --key f firmware-submenu       ${spaces2}${redfg}F${whitefg}irmware Updates              # Firmware
