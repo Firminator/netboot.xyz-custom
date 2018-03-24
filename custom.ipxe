@@ -127,9 +127,9 @@
 	item --gap =====================================================================
 	#tem --key r info-retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces2}${whitefg} = Show Fetched Images (imgstat)
 	#tem --key k info-discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces2}${whitefg} =${spaces2}Discard All Images (imgfree)
-	item --key r info-retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${whitefg}= (r) imgstat
-	item --key k info-discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${whitefg}= (k) imgfree
-	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces4} ========================================
+	item --key g info-retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${whitefg}= im${redfg}g${whitefg}stat
+	item --key m info-discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${whitefg}= i${redfg}m${whitefg}gfree
+	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4} =======================
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${defaultfg}IOS Updates                  # Boot
 	item --key f firmware-submenu       ${spaces2}${yellowfg}F${defaultfg}irmware Updates              # Firmware
