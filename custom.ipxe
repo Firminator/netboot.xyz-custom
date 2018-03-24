@@ -18,7 +18,7 @@
 	set menuname DasBoot
 	set menuvers v6.00.01
 	set menudate (2018-03-23)
-	set horiline ==========================================================================+
+	set horiline ==========================================================================
 	### Define Indent
 	set spaces2:hex 20:20
 	set spaces4:hex 20:20:20:20
@@ -106,6 +106,12 @@
 
 :info-network
 :pciscan-nic0
+	clear addr
+	pciscan addr && goto pciscan-nic0_found ||
+	echo Missing "pciscan" command. Recompile iPXE with CMD_PCI.
+	prompt
+	goto dasboot-main-menu
+	:pciscan-nic0_found
 	imgfetch http://boot.salstar.sk/pciids.ipxe
 	clear addr
 	:pciscan-nic0
@@ -115,59 +121,40 @@
 		set vendor ${pci/${net0/busloc}.0.2}
 		set device ${pci/${net0/busloc}.2.2}
 		chain pciids.ipxe
-		echo ${ven}
 		set vendorcleartext-nic0 ${ven}
-		echo ${dev}
 		set devicecleartext-nic0 ${dev}
 	:pciscan-nic0_done
-		echo ${vendorcleartext-nic0}
-		echo ${devicecleartext-nic0}
-		echo press_enter
-		prompt
 
-# goto info-network-nic0
-
-#		pciscan addr
-#		clear ven
-#		clear vendor
-#		clear dev
-#		clear device
-#		clear vendorcleartext-nic0
-#		clear vendorcleartext-nic1
-#		clear devicecleartext-nic0
-#		clear devicecleartext-nic1
-#		set vendor ${pci/${net0/busloc}.0.2}
-#		set device ${pci/${net0/busloc}.2.2}
-#		chain pciids.pxe
-#		set vendorcleartext-nic0 ${ven}
-#		set devicecleartext-nic0 ${dev}
-### goto info-network-nic1
-### 
-#		pciscan addr
-#		clear ven
-#		clear vendor
-#		clear dev
-#		clear device
-#		clear vendorcleartext-nic0
-#		clear vendorcleartext-nic1
-#		clear devicecleartext-nic0
-#		clear devicecleartext-nic1
-#		set vendor ${pci/${net1/busloc}.0.2}
-#		set device ${pci/${net1/busloc}.2.2}
-#		chain pciids.pxe
-#		set vendorcleartext-nic1 ${ven}
-#		set devicecleartext-nic1 ${dev}
-#goto info-network-nic0
+:pciscan-nic1
+	clear addr
+	pciscan addr && goto pciscan-nic1_found ||
+	echo Missing "pciscan" command. Recompile iPXE with CMD_PCI.
+	prompt
+	goto dasboot-main-menu
+	:pciscan-nic1_found
+	imgfetch http://boot.salstar.sk/pciids.ipxe
+	clear addr
+	:pciscan-nic1
+		pciscan addr || goto pciscan-nic1_done
+		clear ven
+		clear dev
+		set vendor ${pci/${net1/busloc}.0.2}
+		set device ${pci/${net1/busloc}.2.2}
+		chain pciids.ipxe
+		set vendorcleartext-nic1 ${ven}
+		set devicecleartext-nic1 ${dev}
+	:pciscan-nic1_done
 
 :info-network-nic0
 	menu ${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
 	item --gap Device and Network Information for:
-	item info-network-nic0 - NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2}) - ${vendorcleartext-nic0} ${devicecleartext-nic0}
-	item info-network-nic1 - NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2}) - ${vendorcleartext-nic1} ${devicecleartext-nic1}
+	item info-network-nic0 - NIC 0 (${vendorcleartext-nic0} ${devicecleartext-nic0})
+	item info-network-nic1 - NIC 1 (${vendorcleartext-nic1} ${devicecleartext-nic1})
 	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
+	item --gap VenID:DevID..: ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2}
 	item --gap Driver.......: ${net0/chip}
 	item --gap MAC..........: ${net0/mac}
 	item --gap IP...........: ${net0/ip}
@@ -187,11 +174,12 @@
 	menu ${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
 	item --gap Device and Network Information for:
-	item info-network-nic0 - NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item info-network-nic1 - NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	item info-network-nic0 - NIC 0 (${vendorcleartext-nic0} ${devicecleartext-nic0})
+	item info-network-nic1 - NIC 1 (${vendorcleartext-nic1} ${devicecleartext-nic1})
 	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net1/busloc}.2.2})
 	item --gap ${horiline}
 	item
+	item --gap VenID:DevID..: ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2}
 	item --gap Driver.......: ${net1/chip}
 	item --gap MAC..........: ${net1/mac}
 	item --gap IP...........: ${net1/ip}
