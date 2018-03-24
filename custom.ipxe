@@ -108,19 +108,20 @@
 :pciscan-nic0
 	imgfetch http://boot.salstar.sk/pciids.ipxe
 	clear addr
-	:pciscan-nic0_loop
+	:pciscan-nic0
 		pciscan addr || goto pciscan-nic0_done
 		clear ven
 		clear dev
 		set vendor ${pci/${net0/busloc}.0.2}
 		set device ${pci/${net0/busloc}.2.2}
 		chain pciids.ipxe
-		echo ${addr:busdevfn} ${spaces4} ${ven}
-		echo ${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
-		#goto pciscan-nic0_loop
+		echo ${ven}
+		set vendorcleartext-nic0 ${ven}
+		echo ${dev}
+		set devicecleartext-nic0 ${dev}
 	:pciscan-nic0_done
-		echo ${addr:busdevfn} ${spaces4} ${ven}
-		echo ${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
+		echo ${vendorcleartext-nic0}
+		echo ${devicecleartext-nic0}
 		echo press_enter
 		prompt
 
