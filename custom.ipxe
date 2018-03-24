@@ -95,7 +95,7 @@
 	set menuname DasBoot
 	set menuvers v6.00.01
 	set menudate (2018-03-23)
-	set menu ${whitebg}${blackfg}${menuname} ${menuvers} ${menudate}
+	set menu ${blackbg}${magentafg}${menuname} ${menuvers} ${menudate}
 	set horiline ==========================================================================
 
 ### Check if BIOS or UEFI is used
@@ -128,7 +128,7 @@
 	item --key r retrieved ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} r ${whitefg} imgstat
 	#tem --key k discard                                =  Discard All Images (imgfree) =
 	item --key k discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} imgfree
-	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4}=================
+	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces2} =================
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${whitefg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${whitefg}IOS Updates                  # Boot
 	item --key f firmware-submenu       ${spaces2}${yellowfg}F${whitefg}irmware Updates              # Firmware
