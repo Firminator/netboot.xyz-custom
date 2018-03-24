@@ -91,7 +91,6 @@
 		### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 		clear addr
 		menu boot.salstar.sk's PCIscan using latest PCI.IDs (2018-03-15)
-		item --gap PCI Device List:
 		:info-pciscan_loop
 			pciscan addr || goto info-pciscan_done
 			clear ven
@@ -101,7 +100,8 @@
 			### temporary using local for testing things
 			chain pciids.ipxe
 			item --gap ${addr:busdevfn} ${vendor}:${device} ${ven}
-			item 3dot ...${dev}
+			item 2dot .. ${dev}
+			item 
 			goto info-pciscan_loop
 	:info-pciscan_done
 		choose press_enter ||
@@ -143,50 +143,50 @@
 	menu ${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
 	item --gap Select a different NIC:
-	item info-network-nic0 - NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item info-network-nic1 - NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	item info-network-nic0 - NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item info-network-nic1 - NIC 1 (${net1/busloc:busdevfn} ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
 	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
-	item --gap Vendor Name..: ${vendorcleartext-nic0}
-	item --gap Device Name..: ${devicecleartext-nic0}
-	item --gap Driver.Name..: ${net0/chip}
-	item --gap MAC..........: ${net0/mac}
-	item --gap IP...........: ${net0/ip}
-	item --gap Netmask......: ${net0/netmask}
-	item --gap Gateway......: ${net0/gateway}
-	item --gap Domain.Name..: ${net0/domain}
-	item --gap DNS.Server...: ${net0/dns}
+	item --gap Vendor Name....: ${vendorcleartext-nic0}
+	item --gap Device Name....: ${devicecleartext-nic0}
+	item --gap Driver Name....: ${net0/chip}
+	item --gap MAC............: ${net0/mac}
+	item --gap IP.............: ${net0/ip}
+	item --gap Netmask........: ${net0/netmask}
+	item --gap Gateway........: ${net0/gateway}
+	item --gap Domain Name....: ${net0/domain}
+	item --gap DNS Server.....: ${net0/dns}
 	item
 	item --gap DHCP
-	item --gap Server.......: ${net0/dhcp-server}
-	item --gap Next-Server..: ${next-server}
-	item --gap Bootfilename.: ${net0/filename}
+	item --gap Server Name....: ${net0/dhcp-server}
+	item --gap Next-Server....: ${next-server}
+	item --gap Bootfile Name..: ${net0/filename}
 	choose --default info-network-nic1 info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
 	
 :info-network-nic1
 	menu ${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
 	item --gap Select a different NIC:
-	item info-network-nic0 - NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item info-network-nic1 - NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	item info-network-nic0 - NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item info-network-nic1 - NIC 1 (${net1/busloc:busdevfn} ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
 	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
-	item --gap Vendor Name..: ${vendorcleartext-nic1}
-	item --gap Device Name..: ${devicecleartext-nic1}
-	item --gap Driver.Name..: ${net1/chip}
-	item --gap MAC..........: ${net1/mac}
-	item --gap IP...........: ${net1/ip}
-	item --gap Netmask......: ${net1/netmask}
-	item --gap Gateway......: ${net1/gateway}
-	item --gap Domain.Name..: ${net1/domain}
-	item --gap DNS.Server...: ${net1/dns}
+	item --gap Vendor Name....: ${vendorcleartext-nic1}
+	item --gap Device Name....: ${devicecleartext-nic1}
+	item --gap Driver Name....: ${net1/chip}
+	item --gap MAC............: ${net1/mac}
+	item --gap IP.............: ${net1/ip}
+	item --gap Netmask........: ${net1/netmask}
+	item --gap Gateway........: ${net1/gateway}
+	item --gap Domain Name....: ${net1/domain}
+	item --gap DNS Server.....: ${net1/dns}
 	item
 	item --gap DHCP
-	item --gap Server.......: ${net1/dhcp-server}
-	item --gap Next-Server..: ${next-server}
-	item --gap Bootfilename.: ${net1/filename}
+	item --gap Server Name....: ${net1/dhcp-server}
+	item --gap Next-Server....: ${next-server}
+	item --gap Bootfile Name..: ${net1/filename}
 	choose --default info-network-nic0 info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
 
 #:info-network-nic2
