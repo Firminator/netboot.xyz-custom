@@ -111,9 +111,15 @@
 	imgfetch pciids.ipxe || goto failed_download
 	### HTTPS fails; not sure why
 	#imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
+	clear vendorcleartext-nic0
+	clear devicecleartext-nic0
+	clear vendorcleartext-nic1
+	clear devicecleartext-nic2
 	:pciscan-nic0
 		clear ven
+		clear vendor
 		clear dev
+		clear device
 		### pciids.ipxe uses ${vendor} and ${device} variables for processing
 		set vendor ${pci/${net0/busloc}.0.2}
 		set device ${pci/${net0/busloc}.2.2}
@@ -123,8 +129,9 @@
 		set devicecleartext-nic0 ${dev}
 	:pciscan-nic1
 		clear ven
+		clear vendor
 		clear dev
-		### pciids.ipxe uses ${vendor} and ${device} variables for processing
+		clear device
 		set vendor ${pci/${net1/busloc}.0.2}
 		set device ${pci/${net1/busloc}.2.2}
 		chain pciids.ipxe || goto failed_download
