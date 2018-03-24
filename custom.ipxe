@@ -83,8 +83,10 @@
 	prompt
 	goto dasboot-main-menu
 	:info-pciscan_found
+		### temporary using local for testing things
+		imgfetch pciids.ipxe
 		### HTTPS fails; not sure why
-		imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
+		#imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
 		### verify fails; not sure why
 		### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 		clear addr
@@ -105,56 +107,40 @@
 		goto dasboot-main-menu
 
 :info-network
-:pciscan-nic0
-	clear addr
-	pciscan addr && goto pciscan-nic0_found ||
-	echo Missing "pciscan" command. Recompile iPXE with CMD_PCI.
-	prompt
-	goto dasboot-main-menu
-	:pciscan-nic0_found
-	imgfetch http://boot.salstar.sk/pciids.ipxe
-	clear addr
+	### temporary using local for testing things
+	imgfetch pciids.ipxe || goto failed_download
+	### HTTPS fails; not sure why
+	#imgfetch http://boot.salstar.sk/pciids.ipxe || goto failed_download
 	:pciscan-nic0
-		pciscan addr || goto pciscan-nic0_done
 		clear ven
 		clear dev
+		### pciids.ipxe uses ${vendor} and ${device} variables for processing
 		set vendor ${pci/${net0/busloc}.0.2}
 		set device ${pci/${net0/busloc}.2.2}
-		chain pciids.ipxe
+		chain pciids.ipxe || goto failed_download
+		### pciids.ipxe spits out ${ven} and ${dev}
 		set vendorcleartext-nic0 ${ven}
 		set devicecleartext-nic0 ${dev}
-	:pciscan-nic0_done
-
-:pciscan-nic1
-	clear addr
-	pciscan addr && goto pciscan-nic1_found ||
-	echo Missing "pciscan" command. Recompile iPXE with CMD_PCI.
-	prompt
-	goto dasboot-main-menu
-	:pciscan-nic1_found
-	imgfetch http://boot.salstar.sk/pciids.ipxe
-	clear addr
 	:pciscan-nic1
-		pciscan addr || goto pciscan-nic1_done
 		clear ven
 		clear dev
+		### pciids.ipxe uses ${vendor} and ${device} variables for processing
 		set vendor ${pci/${net1/busloc}.0.2}
 		set device ${pci/${net1/busloc}.2.2}
-		chain pciids.ipxe
+		chain pciids.ipxe || goto failed_download
 		set vendorcleartext-nic1 ${ven}
 		set devicecleartext-nic1 ${dev}
-	:pciscan-nic1_done
-
+	
 :info-network-nic0
 	menu ${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
-	item --gap Device and Network Information for:
-	item info-network-nic0 - NIC 0 (${vendorcleartext-nic0} ${devicecleartext-nic0})
-	item info-network-nic1 - NIC 1 (${vendorcleartext-nic1} ${devicecleartext-nic1})
+	item --gap Select a different NIC:
+	item info-network-nic0 - NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item info-network-nic1 - NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
 	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
-	item --gap VenID:DevID..: ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2}
+	item --gap ${vendorcleartext-nic0} ${devicecleartext-nic0}
 	item --gap Driver.......: ${net0/chip}
 	item --gap MAC..........: ${net0/mac}
 	item --gap IP...........: ${net0/ip}
@@ -164,7 +150,6 @@
 	item --gap DNS..........: ${net0/dns}
 	item
 	item --gap DHCP
-	item
 	item --gap server.......: ${net0/dhcp-server}
 	item --gap Next-server..: ${next-server}
 	item --gap bootfile.....: ${net0/filename}
@@ -173,13 +158,13 @@
 :info-network-nic1
 	menu ${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
-	item --gap Device and Network Information for:
-	item info-network-nic0 - NIC 0 (${vendorcleartext-nic0} ${devicecleartext-nic0})
-	item info-network-nic1 - NIC 1 (${vendorcleartext-nic1} ${devicecleartext-nic1})
-	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	item --gap Select a different NIC:
+	item info-network-nic0 - NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item info-network-nic1 - NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
-	item --gap VenID:DevID..: ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2}
+	item --gap ${vendorcleartext-nic1} ${devicecleartext-nic1}
 	item --gap Driver.......: ${net1/chip}
 	item --gap MAC..........: ${net1/mac}
 	item --gap IP...........: ${net1/ip}
@@ -187,22 +172,11 @@
 	item --gap Gateway......: ${net1/gateway}
 	item --gap Domain.......: ${net1/domain}
 	item --gap DNS..........: ${net1/dns}
-	#item --gap ${spaces4}Driver : ${net1/chip}
-	#item --gap ${spaces4}MAC${spaces4}: ${net1/mac}
-	#item --gap ${spaces4}IP${spaces4} : ${net1/ip}
-	#item --gap ${spaces4}Netmask: ${net1/netmask}
-	#item --gap ${spaces4}Gateway: ${net1/gateway}
-	#item --gap ${spaces4}Domain : ${net1/domain}
-	#item --gap ${spaces4}DNS${spaces4}: ${net1/dns}
 	item
 	item --gap DHCP
-	item
 	item --gap server.......: ${net1/dhcp-server}
 	item --gap Next-server..: ${next-server}
 	item --gap bootfile.....: ${net1/filename}
-	#item --gap server${spaces4} : ${net1/dhcp-server}
-	#item --gap Next-server: ${next-server}
-	#item --gap bootfile${spaces2} : ${net1/filename}
 	choose --default info-network-nic0 info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
 
 #:info-network-nic2
