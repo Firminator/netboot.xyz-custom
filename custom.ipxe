@@ -18,7 +18,7 @@
 	set menuname DasBoot
 	set menuvers v6.00.01
 	set menudate (2018-03-23)
-	set horiline =========================================================================
+	set horiline ==========================================================================
 	### Define Indent
 	set spaces2:hex 20:20
 	set spaces4:hex 20:20:20:20
@@ -50,7 +50,7 @@
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan - Identify all (P)CI devices
 	item --key n info-network - Show (N)etwork information
-	item --gap item --gap ${horiline}
+	item --gap ${horiline}
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item
 	item
@@ -105,15 +105,47 @@
 		goto dasboot-main-menu
 
 :info-network
-	goto info-network-nic0
+imgfetch http://boot.salstar.sk/pciids.ipxe
+#:info-network-nic0
+		pciscan addr
+		clear ven
+		clear vendor
+		clear dev
+		clear device
+		vendorcleartext-nic0
+		vendorcleartext-nic1
+		devicecleartext-nic0
+		devicecleartext-nic1
+		set vendor ${pci/${net0/busloc}.0.2}
+		set device ${pci/${net0/busloc}.2.2}
+		chain pciids.pxe
+		set vendorcleartext-nic0 ${ven}
+		set devicecleartext-nic0 ${dev}
+#goto info-network-nic1
+#:info-network-nic1
+		pciscan addr
+		clear ven
+		clear vendor
+		clear dev
+		clear device
+		vendorcleartext-nic0
+		vendorcleartext-nic1
+		devicecleartext-nic0
+		devicecleartext-nic1
+		set vendor ${pci/${net1/busloc}.0.2}
+		set device ${pci/${net1/busloc}.2.2}
+		chain pciids.pxe
+		set vendorcleartext-nic1 ${ven}
+		set devicecleartext-nic1 ${dev}
+#goto info-network-nic0
 
 :info-network-nic0
 	menu ${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
 	item --gap Device and Network Information for:
-	item --key 0 info-network-nic0 - NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item --key 1 info-network-nic1 - NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
-	#tem --key 2 info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	item --key 0 info-network-nic0 - NIC 0 (${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2}) - ${vendorcleartext-nic0} ${devicecleartext-nic0}
+	item --key 1 info-network-nic1 - NIC 1 (${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2}) - ${vendorcleartext-nic1} ${devicecleartext-nic1}
+	#tem --key 2 info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
 	item --gap Driver.......: ${net0/chip}
@@ -122,7 +154,7 @@
 	item --gap Netmask......: ${net0/netmask}
 	item --gap Gateway......: ${net0/gateway}
 	item --gap Domain.......: ${net0/domain}
-	item --gap DNS$.........: ${net0/dns}
+	item --gap DNS..........: ${net0/dns}
 	item
 	item --gap DHCP
 	item
@@ -146,7 +178,7 @@
 	item --gap Netmask......: ${net1/netmask}
 	item --gap Gateway......: ${net1/gateway}
 	item --gap Domain.......: ${net1/domain}
-	item --gap DNS$.........: ${net1/dns}
+	item --gap DNS..........: ${net1/dns}
 	#item --gap ${spaces4}Driver : ${net1/chip}
 	#item --gap ${spaces4}MAC${spaces4}: ${net1/mac}
 	#item --gap ${spaces4}IP${spaces4} : ${net1/ip}
