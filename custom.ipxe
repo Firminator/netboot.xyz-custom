@@ -10,11 +10,13 @@
 	set spaces2:hex 20:20
 	set spaces4:hex 20:20:20:20
 	set spaces8:hex 20:20:20:20:20:20:20:20
-	#set spaces16:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
+	set spaces16:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
+	set spaces32:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
 	set spaces2 ${spaces2:string}
 	set spaces4 ${spaces4:string}
 	set spaces8 ${spaces8:string}
 	set spaces16 ${spaces16:string}
+	set spaces32 ${spaces32:string}
 	### Define Colors if 'cpair' and 'color' have not been included in iPXE build
 	### use http://www.isthe.com/chongo/tech/comp/ansi_escapes.html and
 	### 	https://www.binaryhexconverter.com/ascii-text-to-hex-converter
@@ -125,11 +127,12 @@
 	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information${defaultfg}
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap =====================================================================
-	#tem --key r info-retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces2}${whitefg} = Show Fetched Images (imgstat)
-	#tem --key k info-discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces2}${whitefg} =${spaces2}Discard All Images (imgfree)
-	item --key g info-retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${whitefg}= imgstat
-	item --key m info-discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${whitefg}= imgfree
-	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8} ===================
+	#tem --key r info-retrieved ${spaces32}${spaces8}${spaces2}${whitefg} = Show Fetched Images (imgstat)
+	#tem --key k info-discard ${spaces32}${spaces8}${spaces2}${whitefg} =${spaces2}Discard All Images (imgfree)
+	item --key g info-retrieved ${spaces32}${spaces16}${spaces8}${whitefg}= imgstat
+	item --key m info-discard ${spaces32}${spaces16}${spaces8}${whitefg}= imgfree
+	 ## ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8} ===================
+	item --gap Boot:
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${defaultfg}IOS Updates                  # Boot
 	item --key f firmware-submenu       ${spaces2}${yellowfg}F${defaultfg}irmware Updates              # Firmware
