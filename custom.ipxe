@@ -98,9 +98,10 @@
 			clear dev
 			set vendor ${pci/${addr}.0.2}
 			set device ${pci/${addr}.2.2}
+			### temporary using local for testing things
 			chain pciids.ipxe
-			item --gap ${addr:busdevfn} ${spaces4} ${ven}
-			item ${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
+			item --gap ${addr:busdevfn} {vendor}:{device} ${ven}
+			item ${spaces2} ${dev}
 			goto info-pciscan_loop
 	:info-pciscan_done
 		choose press_enter ||
