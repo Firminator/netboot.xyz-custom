@@ -112,28 +112,28 @@
 	iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM CPU ||
 
 :dasboot-main-menu
-	menu ${menuname} ${menuvers} ${menudate}
-	item --gap ${horiline}
+	menu ${redfg}${menuname} ${menuvers} ${menudate}
+	item --gap ${whitefg}${horiline}
 	#tem --gap ==========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan - Identify all (P)CI devices
-	item --key n info-network - Show (N)etwork information
+	item --key p info-pciscan - Identify all ${greenfg}(P)${whitefg}CI devices
+	item --key n info-network - Show ${greenfg}(N)${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap ${green}==========================================================
 	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
-	item --key r retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (r) imgstat  =
+	item --key r retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}{spaces8} = {spaces2}(r) imgstat{spaces2}=
 	#tem --key k discard                                =  Discard All Images (imgfree) =
-	item --key k discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (k) imgfree  =
-	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}===
-	item --key d diagnostic-submenu     ${spaces2}(D)iagnostic Tools              # Das
-	item --key b bios-submenu           ${spaces2}(B)IOS ${whitefg}Updates                  # Boot
-	item --key f firmware-submenu       ${spaces2}(F)irmware ${yellowfg}Updates              # Firmware
-	item --key w wiping-submenu         ${spaces2}(W)iping/Media Sanitation Tools # Wiping
+	item --key k discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}{spaces8}{spaces8} ={spaces2}(k) imgfree{spaces2} =
+	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}{spaces4}===========
+	item --key d diagnostic-submenu     ${spaces2}${greenfg}(D)${whitefg}iagnostic Tools              # Das
+	item --key b bios-submenu           ${spaces2}${greenfg}(B)${whitefg}IOS Updates                  # Boot
+	item --key f firmware-submenu       ${spaces2}${greenfg}(F)${whitefg}irmware Updates              # Firmware
+	item --key w wiping-submenu         ${spaces2}${greenfg}(W)${whitefg}iping/Media Sanitation Tools # Wiping
 	item
 	item
 	item --gap Other:
 	#tem --key r reboot                 ${spaces2}(R)eboot                        # R
-	item --key o other                  ${spaces2}${whitefg}(O)ther iPXE boot menus         # O
+	item --key o other                  ${spaces2}(O)ther iPXE boot menus         # O
 	item --key c changelog              ${spaces2}(C)hangelog                     # C
 	#tem --key k rocks                  ${spaces2}(K)                             # K
 	item --key s shell                  ${spaces2}(S)hell                         # S
