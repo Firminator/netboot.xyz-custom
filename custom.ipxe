@@ -125,8 +125,8 @@
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap -- ==========================================================
 	#item --key r info-retrieved                              = Show Fetched Images (imgstat) =
-	item --key r info-retrieved ${spaces8}${spaces8}${spaces8}= Show Fetched Images (imgstat) =
-	item --key k info-discard   ${spaces8}${spaces8}${spaces8}=  Discard All Images (imgfree) =
+	item --key r info-retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}= Show Fetched Images (imgstat) =
+	item --key k info-discard   ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=${spaces2}Discard All Images (imgfree) =
 	#item --key r info-retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${whitefg} = ${redfg} r ${whitefg} fimgstat
 	#tem --key k info-discard                                =  Discard All Images (imgfree) =
 	#item --key k info-discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} fimgfree
