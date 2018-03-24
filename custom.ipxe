@@ -10,7 +10,7 @@
 	set spaces2:hex 20:20
 	set spaces4:hex 20:20:20:20
 	set spaces8:hex 20:20:20:20:20:20:20:20
-	set spaces16:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
+	#set spaces16:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
 	set spaces2 ${spaces2:string}
 	set spaces4 ${spaces4:string}
 	set spaces8 ${spaces8:string}
@@ -125,8 +125,8 @@
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap -- ==========================================================
 	#item --key r info-retrieved                              = Show Fetched Images (imgstat) =
-	item --key r info-retrieved ${spaces16}${spaces16}${spaces16}= Show Fetched Images (imgstat) =
-	#item --key r info-retrieved ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} r ${whitefg} fimgstat
+	item --key r info-retrieved ${spaces8}${spaces8}${spaces8}= Show Fetched Images (imgstat) =
+	#item --key r info-retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${whitefg} = ${redfg} r ${whitefg} fimgstat
 	#tem --key k info-discard                                =  Discard All Images (imgfree) =
 	#item --key k info-discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} fimgfree
 	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces2} =================
