@@ -52,12 +52,17 @@
 	item --key p info-pciscan - Identify all (P)CI devices
 	item --key n info-network - Show (N)etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --gap ${horiline}
-	item --gap ==========================================================
+	### ESC[2J Clear screen and home cursor
+	set cls:hex 1b:5b:4a  ### ANSI clear screen sequence - "#^#[#[#J" aka "##[#J ###
+	set cls ${cls:string}
+	### ESC[42 is green
+	set green:hex 34:32
+	set green ${green:string}
+	item --gap ${green}==========================================================
 	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
-	item --key r retrieved                                              =  (r) imgstat  =
+	item --key r retrieved${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (r) imgstat  =
 	#tem --key k discard                                =  Discard All Images (imgfree) =
-	item --key k discard                                                =  (k) imgfree  =
+	item --key k discard${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (k) imgfree  =
 	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}===
 	item --key d diagnostic-submenu     ${spaces2}(D)iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}(B)IOS Updates                  # Boot
