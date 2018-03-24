@@ -5,9 +5,9 @@
 
 ### iPXE menu settings
 	### Set a background picture * Not enabled in netboot.xyz build
-    #console --picture http://boot.ipxe.org/ipxe.png
+	#console --picture http://boot.ipxe.org/ipxe.png
 	### Set a background picture with margins * Not enabled in netboot.xyz build
-    #console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
+	#console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
 	### Define ClearScreen
 	#http://www.isthe.com/chongo/tech/comp/ansi_escapes.html
 
