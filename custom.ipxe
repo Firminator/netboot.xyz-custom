@@ -18,7 +18,7 @@
 	set menuname DasBoot
 	set menuvers v6.00.01
 	set menudate (2018-03-23)
-	set horiline ==========================================================================
+	set horiline ==========================================================================+
 	### Define Indent
 	set spaces2:hex 20:20
 	set spaces4:hex 20:20:20:20
@@ -105,8 +105,26 @@
 		goto dasboot-main-menu
 
 :info-network
-imgfetch http://boot.salstar.sk/pciids.ipxe
-goto info-network-nic0
+:pciscan-nic0
+	imgfetch http://boot.salstar.sk/pciids.ipxe
+	clear addr
+	:pciscan-nic0_loop
+			pciscan addr || pciscan-nic0_done
+			clear ven
+			clear dev
+			set vendor ${pci/${net0/busloc}.0.2}
+			set device ${pci/${net0/busloc}.2.2}
+			chain pciids.ipxe
+			echo ${addr:busdevfn} ${spaces4} ${ven}
+			echo ${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
+			goto pciscan-nic0_loop
+	:pciscan-nic0_done
+		echo ${addr:busdevfn} ${spaces4} ${ven}
+		echo ${addr:busdevfn} ${spaces2} ${vendor}:${device} ${dev}
+		echo press_enter
+		prompt
+
+# goto info-network-nic0
 
 #		pciscan addr
 #		clear ven
@@ -123,7 +141,7 @@ goto info-network-nic0
 #		set vendorcleartext-nic0 ${ven}
 #		set devicecleartext-nic0 ${dev}
 ### goto info-network-nic1
-### :info-network-nic1
+### 
 #		pciscan addr
 #		clear ven
 #		clear vendor
