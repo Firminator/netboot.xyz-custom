@@ -10,9 +10,11 @@
 	set spaces2:hex 20:20
 	set spaces4:hex 20:20:20:20
 	set spaces8:hex 20:20:20:20:20:20:20:20
+	set spaces16:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
 	set spaces2 ${spaces2:string}
 	set spaces4 ${spaces4:string}
 	set spaces8 ${spaces8:string}
+	set spaces16 ${spaces16:string}
 	### Define Colors if 'cpair' and 'color' have not been included in iPXE build
 	### use http://www.isthe.com/chongo/tech/comp/ansi_escapes.html and
 	### 	https://www.binaryhexconverter.com/ascii-text-to-hex-converter
@@ -123,9 +125,9 @@
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap ==========================================================
 	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
-	item --key r retrieved ${whitefg}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8} =${spaces2}${redfg}(r)${whitefg} imgstat
+	item --key r retrieved ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} r ${whitefg} imgstat
 	#tem --key k discard                                =  Discard All Images (imgfree) =
-	item --key k discard ${whitefg}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8} =${spaces2}${redfg}(k)${whitefg} imgfree
+	item --key k discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} imgfree
 	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4}=================
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${whitefg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${whitefg}IOS Updates                  # Boot
@@ -134,11 +136,11 @@
 	item
 	item
 	item --gap Other:
-	#tem --key r reboot                 ${redfg}${spaces2}R${whitefg}eboot                # R
-	item --key o other                  ${spaces2}${greenfg}O${whitefg}ther iPXE boot menus # O
-	item --key c changelog              ${spaces2}${greenfg}C${whitefg}hangelog                     # C
-	#tem --key k rocks                  ${spaces2}${greenfg}K${whitefg}K                            # K
-	item --key s shell                  ${spaces2}${greenfg}S${whitefg}hell                         # S
+	#tem --key r reboot                 ${spaces2}${greenfg}R${whitefg}eboot                         # R
+	item --key o other                  ${spaces2}${greenfg}O${whitefg}ther iPXE boot menus          # O
+	item --key c changelog              ${spaces2}${greenfg}C${whitefg}hangelog                      # C
+	#tem --key k rocks                  ${spaces2}${greenfg}K${whitefg}K                             # K
+	item --key s shell                  ${spaces2}${greenfg}S${whitefg}hell                          # S
 	item
 	item --gap Press ESC anywhere to return to the previous menu.
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
