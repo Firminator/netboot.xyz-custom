@@ -403,4 +403,5 @@ goto dasboot-main-menu
 	goto dasboot-main-menu
 
 :exit
+	imgfree
 	exit
