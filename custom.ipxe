@@ -95,7 +95,7 @@
 	set menuname DasBoot
 	set menuvers v6.00.01
 	set menudate (2018-03-23)
-	set menu ${blackbg}${magentafg}${menuname} ${menuvers} ${menudate}
+	set menu ${blackbg}${redfg}${menuname} ${menuvers} ${menudate}
 	set horiline ==========================================================================
 
 ### Check if BIOS or UEFI is used
@@ -125,9 +125,9 @@
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap ==========================================================
 	#tem --key r info-retrieved                              = Show Fetched Images (imgstat) =
-	item --key r info-retrieved ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} r ${whitefg} imgstat
+	item --key r info-retrieved ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} r ${whitefg} fimgstat
 	#tem --key k info-discard                                =  Discard All Images (imgfree) =
-	item --key k info-discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} imgfree
+	item --key k info-discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} fimgfree
 	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces2} =================
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${whitefg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${whitefg}IOS Updates                  # Boot
