@@ -121,19 +121,19 @@
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap ${green}==========================================================
 	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
-	item --key r retrieved${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (r) imgstat  =
+	item --key r retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (r) imgstat  =
 	#tem --key k discard                                =  Discard All Images (imgfree) =
-	item --key k discard${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (k) imgfree  =
+	item --key k discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (k) imgfree  =
 	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}===
 	item --key d diagnostic-submenu     ${spaces2}(D)iagnostic Tools              # Das
-	item --key b bios-submenu           ${spaces2}(B)IOS Updates                  # Boot
-	item --key f firmware-submenu       ${spaces2}(F)irmware Updates              # Firmware
+	item --key b bios-submenu           ${spaces2}(B)IOS ${whitefg}Updates                  # Boot
+	item --key f firmware-submenu       ${spaces2}(F)irmware ${yellowfg}Updates              # Firmware
 	item --key w wiping-submenu         ${spaces2}(W)iping/Media Sanitation Tools # Wiping
 	item
 	item
 	item --gap Other:
 	#tem --key r reboot                 ${spaces2}(R)eboot                        # R
-	item --key o other                  ${spaces2}${whitefg(O)ther iPXE boot menus         # O
+	item --key o other                  ${spaces2}${whitefg}(O)ther iPXE boot menus         # O
 	item --key c changelog              ${spaces2}(C)hangelog                     # C
 	#tem --key k rocks                  ${spaces2}(K)                             # K
 	item --key s shell                  ${spaces2}(S)hell                         # S
