@@ -124,10 +124,10 @@
 	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap ==========================================================
-	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
-	item --key r retrieved ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} r ${whitefg} imgstat
-	#tem --key k discard                                =  Discard All Images (imgfree) =
-	item --key k discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} imgfree
+	#tem --key r info-retrieved                              = Show Fetched Images (imgstat) =
+	item --key r info-retrieved ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} r ${whitefg} imgstat
+	#tem --key k info-discard                                =  Discard All Images (imgfree) =
+	item --key k info-discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} imgfree
 	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces2} =================
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${whitefg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${whitefg}IOS Updates                  # Boot
@@ -293,6 +293,16 @@
 #	module pci.ids || goto error
 #	boot || goto error
 #	goto dasboot-main-menu
+
+:info-retrieved
+imgstat
+prompt
+goto dasboot-main-menu
+
+:info-discard
+imgfree
+prompt
+goto dasboot-main-menu
 
 :diagnostic-submenu
 echo boot memtest86
