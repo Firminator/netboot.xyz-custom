@@ -113,22 +113,22 @@
 
 :dasboot-main-menu
 	menu ${redfg}${menuname} ${menuvers} ${menudate}
-	item --gap ${whitefg}${horiline}
+	item --gap ${horiline}
 	#tem --gap ==========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan - Identify all ${greenfg}(P)${whitefg}CI devices
-	item --key n info-network - Show ${greenfg}(N)${whitefg}etwork information
+	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
+	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap ${green}==========================================================
 	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
-	item --key r retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}{spaces8} = {spaces2}(r) imgstat{spaces2}=
+	item --key r retrieved ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8} = ${spaces2}(r) imgstat${spaces2}=
 	#tem --key k discard                                =  Discard All Images (imgfree) =
-	item --key k discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}{spaces8}{spaces8} ={spaces2}(k) imgfree{spaces2} =
-	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}{spaces4}===========
-	item --key d diagnostic-submenu     ${spaces2}${greenfg}(D)${whitefg}iagnostic Tools              # Das
-	item --key b bios-submenu           ${spaces2}${greenfg}(B)${whitefg}IOS Updates                  # Boot
-	item --key f firmware-submenu       ${spaces2}${greenfg}(F)${whitefg}irmware Updates              # Firmware
-	item --key w wiping-submenu         ${spaces2}${greenfg}(W)${whitefg}iping/Media Sanitation Tools # Wiping
+	item --key k discard ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}{spaces8}${spaces8} =${spaces2}(k) imgfree${spaces2} =
+	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4}===========
+	item --key d diagnostic-submenu     ${spaces2}${redfg}D${whitefg}iagnostic Tools              # Das
+	item --key b bios-submenu           ${spaces2}${redfg}B${whitefg}IOS Updates                  # Boot
+	item --key f firmware-submenu       ${spaces2}${redfg}F${whitefg}irmware Updates              # Firmware
+	item --key w wiping-submenu         ${spaces2}${redfg}W${whitefg}iping/Media Sanitation Tools # Wiping
 	item
 	item
 	item --gap Other:
