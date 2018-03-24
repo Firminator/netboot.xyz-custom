@@ -117,14 +117,14 @@
 
 :dasboot-main-menu
 	menu ${menu}
-	item --gap ${horiline}
+	item --gap -- ${horiline}
 	#tem --gap ==========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
 	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap -- ==========================================================
-	#tem --key r info-retrieved                              = Show Fetched Images (imgstat) =
+	item --key r info-retrieved                              = Show Fetched Images (imgstat) =
 	#item --key r info-retrieved ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} r ${whitefg} fimgstat
 	#tem --key k info-discard                                =  Discard All Images (imgfree) =
 	#item --key k info-discard ${spaces16}${spaces16}${spaces16}${spaces8}${whitefg} = ${redfg} k ${whitefg} fimgfree
