@@ -107,37 +107,37 @@
 :info-network
 imgfetch http://boot.salstar.sk/pciids.ipxe
 goto info-network-nic0
-#:info-network-nic0
-		pciscan addr
-		clear ven
-		clear vendor
-		clear dev
-		clear device
-		clear vendorcleartext-nic0
-		clear vendorcleartext-nic1
-		clear devicecleartext-nic0
-		clear devicecleartext-nic1
-		set vendor ${pci/${net0/busloc}.0.2}
-		set device ${pci/${net0/busloc}.2.2}
-		chain pciids.pxe
-		set vendorcleartext-nic0 ${ven}
-		set devicecleartext-nic0 ${dev}
-#goto info-network-nic1
-#:info-network-nic1
-		pciscan addr
-		clear ven
-		clear vendor
-		clear dev
-		clear device
-		clear vendorcleartext-nic0
-		clear vendorcleartext-nic1
-		clear devicecleartext-nic0
-		clear devicecleartext-nic1
-		set vendor ${pci/${net1/busloc}.0.2}
-		set device ${pci/${net1/busloc}.2.2}
-		chain pciids.pxe
-		set vendorcleartext-nic1 ${ven}
-		set devicecleartext-nic1 ${dev}
+
+#		pciscan addr
+#		clear ven
+#		clear vendor
+#		clear dev
+#		clear device
+#		clear vendorcleartext-nic0
+#		clear vendorcleartext-nic1
+#		clear devicecleartext-nic0
+#		clear devicecleartext-nic1
+#		set vendor ${pci/${net0/busloc}.0.2}
+#		set device ${pci/${net0/busloc}.2.2}
+#		chain pciids.pxe
+#		set vendorcleartext-nic0 ${ven}
+#		set devicecleartext-nic0 ${dev}
+### goto info-network-nic1
+### :info-network-nic1
+#		pciscan addr
+#		clear ven
+#		clear vendor
+#		clear dev
+#		clear device
+#		clear vendorcleartext-nic0
+#		clear vendorcleartext-nic1
+#		clear devicecleartext-nic0
+#		clear devicecleartext-nic1
+#		set vendor ${pci/${net1/busloc}.0.2}
+#		set device ${pci/${net1/busloc}.2.2}
+#		chain pciids.pxe
+#		set vendorcleartext-nic1 ${ven}
+#		set devicecleartext-nic1 ${dev}
 #goto info-network-nic0
 
 :info-network-nic0
