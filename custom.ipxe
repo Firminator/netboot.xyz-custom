@@ -112,10 +112,10 @@ imgfetch http://boot.salstar.sk/pciids.ipxe
 		clear vendor
 		clear dev
 		clear device
-		vendorcleartext-nic0
-		vendorcleartext-nic1
-		devicecleartext-nic0
-		devicecleartext-nic1
+		clear vendorcleartext-nic0
+		clear vendorcleartext-nic1
+		clear devicecleartext-nic0
+		clear devicecleartext-nic1
 		set vendor ${pci/${net0/busloc}.0.2}
 		set device ${pci/${net0/busloc}.2.2}
 		chain pciids.pxe
@@ -128,10 +128,10 @@ imgfetch http://boot.salstar.sk/pciids.ipxe
 		clear vendor
 		clear dev
 		clear device
-		vendorcleartext-nic0
-		vendorcleartext-nic1
-		devicecleartext-nic0
-		devicecleartext-nic1
+		clear vendorcleartext-nic0
+		clear vendorcleartext-nic1
+		clear devicecleartext-nic0
+		clear devicecleartext-nic1
 		set vendor ${pci/${net1/busloc}.0.2}
 		set device ${pci/${net1/busloc}.2.2}
 		chain pciids.pxe
