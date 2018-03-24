@@ -3,6 +3,9 @@
 ### netboot.xyz-custom menu
 ###
 
+### Permanently require trusted images
+	#imgtrust --permanent
+
 ### iPXE menu settings
 	### Set a background picture * Not enabled in netboot.xyz build
 	#console --picture http://boot.ipxe.org/ipxe.png
@@ -10,22 +13,86 @@
 	#console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
 	### Define ClearScreen
 	#http://www.isthe.com/chongo/tech/comp/ansi_escapes.html
-
-### Permanently require trusted images
-	#imgtrust --permanent
 	
 ### Set Infohead
 	set menuname DasBoot
 	set menuvers v6.00.01
 	set menudate (2018-03-23)
 	set horiline ==========================================================================
-	### Define Indent
+	###Define Indent
 	set spaces2:hex 20:20
 	set spaces4:hex 20:20:20:20
 	set spaces8:hex 20:20:20:20:20:20:20:20
 	set spaces2 ${spaces2:string}
 	set spaces4 ${spaces4:string}
 	set spaces8 ${spaces8:string}
+	### Define Colors if 'cpair' and 'color' have not been included in iPXE build
+	### use http://www.isthe.com/chongo/tech/comp/ansi_escapes.html and
+	### 	https://www.binaryhexconverter.com/ascii-text-to-hex-converter
+	### All ANSI Sequences start with ESC[ which is [ in ASCI which is 1b:5b converted to Hex
+	### ESC[J Clear screen and home cursor
+	set cls:hex 1b:5b:4a  ### ANSI clear screen sequence - "#^#[#[#J" aka "##[#J ###
+	set cls ${cls:string}
+	### Text/Foreground  Colors
+	### The format is ESC[%number%m, so
+		### 30 black foreground
+		set blackfg:hex 1b:5b:33:30:6d
+		set blackfg ${blackfg:string}
+		### 31 red foreground
+		set redfg:hex 1b:5b:33:31:6d
+		set redfg ${redfg:string}
+		### 32 green foreground
+		set greenfg:hex 1b:5b:33:32:6d
+		set greenfg ${greenfg:string}
+		### 33 yellow foreground
+		set yellowfg:hex 1b:5b:33:33:6d
+		set yellowfg ${yellowfg:string}
+		### 34 blue foreground
+		set bluefg:hex 1b:5b:33:34:6d
+		set bluefg ${bluefg:string}
+		### 35 magenta foreground
+		set magentafg:hex 1b:5b:33:35:6d
+		set magentafg ${magentafg:string}
+		### 36 cyan foreground
+		set cyanfg:hex 1b:5b:33:36:6d
+		set cyanfg ${cyanfg:string}
+		### 37 white foreground
+		set whitefg:hex 1b:5b:33:37:6d
+		set whitefg ${whitefg:string}
+		### 39 default foreground
+		set defaultfg:hex 1b:5b:33:39:6d
+		set defaultfg ${defaultfg:string}
+	### Background  Colors
+	### The format is ESC[%number%m, so
+	### ESC[42m is green background
+	### ESC[43m is yellow background
+		### 40 black background
+		set blackbg:hex 1b:5b:34:30:6d
+		set blackbg ${blackbg:string}
+		### 41 red background
+		set redbg:hex 1b:5b:34:31:6d
+		set redbg ${redbg:string}
+		### 42 green background
+		set greenbg:hex 1b:5b:34:32:6d
+		set greenbg ${greenbg:string}
+		### 43 yellow background
+		set yellowbg:hex 1b:5b:34:33:6d
+		set yellowbg ${yellowbg:string}
+		### 44 blue background
+		set bluebg:hex 1b:5b:34:34:6d
+		set bluebg ${bluebg:string}
+		### 45 magenta background
+		set magentabg:hex 1b:5b:34:35:6d
+		set magentabg ${magentabg:string}
+		### 46 cyan background
+		set cyanbg:hex 1b:5b:34:36:6d
+		set cyanbg ${cyanbg:string}
+		### 47 white background
+		set whitebg:hex 1b:5b:34:37:6d
+		set whitebg ${whitebg:string}
+		### 49 default background
+		set defaultbg:hex 1b:5b:34:39:6d
+		set defaultbg ${defaultbg:string}
 
 ### Check if BIOS or UEFI is used
 	iseq ${platform} pcbios && set fwplatform BIOS ||
@@ -52,12 +119,6 @@
 	item --key p info-pciscan - Identify all (P)CI devices
 	item --key n info-network - Show (N)etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	### ESC[2J Clear screen and home cursor
-	set cls:hex 1b:5b:4a  ### ANSI clear screen sequence - "#^#[#[#J" aka "##[#J ###
-	set cls ${cls:string}
-	### ESC[42 is green
-	set green:hex 34:32
-	set green ${green:string}
 	item --gap ${green}==========================================================
 	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
 	item --key r retrieved${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}=  (r) imgstat  =
@@ -72,7 +133,7 @@
 	item
 	item --gap Other:
 	#tem --key r reboot                 ${spaces2}(R)eboot                        # R
-	item --key o other                  ${spaces2}(O)ther iPXE boot menus         # O
+	item --key o other                  ${spaces2}${whitefg(O)ther iPXE boot menus         # O
 	item --key c changelog              ${spaces2}(C)hangelog                     # C
 	#tem --key k rocks                  ${spaces2}(K)                             # K
 	item --key s shell                  ${spaces2}(S)hell                         # S
