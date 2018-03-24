@@ -47,14 +47,18 @@
 :dasboot-main-menu
 	menu ${menuname} ${menuvers} ${menudate}
 	item --gap ${horiline}
+	#tem --gap ==========================================================================
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan - Identify all (P)CI devices
 	item --key n info-network - Show (N)etwork information
-	item --gap ${horiline}
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item
-	item
-	item --gap Boot:
+	item --gap ${horiline}
+	item --gap ==========================================================
+	#tem --key r retrieved                              = Show Fetched Images (imgstat) =
+	item --key r retrieved                                              =  (r) imgstat  =
+	#tem --key k discard                                =  Discard All Images (imgfree) =
+	item --key k discard                                                =  (k) imgfree  =
+	item --gap Boot:${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}===
 	item --key d diagnostic-submenu     ${spaces2}(D)iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}(B)IOS Updates                  # Boot
 	item --key f firmware-submenu       ${spaces2}(F)irmware Updates              # Firmware
@@ -100,7 +104,7 @@
 			### temporary using local for testing things
 			chain pciids.ipxe
 			item --gap ${addr:busdevfn} ${vendor}:${device} ${ven}
-			item 2dot .. ${dev}
+			item 2dot ..${dev}
 			item 
 			goto info-pciscan_loop
 	:info-pciscan_done
