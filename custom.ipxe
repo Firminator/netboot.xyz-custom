@@ -98,7 +98,8 @@
 	set menuvers v6.00.01
 	set menudate (2018-03-23)
 	set menu ${menuname} ${menuvers} ${menudate}
-	set horiline ==========================================================================
+	#set horiline ==========================================================================
+	set horiline =====================================================================
 
 ### Check if BIOS or UEFI is used
 	iseq ${platform} pcbios && set fwplatform BIOS ||
@@ -119,14 +120,12 @@
 
 :dasboot-main-menu
 	menu ${bluefg} ${menu}
-	#tem --gap -- ${horiline}
-	#tem --gap =====================================================================
-	item --gap =====================================================================
+	item --gap -- ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices${defaultfg}
 	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information${defaultfg}
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --gap =====================================================================
+	item --gap -- ${horiline}
 	#tem --key r info-retrieved ${spaces32}${spaces8}${spaces2}${whitefg} = Show Fetched Images (imgstat)
 	#tem --key k info-discard ${spaces32}${spaces8}${spaces2}${whitefg} =${spaces2}Discard All Images (imgfree)
 	item --key g info-retrieved ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= im(g)stat
