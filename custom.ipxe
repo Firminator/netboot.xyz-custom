@@ -128,9 +128,9 @@
 	item --gap -- ${horiline}
 	#tem --key r info-retrieved ${spaces32}${spaces8}${spaces2}${whitefg} = Show Fetched Images (imgstat)
 	#tem --key k info-discard ${spaces32}${spaces8}${spaces2}${whitefg} =${spaces2}Discard All Images (imgfree)
-	item --key g info-retrieved ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= im(g)stat
+	item --key g info-retrieved ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= im(${redfg}g)stat
 	item --key m info-discard ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= i(m)gfree
-	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4} ==========
+	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4}===========
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${defaultfg}IOS Updates                  # Boot
 	item --key f firmware-submenu       ${spaces2}${yellowfg}F${defaultfg}irmware Updates              # Firmware
@@ -166,7 +166,7 @@
 		### verify fails; not sure why
 		### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 		clear addr
-		menu boot.salstar.sk's PCIscan using latest PCI.IDs (2018-03-15)
+		menu ${bluefg} boot.salstar.sk's PCIscan using latest PCI.IDs (2018-03-15)
 		:info-pciscan_loop
 			pciscan addr || goto info-pciscan_done
 			clear ven
