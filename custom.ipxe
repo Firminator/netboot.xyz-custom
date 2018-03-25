@@ -120,15 +120,15 @@
 
 :dasboot-main-menu
 	menu ${bluefg} ${menu}
-	item --gap -- ${horiline}
+	item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
 	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --gap -- ${horiline}
+	item --gap =====================================================================
 	#tem --key r info-retrieved ${spaces32}${spaces8}${spaces2}${whitefg} = Show Fetched Images (imgstat)
 	#tem --key k info-discard ${spaces32}${spaces8}${spaces2}${whitefg} =${spaces2}Discard All Images (imgfree)
-	item --key g info-retrieved ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= im(${redfg}g)stat
+	item --key g info-retrieved ${spaces32}${spaces16}${spaces8}${whitefg}= im${redfg}g${whitefg}stat
 	item --key m info-discard ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= i(m)gfree
 	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4}===========
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
