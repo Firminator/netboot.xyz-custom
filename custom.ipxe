@@ -122,15 +122,15 @@
 	menu ${bluefg} ${menu}
 	item --gap -- ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices${defaultfg}
-	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information${defaultfg}
+	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
+	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap -- ${horiline}
 	#tem --key r info-retrieved ${spaces32}${spaces8}${spaces2}${whitefg} = Show Fetched Images (imgstat)
 	#tem --key k info-discard ${spaces32}${spaces8}${spaces2}${whitefg} =${spaces2}Discard All Images (imgfree)
 	item --key g info-retrieved ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= im(g)stat
 	item --key m info-discard ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= i(m)gfree
-	item --gap Boot:## ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8} ==========
+	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4} ==========
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${defaultfg}IOS Updates                  # Boot
 	item --key f firmware-submenu       ${spaces2}${yellowfg}F${defaultfg}irmware Updates              # Firmware
@@ -176,7 +176,7 @@
 			### temporary using local for testing things
 			chain pciids.ipxe
 			item --gap ${addr:busdevfn} ${vendor}:${device} ${ven}
-			item 2dot ..${dev}
+			item 2dot > ${dev}
 			item 
 			goto info-pciscan_loop
 	:info-pciscan_done
@@ -216,7 +216,7 @@
 		set devicecleartext-nic1 ${dev}
 	
 :info-network-nic0
-	menu ${menuname} ${menuvers} ${menudate}
+	menu ${bluefg} ${menu}
 	item --gap ${horiline}
 	item --gap Select a different NIC:
 	item info-network-nic0 - NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
@@ -241,7 +241,7 @@
 	choose --default info-network-nic1 info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
 	
 :info-network-nic1
-	menu ${menuname} ${menuvers} ${menudate}
+	menu ${bluefg} ${menu}
 	item --gap ${horiline}
 	item --gap Select a different NIC:
 	item info-network-nic0 - NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
