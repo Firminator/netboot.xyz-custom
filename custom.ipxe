@@ -3,8 +3,13 @@
 ### netboot.xyz-custom menu
 ###
 
-### Permanently require trusted images
-	#imgtrust --permanent
+### Set Infohead
+	set menuname DasBoot
+	set menuvers v6.00.01
+	set menudate (2018-03-23)
+	set menu ${menuname} ${menuvers} ${menudate}
+	set horiline ==========================================================================+
+	#set horiline =====================================================================
 
 ###Define Indent
 	set spaces2:hex 20:20
@@ -17,71 +22,71 @@
 	set spaces8 ${spaces8:string}
 	set spaces16 ${spaces16:string}
 	set spaces32 ${spaces32:string}
-	### Define Colors if 'cpair' and 'color' have not been included in iPXE build
-	### use http://www.isthe.com/chongo/tech/comp/ansi_escapes.html and
-	### 	https://www.binaryhexconverter.com/ascii-text-to-hex-converter
-	### All ANSI Sequences start with ESC[ which is [ in ASCI which is 1b:5b converted to Hex
-	### ESC[J Clear screen and home cursor
+### ESC[J Clear screen and home cursor
 	set cls:hex 1b:5b:4a  ### ANSI clear screen sequence - "#^#[#[#J" aka "##[#J ###
 	set cls ${cls:string}
-	### Text/Foreground  Colors
-	### The format is ESC[%number%m, so
-		### 30 black foreground
+### Define Colors (if 'cpair' and 'color' have not been included in iPXE build)
+### use http://www.isthe.com/chongo/tech/comp/ansi_escapes.html and
+### 	https://www.binaryhexconverter.com/ascii-text-to-hex-converter
+### All ANSI Sequences start with ESC[ which is [ in ASCI which is 1b:5b converted to Hex
+### Define Text/Foreground Colors
+### The format is ESC[%number%m, so
+	### 30 black foreground
 		set blackfg:hex 1b:5b:33:30:6d
 		set blackfg ${blackfg:string}
-		### 31 red foreground
+	### 31 red foreground
 		set redfg:hex 1b:5b:33:31:6d
 		set redfg ${redfg:string}
-		### 32 green foreground
+	### 32 green foreground
 		set greenfg:hex 1b:5b:33:32:6d
 		set greenfg ${greenfg:string}
-		### 33 yellow foreground
+	### 33 yellow foreground
 		set yellowfg:hex 1b:5b:33:33:6d
 		set yellowfg ${yellowfg:string}
-		### 34 blue foreground
+	### 34 blue foreground
 		set bluefg:hex 1b:5b:33:34:6d
 		set bluefg ${bluefg:string}
-		### 35 magenta foreground
+	### 35 magenta foreground
 		set magentafg:hex 1b:5b:33:35:6d
 		set magentafg ${magentafg:string}
-		### 36 cyan foreground
+	### 36 cyan foreground
 		set cyanfg:hex 1b:5b:33:36:6d
 		set cyanfg ${cyanfg:string}
-		### 37 white foreground
+	### 37 white foreground
 		set whitefg:hex 1b:5b:33:37:6d
 		set whitefg ${whitefg:string}
-		### 39 default foreground
+	### 39 default foreground
 		set defaultfg:hex 1b:5b:33:39:6d
 		set defaultfg ${defaultfg:string}
-	### Background  Colors
-	### The format is ESC[%number%m, so
-	### ESC[42m is green background
-	### ESC[43m is yellow background
-		### 40 black background
+### Define Background Colors
+### The format is ESC[%number%m, so
+### ESC[42m is green background
+### ESC[43m is yellow background
+	### 40 black background
 		set blackbg:hex 1b:5b:34:30:6d
 		set blackbg ${blackbg:string}
-		### 41 red background
+	### 41 red background
 		set redbg:hex 1b:5b:34:31:6d
 		set redbg ${redbg:string}
-		### 42 green background
+	### 42 green background
 		set greenbg:hex 1b:5b:34:32:6d
 		set greenbg ${greenbg:string}
-		### 43 yellow background
+	### 43 yellow background
 		set yellowbg:hex 1b:5b:34:33:6d
 		set yellowbg ${yellowbg:string}
-		### 44 blue background
+	### 44 blue background
 		set bluebg:hex 1b:5b:34:34:6d
 		set bluebg ${bluebg:string}
-		### 45 magenta background
+	### 45 magenta background
 		set magentabg:hex 1b:5b:34:35:6d
 		set magentabg ${magentabg:string}
-		### 46 cyan background
+	### 46 cyan background
 		set cyanbg:hex 1b:5b:34:36:6d
 		set cyanbg ${cyanbg:string}
-		### 47 white background
+	### 47 white background
 		set whitebg:hex 1b:5b:34:37:6d
 		set whitebg ${whitebg:string}
-		### 49 default background
+	### 49 default background
 		set defaultbg:hex 1b:5b:34:39:6d
 		set defaultbg ${defaultbg:string}
 
@@ -90,16 +95,6 @@
 	#console --picture http://boot.ipxe.org/ipxe.png
 	### Set a background picture with margins * Not enabled in netboot.xyz build
 	#console --picture http://boot.ipxe.org/texture.png --left 32 --right 32 --top 32 --bottom 48
-	### Define ClearScreen
-	#http://www.isthe.com/chongo/tech/comp/ansi_escapes.html
-
-### Set Infohead
-	set menuname DasBoot
-	set menuvers v6.00.01
-	set menudate (2018-03-23)
-	set menu ${menuname} ${menuvers} ${menudate}
-	#set horiline ==========================================================================
-	set horiline =====================================================================
 
 ### Check if BIOS or UEFI is used
 	iseq ${platform} pcbios && set fwplatform BIOS ||
@@ -118,6 +113,9 @@
 	iseq ${buildarch} arm32 && set cpuarch arm32 ||
 	iseq ${buildarch} arm32 && set cpuarch_text 32bit ARM CPU ||
 
+### Permanently require trusted images
+	#imgtrust --permanent
+
 :dasboot-main-menu
 	menu ${bluefg} ${menu}
 	item --gap ${horiline}
@@ -125,12 +123,8 @@
 	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
 	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --gap =====================================================================
-	#tem --key r info-retrieved ${spaces32}${spaces8}${spaces2}${whitefg} = Show Fetched Images (imgstat)
-	#tem --key k info-discard ${spaces32}${spaces8}${spaces2}${whitefg} =${spaces2}Discard All Images (imgfree)
-	item --key g info-retrieved ${spaces32}${spaces16}${spaces8}${whitefg}= im${redfg}g${whitefg}stat
-	item --key m info-discard ${spaces32}${spaces16}${spaces8}${spaces2}${whitefg}= i(m)gfree
-	item --gap Boot: ${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces8}${spaces4}===========
+	item --gap ${horiline}
+	item --gap Boot:
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${defaultfg}IOS Updates                  # Boot
 	item --key f firmware-submenu       ${spaces2}${yellowfg}F${defaultfg}irmware Updates              # Firmware
@@ -176,7 +170,7 @@
 			### temporary using local for testing things
 			chain pciids.ipxe
 			item --gap ${addr:busdevfn} ${vendor}:${device} ${ven}
-			item 2dot > ${dev}
+			item > ${dev}
 			item 
 			goto info-pciscan_loop
 	:info-pciscan_done
