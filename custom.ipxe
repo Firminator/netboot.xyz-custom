@@ -117,7 +117,7 @@
 	#imgtrust --permanent
 
 :dasboot-main-menu
-	menu ${bluefg} ${menu}
+	menu ${redfg} ${menu}
 	item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
