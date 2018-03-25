@@ -117,13 +117,15 @@
 	#imgtrust --permanent
 
 :dasboot-main-menu
-	menu ${redfg} ${menu}
+	menu ${bluefg} ${menu}
 	item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
 	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --gap ${horiline}
+	item
+	item
 	item --gap Boot:
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${defaultfg}IOS Updates                  # Boot
