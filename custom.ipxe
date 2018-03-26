@@ -8,7 +8,7 @@
 	set menuvers v6.00.01
 	set menudate (2018-03-23)
 	set menu ${menuname} ${menuvers} ${menudate}
-	set horiline ==========================================================================+
+	set horiline ==========================================================================
 	#set horiline =====================================================================
 
 ###Define Indent
@@ -118,11 +118,10 @@
 
 :dasboot-main-menu
 	menu ${bluefg} ${menu}
-	item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
-	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
+	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
 	item --gap ${horiline}
 	item
 	item
@@ -133,6 +132,7 @@
 	item --key w wiping-submenu         ${spaces2}${yellowfg}W${defaultfg}iping/Media Sanitation Tools # Wiping
 	item
 	item
+	item --gap ${horiline}
 	item --gap Other:
 	#tem --key r reboot                 ${spaces2}${greenfg}R${defaultfg}eboot                         # R
 	item --key o other                  ${spaces2}${greenfg}O${defaultfg}ther iPXE boot menus          # O
