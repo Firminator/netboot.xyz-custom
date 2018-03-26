@@ -326,14 +326,17 @@ prompt
 #	.com  COMBOOT image (runnable from DOS)
 #	.img  Disk image [ISOLINUX only]
 #works: boot https://boot.ipxe.org/memtest501.0 onepass onefail && goto dasboot-main-menu || goto error
-# Memtest v4.3.7
-chain memtest
+# 
+# Memtest v7.4 Dual (BIOS + UEFI)
+kernel memdisk610
+initrd https://www.memtest86.com/downloads/memtest86-iso.zip
 #fails: kernel memdisk510 raw
 #initrd memtest
+# Memtest v4.3.7
 #works:
 #kernel memdisk510 iso
 #initrd memtest86-4.3.7.iso
-# boot
+boot
 
 # kernel memdisk iso bigraw || goto error
 # initrd memtest5.iso || goto error
