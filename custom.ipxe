@@ -117,12 +117,12 @@
 	#imgtrust --permanent
 
 :dasboot-main-menu
-	menu ${bluefg} ${menu}
+	menu ${yellowfg} ${menu}
 	#item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan ${defaultfg}> Identify all ${greenfg}P${defaultfg}CI devices
+	item --key p info-pciscan ${defaultfg}* Identify all ${greenfg}P${defaultfg}CI devices
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --key n info-network ${defaultfg}> Show ${greenfg}N${defaultfg}etwork information
+	item --key n info-network ${defaultfg}* Show ${greenfg}N${defaultfg}etwork information
 	item --gap ${horiline}
 	item
 	item
@@ -138,11 +138,11 @@
 	item --gap ${horiline}
 	#item --gap Other:
 	#tem --key r reboot                 ${spaces2}${greenfg}R${defaultfg}eboot                         # R
-	item --key o other                  ${defaultfg}>${greenfg} O${defaultfg}ther iPXE boot menus                  # O
-	item --key c changelog              ${defaultfg}>${greenfg} C${defaultfg}hangelog                              # C
+	item --key o other                  ${defaultfg}*${greenfg} O${defaultfg}ther iPXE boot menus                  # O
+	item --key c changelog              ${defaultfg}*${greenfg} C${defaultfg}hangelog                              # C
 	#tem --key k rocks                  ${spaces2}${greenfg}K${defaultfg}K                             # K
-	item --key s shell                  ${defaultfg}>${greenfg} S${defaultfg}hell                                  # S
-	item --key x exit                   ${defaultfg}>${greenfg} X${defaultfg} (or ${greenfg}ESC${defaultfg}) returns to previous menu
+	item --key s shell                  ${defaultfg}*${greenfg} S${defaultfg}hell                                  # S
+	item --key x exit                   ${defaultfg}*${greenfg} X${defaultfg} or ${greenfg}ESC${defaultfg} returns to previous menu
 	#item
 	#item --gap Press ESC anywhere to return to the previous menu.
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
