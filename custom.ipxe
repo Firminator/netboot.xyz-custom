@@ -330,7 +330,7 @@ echo boot memtest86
 echo Memdisk 604 iso
 prompt
 kernel memdisk604 iso
-initrd memtest86-7.5
+initrd memtest86-7.5.iso
 #fails: kernel memdisk510 raw
 #initrd memtest
 # Memtest v4.3.7
