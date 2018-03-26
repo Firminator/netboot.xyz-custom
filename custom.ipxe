@@ -120,29 +120,29 @@
 	menu ${bluefg} ${menu}
 	#item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan ${whitefg}- Identify all ${redfg}P${whitefg}CI devices
+	item --key p info-pciscan ${defaultfg}> Identify all ${greenfg}P${defaultfg}CI devices
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --key n info-network ${whitefg}- Show ${redfg}N${whitefg}etwork information
+	item --key n info-network ${defaultfg}> Show ${greenfg}N${defaultfg}etwork information
 	item --gap ${horiline}
 	item
 	item
 	item
 	item --gap Boot:
-	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
-	item --key b bios-submenu           ${spaces2}${yellowfg}B${defaultfg}IOS Updates                  # Boot
-	item --key f firmware-submenu       ${spaces2}${yellowfg}F${defaultfg}irmware Updates              # Firmware
-	item --key w wiping-submenu         ${spaces2}${yellowfg}W${defaultfg}iping/Media Sanitation Tools # Wiping
+	item --key d diagnostic-submenu     ${spaces2}${redfg}D${defaultfg}iagnostic Tools              # Das
+	item --key b bios-submenu           ${spaces2}${redfg}B${defaultfg}IOS Updates                  # Boot
+	item --key f firmware-submenu       ${spaces2}${redfg}F${defaultfg}irmware Updates              # Firmware
+	item --key w wiping-submenu         ${spaces2}${redfg}W${defaultfg}iping/Media Sanitation Tools # Wiping
 	item
 	item
 	item
 	item --gap ${horiline}
 	#item --gap Other:
 	#tem --key r reboot                 ${spaces2}${greenfg}R${defaultfg}eboot                         # R
-	item --key o other                  - ${greenfg}O${defaultfg}ther iPXE boot menus                  # O
-	item --key c changelog              - ${greenfg}C${defaultfg}hangelog                              # C
+	item --key o other                  ${defaultfg}>${greenfg} O${defaultfg}ther iPXE boot menus                  # O
+	item --key c changelog              ${defaultfg}>${greenfg} C${defaultfg}hangelog                              # C
 	#tem --key k rocks                  ${spaces2}${greenfg}K${defaultfg}K                             # K
-	item --key s shell                  - ${greenfg}S${defaultfg}hell                                  # S
-	item --key x exit                   - ${greenfg}X (or ESC)${defaultfg} returns to previous menu
+	item --key s shell                  ${defaultfg}>${greenfg} S${defaultfg}hell                                  # S
+	item --key x exit                   ${defaultfg}>${greenfg} X${defaultfg} (or ${greenfg}ESC${defaultfg}) returns to previous menu
 	#item
 	#item --gap Press ESC anywhere to return to the previous menu.
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
