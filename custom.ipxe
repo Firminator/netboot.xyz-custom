@@ -326,7 +326,7 @@ prompt
 #	.com  COMBOOT image (runnable from DOS)
 #	.img  Disk image [ISOLINUX only]
 #works: boot https://boot.ipxe.org/memtest501.0 onepass onefail && goto dasboot-main-menu || goto error
-chain memdisk iso
+kernel memdisk iso
 initrd memtest86-4.3.7-iso
 boot
 
