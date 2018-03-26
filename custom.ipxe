@@ -117,6 +117,7 @@
 	#imgtrust --permanent
 
 :dasboot-main-menu
+	### yellowfg normally shows up as orange for some reason; however when highlighted (and menu is) it will turn to Yellow
 	menu ${yellowfg} ${menu}
 	#item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
@@ -324,7 +325,10 @@ prompt
 #	.cbt  COMBOOT image (not runnable from DOS)
 #	.com  COMBOOT image (runnable from DOS)
 #	.img  Disk image [ISOLINUX only]
-boot https://boot.ipxe.org/memtest501.0 onepass onefail && goto dasboot-main-menu || goto error
+#works: boot https://boot.ipxe.org/memtest501.0 onepass onefail && goto dasboot-main-menu || goto error
+chain memdisk iso
+initrd memtest86-4.3.7-iso
+boot
 
 # kernel memdisk iso bigraw || goto error
 # initrd memtest5.iso || goto error
