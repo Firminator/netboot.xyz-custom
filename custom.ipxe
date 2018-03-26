@@ -327,7 +327,7 @@ prompt
 #	.img  Disk image [ISOLINUX only]
 #works: boot https://boot.ipxe.org/memtest501.0 onepass onefail && goto dasboot-main-menu || goto error
 # Memtest v4.3.7
-kernel memdisk
+kernel memdisk raw
 initrd memtest86-4.3.7-floppy.tar.gz
 #works:
 #kernel memdisk iso
