@@ -308,11 +308,9 @@ prompt
 goto dasboot-main-menu
 
 :diagnostic-submenu
-echo boot memtest86
 imgstat
 imgfree
 imgstat
-prompt
 	### http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 	### http://ipxe.org/appnote/memtest
 	### https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/
@@ -328,7 +326,10 @@ prompt
 #works: boot https://boot.ipxe.org/memtest501.0 onepass onefail && goto dasboot-main-menu || goto error
 # 
 # Memtest v7.4 Dual (BIOS + UEFI)
-kernel memdisk610
+echo boot memtest86
+echo Memdisk 604
+prompt
+kernel memdisk604
 initrd https://www.memtest86.com/downloads/memtest86-iso.zip
 #fails: kernel memdisk510 raw
 #initrd memtest
