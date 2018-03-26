@@ -327,9 +327,9 @@ imgstat
 # 
 # Memtest v7.4 Dual (BIOS + UEFI)
 echo boot memtest86
-echo Memdisk 604 iso
+echo Memdisk 604 iso raw
 prompt
-kernel memdisk604 iso
+kernel memdisk604 iso raw
 initrd memtest86-7.5.iso
 #fails: kernel memdisk510 raw
 #initrd memtest
