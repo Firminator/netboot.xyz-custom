@@ -333,7 +333,7 @@ chain memtest
 #works:
 #kernel memdisk510 iso
 #initrd memtest86-4.3.7.iso
-boot
+# boot
 
 # kernel memdisk iso bigraw || goto error
 # initrd memtest5.iso || goto error
