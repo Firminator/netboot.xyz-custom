@@ -125,6 +125,7 @@
 	item --gap ${horiline}
 	item
 	item
+	item
 	item --gap Boot:
 	item --key d diagnostic-submenu     ${spaces2}${yellowfg}D${defaultfg}iagnostic Tools              # Das
 	item --key b bios-submenu           ${spaces2}${yellowfg}B${defaultfg}IOS Updates                  # Boot
@@ -132,19 +133,23 @@
 	item --key w wiping-submenu         ${spaces2}${yellowfg}W${defaultfg}iping/Media Sanitation Tools # Wiping
 	item
 	item
+	item
 	item --gap ${horiline}
-	item --gap Other:
+	#item --gap Other:
 	#tem --key r reboot                 ${spaces2}${greenfg}R${defaultfg}eboot                         # R
 	item --key o other                  ${spaces2}${greenfg}O${defaultfg}ther iPXE boot menus          # O
 	item --key c changelog              ${spaces2}${greenfg}C${defaultfg}hangelog                      # C
 	#tem --key k rocks                  ${spaces2}${greenfg}K${defaultfg}K                             # K
 	item --key s shell                  ${spaces2}${greenfg}S${defaultfg}hell                          # S
-	item
-	item --gap Press ESC anywhere to return to the previous menu.
+	item --key x exit                   ${spaces2}${greenfg}ESC${defaultfg}hell                          # S
+	#item
+	#item --gap Press ESC anywhere to return to the previous menu.
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
 	### You may therefore wish to always handle failures of the choose command.
 	### Also set Changelog as Default when loading this menu for the first time or when exiting to it from a submenu
-	choose --default changelog dasboot-main-menu_choice && goto ${dasboot-main-menu_choice} || goto dasboot-main-menu
+	choose --default changelog dasboot-main-menu_choice && goto ${dasboot-main-menu_choice}
+	goto error
+	#dasboot-main-menu
 
 :info-pciscan
 	### copied from http://boot.salstar.sk/lspci.ipxe and slightly modified
