@@ -159,6 +159,7 @@
 	echo Missing "pciscan" command. Recompile iPXE with CMD_PCI.
 	prompt
 	goto dasboot-main-menu
+	
 	:info-pciscan_found
 		### temporary using local for testing things
 		imgfetch pciids.ipxe
@@ -170,6 +171,7 @@
 		menu ${yellowfg}${menu}
 		item --gap ${defaultfg} PCIscan using boot.salstar.sk's PCI.IDs (2018-03-15)
 		item
+	
 		:info-pciscan_loop
 			pciscan addr || goto info-pciscan_done
 			clear ven
@@ -182,6 +184,7 @@
 			item 2dot ..${dev}
 			item 
 			goto info-pciscan_loop
+	
 	:info-pciscan_done
 		choose press_enter ||
 		goto dasboot-main-menu
@@ -195,6 +198,7 @@
 	clear vendorcleartext-nic1
 	clear devicecleartext-nic0
 	clear devicecleartext-nic1
+
 	:pciscan-nic0
 		clear ven
 		clear vendor
@@ -207,6 +211,7 @@
 		### pciids.ipxe spits out ${ven} and ${dev}
 		set vendorcleartext-nic0 ${ven}
 		set devicecleartext-nic0 ${dev}
+	
 	:pciscan-nic1
 		clear ven
 		clear vendor
@@ -268,41 +273,10 @@
 	item --gap Bootfile Name..: ${net1/filename}
 	choose --default info-network-nic0 info-network-nic1_choice && goto ${info-network-nic1_choice} || goto dasboot-main-menu
 
-#:info-network-nic2
-#	menu Device and Network Information for NIC 2
-#	item --gap Choose a different NIC:
-#	item --key 0 info-network-nic0 - NIC (0)
-#	item --key 1 info-network-nic1 - NIC (1)
-#	item --key 2 info-network-nic2 - NIC (2)
-#	item
-#	item
-#	item --gap NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
-#	item --gap ${spaces4}Driver : ${net2/chip}
-#	item --gap ${spaces4}MAC${spaces4}: ${net2/mac}
-#	item --gap ${spaces4}IP${spaces4} : ${net2/ip}
-#	item --gap ${spaces4}Netmask: ${net2/netmask}
-#	item --gap ${spaces4}Gateway: ${net2/gateway}
-#	item --gap ${spaces4}Domain : ${net2/domain}
-#	item --gap ${spaces4}DNS${spaces4}: ${net2/dns}
-#	item
-#	item
-#	item --gap DHCP
-#	item --gap server${spaces4} : ${net2/dhcp-server}
-#	item --gap Next-server: ${next-server}
-#	item --gap bootfile${spaces2} : ${net2/filename}
-#	choose --default info-network-nic0 info-network-nic2_choice && goto ${info-network-nic2_choice} || goto dasboot-main-menu
-	
-#:info-hdt
-#	kernel hdt.c32 || goto error
-#	module modules.alias || goto error
-#	module pci.ids || goto error
-#	boot || goto error
-#	goto dasboot-main-menu
-
 :diagnostic-submenu
-imgstat
-imgfree
-imgstat
+	imgstat
+	imgfree
+	imgstat
 	### http://www.syslinux.org/wiki/index.php?title=MEMDISK#Floppy_images
 	### http://ipxe.org/appnote/memtest
 	### https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/
@@ -373,40 +347,41 @@ goto dasboot-main-menu
 	item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
 	item --gap ${horiline}
 	choose --default dban-586_info wiping-submenu_choice && goto ${wiping-submenu_choice} || goto exit
-	:dban-i586_info
-	item --key 1 dban-i586_boot      ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
-	item --key 2 hdsentinel-dos_info ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
-	item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
-	item --gap ${horiline}
-	item
-	echo DBAN - 1 of 3 NASA approved methods for media sanitation
-	echo a) internal SecureErase b) DBAN c) Wiper/WiperPro
-	item
-	item --key B dban-i586_boot      ${defaultfg}${greenfg}B${defaultfg}oot
-	choose --default dban-i586_boot dban-i586_choice && goto ${dban-i586_choice} || goto dasboot-main-menu
-	:dban-i586_boot
-	imgfree
-	kernel memdisk604 iso 
-	initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso && boot || goto wiping-submenu
-	:hdsentinel-dos_info
-	item --key 1 dban-i586_info      ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
-	item --key 2 hdsentinel-dos_boot ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
-	item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
-	item --gap ${horiline}
-	item
-	echo Shows SMART status, temperature, and Bad Sector count
-	echo of SATA and IDE drives, including SSDs.
-	item
-	item --key B hdsentinel-dos_boot      ${defaultfg}${greenfg}B${defaultfg}oot
-	choose --default hdsentinel-dos_boot hdsentinel-dos_choice && goto ${hdsentinel-dos_choice} || goto dasboot-main-menu
-	:hdsentinel-dos_boot
-	imgfree
-	kernel memdisk604 iso raw
-	initrd hdsdos_cd.zip && boot || goto wiping-submenu
 	
-
-
-
+	:dban-i586_info
+		item --key 1 dban-i586_info      ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+		item --key 2 hdsentinel-dos_info ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
+		item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
+		item --gap ${horiline}
+		item
+		echo DBAN - 1 of 3 NASA approved methods for media sanitation
+		echo a) internal SecureErase b) DBAN c) Wiper/WiperPro
+		item
+		item --key B dban-i586_boot      ${defaultfg}${greenfg}B${defaultfg}oot
+		choose --default dban-i586_boot dban-i586_choice && goto ${dban-i586_choice} || goto dasboot-main-menu
+			
+			:dban-i586_boot
+			imgfree
+			kernel memdisk604 iso 
+			initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso && boot || goto wiping-submenu
+	
+	:hdsentinel-dos_info
+		item --key 1 dban-i586_info      ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+		item --key 2 hdsentinel-dos_info ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
+		item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
+		item --gap ${horiline}
+		item
+		echo Shows SMART status, temperature, and Bad Sector count
+		echo of SATA and IDE drives, including SSDs.
+		item
+		item --key B hdsentinel-dos_boot      ${defaultfg}${greenfg}B${defaultfg}oot
+		choose --default hdsentinel-dos_boot hdsentinel-dos_choice && goto ${hdsentinel-dos_choice} || goto dasboot-main-menu
+			
+			:hdsentinel-dos_boot
+			imgfree
+			kernel memdisk604 iso raw
+			initrd hdsdos_cd.zip && boot || goto wiping-submenu
+	
 :reboot
 	reboot
 
