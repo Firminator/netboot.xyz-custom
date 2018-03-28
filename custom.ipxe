@@ -378,9 +378,10 @@ goto dasboot-main-menu
 	goto wiping-submenu
 	:hdsentinel-linux
 	imgfree
-	kernel memdisk604 
-	initrd hdsentinel-017.gz
-	boot
+	chain HDSentinel
+	#kernel memdisk604 
+	#initrd hdsentinel-017.gz
+	#boot
 	goto wiping-submenu
 	:dban-i586
 	imgfree
