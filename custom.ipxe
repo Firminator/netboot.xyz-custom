@@ -362,10 +362,9 @@ goto dasboot-main-menu
 	echo chain firmware-submenu.ipxe || goto error
 	prompt
 	goto dasboot-main-menu
-${spaces2}${greenfg}D${defaultfg}iagnostic Tool
+
 :wiping-submenu
 	menu ${yellowfg}Wiping/Media Sanitation Tools
-	set_release Release: ${release}
 	item --key 1 dban-i586_info      ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
 	item --key 2 hdsentinel-dos_info ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
 	item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
