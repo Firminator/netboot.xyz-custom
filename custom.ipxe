@@ -297,16 +297,6 @@
 #	boot || goto error
 #	goto dasboot-main-menu
 
-:info-retrieved
-imgstat
-prompt
-goto dasboot-main-menu
-
-:info-discard
-imgfree
-prompt
-goto dasboot-main-menu
-
 :diagnostic-submenu
 imgstat
 imgfree
@@ -374,9 +364,32 @@ goto dasboot-main-menu
 	goto dasboot-main-menu
 
 :wiping-submenu
-	echo chain wiping-submenu.ipxe || goto error
-	prompt
-	goto dasboot-main-menu
+	menu Wiping/Media Sanitation Tools
+	item --key h hdsentinel-dos    HDSentinel v1.21 (2016-05-20) [DOS]   - Shows S.M.A.R.T., Temperature and Bad Blocks
+	item --key h hdsentinel-linux  HDSentinel v0.17 (2017-08-30) [LINUX] - Shows S.M.A.R.T., Temperature and Bad Blocks
+	item --key d dban-i586         DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+	item --key p partedmagic       PartedMagic
+	choose --default dban wiping-submenu_choice && goto ${wiping-submenu_choice} || goto exit
+	:hdsentinel-dos
+	imgfree
+	kernel memdisk604 iso 
+	initrd hdsdos_cd.zip
+	boot
+	goto wiping-submenu
+	:hdsentinel-linux
+	imgfree
+	kernel memdisk 
+	initrd hdsentinel-017.gz
+	boot
+	goto wiping-submenu
+	:dban-i586
+	imgfree
+	kernel memdisk604 iso 
+	initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso
+	boot
+	goto wiping-submenu
+
+
 
 :reboot
 	reboot
