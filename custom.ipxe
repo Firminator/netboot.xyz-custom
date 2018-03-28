@@ -376,9 +376,7 @@ goto dasboot-main-menu
 	:hdsentinel-dos
 	imgfree
 	kernel memdisk604 iso raw
-	initrd hdsdos_cd.zip
-	boot
-	goto wiping-submenu
+	initrd hdsdos_cd.zip && boot || goto wiping-submenu
 	
 
 
