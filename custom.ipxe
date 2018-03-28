@@ -356,8 +356,8 @@ goto dasboot-main-menu
 		item --key 3 partedmagic_info    ${spaces2}${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
 		item --gap ${horiline}
 		item
-		echo DBAN - 1 of 3 NASA approved methods for media sanitation
-		echo a) internal SecureErase b) DBAN c) Wiper/WiperPro
+		item --gap DBAN - 1 of 3 NASA approved methods for media sanitation
+		item --gap a) internal SecureErase b) DBAN c) Wiper/WiperPro
 		item
 		item --key B dban-i586_boot      ${spaces2}${defaultfg}${greenfg}B${defaultfg}oot DBAN
 		choose --default dban-i586_boot dban-i586_choice && goto ${dban-i586_choice} || goto dasboot-main-menu
@@ -373,8 +373,8 @@ goto dasboot-main-menu
 		item --key 3 partedmagic_info    ${spaces2}${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
 		item --gap ${horiline}
 		item
-		echo Shows SMART status, temperature, and Bad Sector count
-		echo of SATA and IDE drives, including SSDs.
+		item --gap Shows SMART status, temperature, and Bad Sector count
+		item --gap of SATA and IDE drives, including SSDs.
 		item
 		item --key B hdsentinel-dos_boot ${spaces2}${defaultfg}${greenfg}B${defaultfg}oot HDSentinel
 		choose --default hdsentinel-dos_boot hdsentinel-dos_choice && goto ${hdsentinel-dos_choice} || goto dasboot-main-menu
