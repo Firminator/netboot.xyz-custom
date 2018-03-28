@@ -167,7 +167,7 @@
 		### verify fails; not sure why
 		### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 		clear addr
-		menu ${yellow}${menu}
+		menu ${yellowfg}${menu}
 		item --gap ${defaultfg} PCIscan using boot.salstar.sk's PCI.IDs (2018-03-15)
 		item
 		:info-pciscan_loop
@@ -219,7 +219,7 @@
 		set devicecleartext-nic1 ${dev}
 	
 :info-network-nic0
-	menu ${yellow}${menu}
+	menu ${yellowfg}${menu}
 	item --gap ${horiline}
 	item --gap Select a different NIC:
 	item info-network-nic0 - NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
@@ -244,7 +244,7 @@
 	choose --default info-network-nic1 info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
 	
 :info-network-nic1
-	menu ${yellow}${menu}
+	menu ${yellowfg}${menu}
 	item --gap ${horiline}
 	item --gap Select a different NIC:
 	item info-network-nic0 - NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
@@ -383,22 +383,22 @@ goto dasboot-main-menu
 	echo a) internal SecureErase b) DBAN c) Wiper/WiperPro
 	item
 	item --key B dban-i586_boot      ${defaultfg}${greenfg}B${defaultfg}oot
-	choose --default dban-586_boot dban-i586_choice && goto ${dban-i586_choice} || goto exit
+	choose --default dban-i586_boot dban-i586_choice && goto ${dban-i586_choice} || goto dasboot-main-menu
 	:dban-i586_boot
 	imgfree
 	kernel memdisk604 iso 
 	initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso && boot || goto wiping-submenu
 	:hdsentinel-dos_info
-	item --key 1 dban-i586_info           ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+	item --key 1 dban-i586_info      ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
 	item --key 2 hdsentinel-dos_boot ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
-	item --key 3 partedmagic_info         ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
+	item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
 	item --gap ${horiline}
 	item
 	echo Shows SMART status, temperature, and Bad Sector count
 	echo of SATA and IDE drives, including SSDs.
 	item
 	item --key B hdsentinel-dos_boot      ${defaultfg}${greenfg}B${defaultfg}oot
-	choose --default hdsentinel-dos_boot hdsentinel-dos_choice && goto ${hdsentinel-dos_choice} || goto exit
+	choose --default hdsentinel-dos_boot hdsentinel-dos_choice && goto ${hdsentinel-dos_choice} || goto dasboot-main-menu
 	:hdsentinel-dos_boot
 	imgfree
 	kernel memdisk604 iso raw
