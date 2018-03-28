@@ -362,18 +362,42 @@ goto dasboot-main-menu
 	echo chain firmware-submenu.ipxe || goto error
 	prompt
 	goto dasboot-main-menu
-
+${spaces2}${greenfg}D${defaultfg}iagnostic Tool
 :wiping-submenu
 	menu ${yellowfg}Wiping/Media Sanitation Tools
-	item --key 1 dban-i586         DBAN i586 (maintained Github fork v2017-12-05) [ISO]
-	item --key 2 hdsentinel-dos    HDSentinel v1.21 (2016-05-20) [DOS]   - Shows S.M.A.R.T., Temperature and Bad Blocks
-	item --key 3 partedmagic       PartedMagic
-	choose --default dban wiping-submenu_choice && goto ${wiping-submenu_choice} || goto exit
-	:dban-i586
+	set_release Release: ${release}
+	item --key 1 dban-i586_info      ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+	item --key 2 hdsentinel-dos_info ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
+	item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
+	item --gap ${horiline}
+	choose --default dban-586_info wiping-submenu_choice && goto ${wiping-submenu_choice} || goto exit
+	:dban-i586_info
+	item --key 1 dban-i586_boot      ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+	item --key 2 hdsentinel-dos_info ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
+	item --key 3 partedmagic_info    ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
+	item --gap ${horiline}
+	item
+	echo DBAN - 1 of 3 NASA approved methods for media sanitation
+	echo a) internal SecureErase b) DBAN c) Wiper/WiperPro
+	item
+	item --key B dban-i586_boot      ${defaultfg}${greenfg}B${defaultfg}oot
+	choose --default dban-586_boot dban-i586_choice && goto ${dban-i586_choice} || goto exit
+	:dban-i586_boot
 	imgfree
 	kernel memdisk604 iso 
 	initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso && boot || goto wiping-submenu
-	:hdsentinel-dos
+	:hdsentinel-dos_info
+	item --key 1 dban-i586_info           ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+	item --key 2 hdsentinel-dos_boot ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
+	item --key 3 partedmagic_info         ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
+	item --gap ${horiline}
+	item
+	echo Shows SMART status, temperature, and Bad Sector count
+	echo of SATA and IDE drives, including SSDs.
+	item
+	item --key B hdsentinel-dos_boot      ${defaultfg}${greenfg}B${defaultfg}oot
+	choose --default hdsentinel-dos_boot hdsentinel-dos_choice && goto ${hdsentinel-dos_choice} || goto exit
+	:hdsentinel-dos_boot
 	imgfree
 	kernel memdisk604 iso raw
 	initrd hdsdos_cd.zip && boot || goto wiping-submenu
