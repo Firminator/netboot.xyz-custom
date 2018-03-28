@@ -399,23 +399,24 @@ goto dasboot-main-menu
 	menu ${yellowfg}${menu}
 	item --gap Changelog
 	item
-	item --gap 2018-03-28_v6.00.003
+	item --gap 2018-03-28_v6.00.005
 	item --gap ====================
 	item --gap * Wiping/Sanitation menu: updated HDSentinel from v1.00.05 (2010-04-15) to v1.21 (2016-05-21)
 	item --gap * Wiping/Sanitation menu: updated DBAN Github fork to v2017-12-05
-	item --gap * menu adjustments
+	item --gap * partially moved changelog here
+	item --gap * minor DasBoot menu adjustments
 	item
 	item
 	item --gap 2018-03-23_v6.00.001
 	item --gap ====================
 	item --gap * testing Memtest image loading
-	item --gap * refined menu
+	item --gap * changes to DasBoot main menu
 	item
 	item
 	item --gap 2018-03-21_v6.00.000
 	item --gap ====================
 	item --gap * converted to iPXE piggybacking off of AntonyM's netboot.xyz menu
-	item --gap * created main menu
+	item --gap * created DasBoot iPXE main menu
 	item
 	item
 	item --gap 2015-05-06_v5.25.115
