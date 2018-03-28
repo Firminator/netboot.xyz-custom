@@ -138,11 +138,11 @@
 	item
 	item --gap ${horiline}
 	#item --gap Other:
-	#tem --key r reboot                 ${spaces2}${greenfg}R${defaultfg}eboot                         # R
-	item --key o other                  ${defaultfg}*${greenfg} O${defaultfg}ther iPXE boot menus                  # O
-	item --key c changelog              ${defaultfg}*${greenfg} C${defaultfg}hangelog                              # C
-	#tem --key k rocks                  ${spaces2}${greenfg}K${defaultfg}K                             # K
-	item --key s shell                  ${defaultfg}*${greenfg} S${defaultfg}hell                                  # S
+	#tem --key r reboot                 ${spaces2}${greenfg}R${defaultfg}eboot                      # R
+	item --key o other                  ${defaultfg}*${greenfg} O${defaultfg}ther iPXE boot menus   # O
+	item --key c changelog              ${defaultfg}*${greenfg} C${defaultfg}hangelog               # C
+	#tem --key k rocks                  ${spaces2}${greenfg}K${defaultfg}K                          # K
+	item --key s shell                  ${defaultfg}*${greenfg} S${defaultfg}hell                   # S
 	item --key x exit                   ${defaultfg}*${greenfg} X${defaultfg} or ${greenfg}ESC${defaultfg} returns to previous menu
 	#item
 	#item --gap Press ESC anywhere to return to the previous menu.
@@ -372,22 +372,20 @@ goto dasboot-main-menu
 	choose --default dban wiping-submenu_choice && goto ${wiping-submenu_choice} || goto exit
 	:hdsentinel-dos
 	imgfree
-	kernel memdisk604 iso 
+	kernel memdisk604 iso raw
 	initrd hdsdos_cd.zip
 	boot
 	goto wiping-submenu
 	:hdsentinel-linux
 	imgfree
-	kernel memdisk 
+	kernel memdisk604 
 	initrd hdsentinel-017.gz
 	boot
 	goto wiping-submenu
 	:dban-i586
 	imgfree
 	kernel memdisk604 iso 
-	initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso
-	boot
-	goto wiping-submenu
+	initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso && boot || goto wiping-submenu
 
 
 
