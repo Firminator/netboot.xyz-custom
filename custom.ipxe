@@ -121,9 +121,9 @@
 	menu ${yellowfg} ${menu}
 	#item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan ${spaces2}${defaultfg}>Identify all ${greenfg}P${defaultfg}CI devices
+	item --key p info-pciscan ${defaultfg}> Identify all ${greenfg}P${defaultfg}CI devices
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --key n info-network ${spaces2}${defaultfg}>Show ${greenfg}N${defaultfg}etwork information
+	item --key n info-network ${defaultfg}> Show ${greenfg}N${defaultfg}etwork information
 	item --gap ${horiline}
 	item
 	item
@@ -364,29 +364,22 @@ goto dasboot-main-menu
 	goto dasboot-main-menu
 
 :wiping-submenu
-	menu Wiping/Media Sanitation Tools
-	item --key h hdsentinel-dos    HDSentinel v1.21 (2016-05-20) [DOS]   - Shows S.M.A.R.T., Temperature and Bad Blocks
-	item --key h hdsentinel-linux  HDSentinel v0.17 (2017-08-30) [LINUX] - Shows S.M.A.R.T., Temperature and Bad Blocks
-	item --key d dban-i586         DBAN i586 (maintained Github fork v2017-12-05) [ISO]
-	item --key p partedmagic       PartedMagic
+	menu ${yellowfg}Wiping/Media Sanitation Tools
+	item --key 1 dban-i586         DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+	item --key 2 hdsentinel-dos    HDSentinel v1.21 (2016-05-20) [DOS]   - Shows S.M.A.R.T., Temperature and Bad Blocks
+	item --key 3 partedmagic       PartedMagic
 	choose --default dban wiping-submenu_choice && goto ${wiping-submenu_choice} || goto exit
+	:dban-i586
+	imgfree
+	kernel memdisk604 iso 
+	initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso && boot || goto wiping-submenu
 	:hdsentinel-dos
 	imgfree
 	kernel memdisk604 iso raw
 	initrd hdsdos_cd.zip
 	boot
 	goto wiping-submenu
-	:hdsentinel-linux
-	imgfree
-	chain HDSentinel
-	#kernel memdisk604 
-	#initrd hdsentinel-017.gz
-	#boot
-	goto wiping-submenu
-	:dban-i586
-	imgfree
-	kernel memdisk604 iso 
-	initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso && boot || goto wiping-submenu
+	
 
 
 
