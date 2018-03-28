@@ -5,8 +5,8 @@
 
 ### Set Infohead
 	set menuname DasBoot
-	set menuvers v6.00.01
-	set menudate (2018-03-23)
+	set menuvers v6.00.05
+	set menudate (2018-03-28)
 	set menu ${menuname} ${menuvers} ${menudate}
 	set horiline ==========================================================================
 	#set horiline =====================================================================
