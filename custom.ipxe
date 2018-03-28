@@ -121,29 +121,29 @@
 	menu ${yellowfg} ${menu}
 	#item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan ${spaces2} ${defaultfg}Identify all ${greenfg}P${defaultfg}CI devices
+	item --key p info-pciscan ${spaces2}${defaultfg}>Identify all ${greenfg}P${defaultfg}CI devices
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --key n info-network ${spaces2} ${defaultfg}Show ${greenfg}N${defaultfg}etwork information
+	item --key n info-network ${spaces2}${defaultfg}>Show ${greenfg}N${defaultfg}etwork information
 	item --gap ${horiline}
 	item
 	item
 	item
 	item --gap Boot:
-	item --key d diagnostic-submenu     ${spaces2}${redfg}D${defaultfg}iagnostic Tools              # Das
-	item --key b bios-submenu           ${spaces2}${redfg}B${defaultfg}IOS Updates                  # Boot
-	item --key f firmware-submenu       ${spaces2}${redfg}F${defaultfg}irmware Updates              # Firmware
-	item --key w wiping-submenu         ${spaces2}${redfg}W${defaultfg}iping/Media Sanitation Tools # Wiping
+	item --key d diagnostic-submenu     ${spaces2}${greenfg}D${defaultfg}iagnostic Tools              # Das
+	item --key b bios-submenu           ${spaces2}${greenfg}B${defaultfg}IOS Updates                  # Boot
+	item --key f firmware-submenu       ${spaces2}${greenfg}F${defaultfg}irmware Updates              # Firmware
+	item --key w wiping-submenu         ${spaces2}${greenfg}W${defaultfg}iping/Media Sanitation Tools # Wiping
 	item
 	item
 	item
 	item --gap ${horiline}
 	#item --gap Other:
-	#tem --key r reboot                 ${spaces2} ${greenfg}R${defaultfg}eboot                     # R
-	item --key o other                  ${spaces2} ${greenfg}O${defaultfg}ther iPXE boot menus      # O
-	item --key c changelog              ${spaces2} ${greenfg}C${defaultfg}hangelog                  # C
-	#tem --key k rocks                  ${spaces2} ${greenfg}K${defaultfg}K                         # K
-	item --key s shell                  ${spaces2} ${greenfg}S${defaultfg}hell                      # S
-	item --key x exit                   ${spaces2} ${greenfg}X${defaultfg} or ${greenfg}ESC${defaultfg} returns to previous menu
+	#tem --key r reboot                 ${spaces2}${greenfg}R${defaultfg}eboot                        # R
+	item --key o other                  ${spaces2}${greenfg}O${defaultfg}ther iPXE boot menus         # O
+	item --key c changelog              ${spaces2}${greenfg}C${defaultfg}hangelog                     # C
+	#tem --key k rocks                  ${spaces2}${greenfg}K${defaultfg}K                            # K
+	item --key s shell                  ${spaces2}${greenfg}S${defaultfg}hell                         # S
+	item --key x exit                   ${spaces2}${greenfg}X${defaultfg} or ${greenfg}ESC${defaultfg} returns to previous menu
 	#item
 	#item --gap Press ESC anywhere to return to the previous menu.
 	### The user is able to use Ctrl-C (or Escape) to exit the menu without making a selection.
