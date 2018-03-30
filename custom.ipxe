@@ -121,9 +121,9 @@
 	menu ${yellowfg}${menu}
 	item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
-	item --key p info-pciscan ${defaultfg}> Identify all ${greenfg}P${defaultfg}CI devices
+	item --key p info-pciscan ${defaultfg}* Identify all ${greenfg}P${defaultfg}CI devices
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
-	item --key n info-network ${defaultfg}> Show ${greenfg}N${defaultfg}etwork information
+	item --key n info-network ${defaultfg}* Show ${greenfg}N${defaultfg}etwork information
 	item --gap ${horiline}
 	item
 	item
@@ -408,12 +408,12 @@ goto dasboot-main-menu
 :changelog
 	menu ${yellowfg}${menu} * Changelog
 	item 2018-03-29_v6.00.006 ${greenfg}${menudate}_${menuvers}
-	item --gap ====================
+#	item --gap ====================
 	item --gap * Wiping/Sanitation:
 	item --gap ${spaces2}> updated DBAN Github fork from v2017-12-05 to v2018-03-28
 	item
 	item 2018-03-28_v6.00.005 ${greenfg}2018-03-28_v6.00.005
-	item --gap ====================
+#	item --gap ====================
 	item --gap * Wiping/Sanitation:
 	item --gap ${spaces2}> updated HDSentinel from v1.00.05 (2010-04-15) to v1.21 (2016-05-21)
 	item --gap ${spaces2}> updated DBAN Github fork to v2017-12-05
@@ -421,17 +421,17 @@ goto dasboot-main-menu
 	item --gap * minor DasBoot menu adjustments
 	item
 	item 2018-03-23_v6.00.001 ${greenfg}2018-03-23_v6.00.001
-	item --gap ====================
+#	item --gap ====================
 	item --gap * testing Memtest image loading
 	item --gap * changes to DasBoot main menu
 	item
 	item 2018-03-21_v6.00.000 ${greenfg}2018-03-21_v6.00.000
-	item --gap ====================
+#	item --gap ====================
 	item --gap * converted to iPXE piggybacking off of AntonyM's netboot.xyz menu
 	item --gap * created DasBoot iPXE main menu
 	item
 	item 2015-05-06_v5.25.115 ${greenfg}2015-05-06_v5.25.115
-	item --gap ====================
+#	item --gap ====================
 	item --gap * added to diagnostic_oem.cfg:
 	item --gap ${spaces2}> DELL Diagnostic for 10th/9th/8th Gen Servers DOS v5118.3 (2009-06-30)
 	item --gap -- -----
@@ -450,7 +450,7 @@ goto dasboot-main-menu
 	item --gap ${spaces2}> added Changelog link and direct Download from FTP folder
 	item
 	item 2015-04-28_v5.24.114 ${greenfg}2015-04-28_v5.24.114
-	item --gap ====================
+#	item --gap ====================
 	item --gap * testing in syslinux.cfg:
 	item --gap ${spaces2}> added "MENU HELP changelog.txt" instead of INCLUDE menu/changelog.cfg
 	item --gap * fixed 'file not found' due uppercase MEMDISK which had to be lowercase'd
@@ -464,7 +464,7 @@ goto dasboot-main-menu
 	item --gap ${spaces2}> updated PCIid file used by sysinfo.exe from 2005 to 2015-04-20
 	item
 	item 2015-04-27_v5.22.111 ${greenfg}2015-04-27_v5.22.111
-	item --gap ====================
+#	item --gap ====================
 	item --gap * updated diagnostic_nic.cfg
 	item --gap ${spaces2}> Pro/1xxx Diag from v1.04.66.02/v1x.0 (2005-09-15)
 	item --gap ${spaces4}to v1.xx.x.x/v20.0.0 (2015-01-27)
@@ -472,7 +472,7 @@ goto dasboot-main-menu
 	item --gap ${spaces4}to Diagnostic Tool for PRO Series Ethernet Adapter
 	item
 	item 2015-04-26_v5.22.110 ${greenfg}2015-04-26_v5.22.110
-	item --gap ====================
+#	item --gap ====================
 	item --gap * added to firmware_ssd.cfg
 	item --gap ${spaces2}> OCZ SSD Guru v1.0.1170 (2015-03-05)
 	item --gap -- -----
