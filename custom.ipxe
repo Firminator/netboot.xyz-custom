@@ -167,6 +167,7 @@
 		### verify fails; not sure why
 		### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 		clear addr
+		item --gap ${horiline}
 		menu ${yellowfg}${menu} - Identify all PCI devices
 		item --gap ${defaultfg}PCIscan using boot.salstar.sk's PCI.IDs from 2018-03-15
 		item --gap ${horiline}
@@ -180,7 +181,7 @@
 			### temporary using local for testing things
 			chain pciids.ipxe
 			item --gap ${addr:busdevfn} ${vendor}:${device} ${ven}:
-			item 2dot ${greenfg}..> ${dev}
+			item ${greenfg}${dev}
 			item 
 			goto info-pciscan_loop
 	
@@ -226,9 +227,9 @@
 	menu ${yellowfg}${menu} - Network Information for NIC 0
 	item --gap ${horiline}
 	item --gap Select a different NIC:
-	item info-network-nic0 ${defaultfg}- NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item info-network-nic1 ${defaultfg}- NIC 1 (${net1/busloc:busdevfn} ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
-	#tem info-network-nic2 ${defaultfg}- NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
+	item info-network-nic0 ${greenfg}NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item info-network-nic1 ${greenfg}NIC 1 (${net1/busloc:busdevfn} ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	#tem info-network-nic2 ${defaultfg}NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
 	item --gap Vendor Name....: ${vendorcleartext-nic0}
