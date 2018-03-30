@@ -448,7 +448,7 @@ goto dasboot-main-menu
 	#item --gap	-> bios_server_dell.cfg (PE2500)
 	#item --gap	-> bios_portable_dell.cfg (E6420)
 	#item --gap	-> diagnostic_oem.cfg
-	item --gap -----
+	#item --gap -----
 	item --gap * updated bios.cfg and diagnostic_oem.cfg
 	#item --gap	-> merged ESM log tools into 'DELL ServiceTag Utility' FDD image
 	#item --gap	-> GZip bios_tools_dell_servicetag_esmtools.ima
@@ -466,7 +466,7 @@ goto dasboot-main-menu
 	item --gap ====================
 	item --gap * added to firmware_ssd.cfg
 	#item --gap 	-> OCZ SSD Guru v1.0.1170 (2015-03-05)
-	item --gap -----
+	#item --gap -----
 	item --gap * updated firmware_ssd.cfg
 	#item --gap 	-> OCZ Toolbox from v5.1.227 (2014-02-28) to v4.9.0.634 (2014-11-27)
 	#item --gap 	-> renamed file from firmware_ssd_ocz.iso to firmware_ssd_ocztoobox.iso
