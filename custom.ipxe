@@ -427,39 +427,39 @@ goto dasboot-main-menu
 	item --gap ====================
 	item --gap * converted to iPXE piggybacking off of AntonyM's netboot.xyz menu
 	item --gap * created DasBoot iPXE main menu
-	item
-	item 2015-05-06_v5.25.115 2018-03-21_v6.00.000
-	item --gap ====================
-	item --gap * added to diagnostic_oem.cfg
-	item --gap	>  DELL Diagnostic for 10th, 9th and 8th Gen Servers DOS v5118.3 (2009-06-30)
-	item --gap -- -----
-	item --gap * updated diagnostic_oem.cfg
+	#item
+	#item 2015-05-06_v5.25.115 2018-03-21_v6.00.000
+	#item --gap ====================
+	#item --gap * added to diagnostic_oem.cfg
+	#item --gap	>  DELL Diagnostic for 10th, 9th and 8th Gen Servers DOS v5118.3 (2009-06-30)
+	#item --gap -- -----
+	#item --gap * updated diagnostic_oem.cfg
 	#item --gap	-> splitted DELL Diag for servers into 2 seperate version
-	item --gap		a) v5158 (2013-01-29) for 11th generation (R710, R610, T610, R410, T410, R210, T110, M910, M610 etc)
-	item --gap 		b) v5108 (2009-06-30) for 10th, 9th and 8th generation (R805, R200, T100, 2950, 2900, 6850, 2850, 2800, SC1425, SC1435 etc.)
-	item --gap 		reason is this DELL Wiki: http://de.community.dell.com/techcenter/w/wiki/186.dell-32-bit-diagnostics-hardware-diagnose
+	#item --gap		a) v5158 (2013-01-29) for 11th generation (R710, R610, T610, R410, T410, R210, T110, M910, M610 etc)
+	#item --gap 		b) v5108 (2009-06-30) for 10th, 9th and 8th generation (R805, R200, T100, 2950, 2900, 6850, 2850, 2800, SC1425, SC1435 etc.)
+	#item --gap 		reason is this DELL Wiki: http://de.community.dell.com/techcenter/w/wiki/186.dell-32-bit-diagnostics-hardware-diagnose
 	#item --gap 	-> renamed and repacked image
-	item --gap 		a) from diagnostic_oem_dell_server.img to diagnostic_oem_dell_server11th.img
-	item --gap * updated firmware_hdd.cfg
+	#item --gap 		a) from diagnostic_oem_dell_server.img to diagnostic_oem_dell_server11th.img
+	#item --gap * updated firmware_hdd.cfg
 	#item --gap 	-> added notes that the Nautilus DOS updater is only for 9th, 10th and 11th gen servers
 	#item --gap 	-> added Changelog link and direct Download from FTP folder
-	item
-	item
-	item --gap 2015-04-28_v5.24.114
-	item --gap ====================
-	item --gap * testing: in syslinux.cfg added "MENU HELP changelog.txt" instead of INCLUDE menu/changelog.cfg
-	item --gap * fixed 'file not found' due uppercase MEMDISK which had to be lowercase'd
+	#item
+	#item
+	#item --gap 2015-04-28_v5.24.114
+	#item --gap ====================
+	#item --gap * testing: in syslinux.cfg added "MENU HELP changelog.txt" instead of INCLUDE menu/changelog.cfg
+	#item --gap * fixed 'file not found' due uppercase MEMDISK which had to be lowercase'd
 	#item --gap	-> bios_server_dell.cfg (PE2500)
 	#item --gap	-> bios_portable_dell.cfg (E6420)
 	#item --gap	-> diagnostic_oem.cfg
 	#item --gap -----
-	item --gap * updated bios.cfg and diagnostic_oem.cfg
+	#item --gap * updated bios.cfg and diagnostic_oem.cfg
 	#item --gap	-> merged ESM log tools into 'DELL ServiceTag Utility' FDD image
 	#item --gap	-> GZip bios_tools_dell_servicetag_esmtools.ima
 	#item --gap	-> updated PCIid file used by sysinfo.exe from 2005 to 2015-04-20
-	item
-	item
-	item --gap 2015-04-27_v5.22.111
+	#item
+	#item
+	#item --gap 2015-04-27_v5.22.111
 	item --gap ====================
 	item --gap * updated diagnostic_nic.cfg
 	#item --gap	-> Pro/1xxx Diag from v1.04.66.02/v1x.0 (2005-09-15) to v1.xx.x.x/v20.0.0 (2015-01-27)
@@ -479,7 +479,7 @@ goto dasboot-main-menu
 	#item --gap 	-> NetXtreme II Server 1 Gbit/s Diag from v7.8.1 (2013-01-22) to v7.10.2 (2014-02-26)
 	#item --gap 	-> NetXtreme II Server 10/20 Gbit/s Diag from v7.8.76 (2013-11-11) to v7.10.9 (2014-03-02)
 	#item --gap 	-> minor text changes and cleanup
-	prompt
+	choose press_enter ||
 	goto dasboot-main-menu
 
 :rocks
