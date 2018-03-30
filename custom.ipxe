@@ -119,13 +119,12 @@
 :dasboot-main-menu
 	### yellowfg normally shows up as orange for some reason; however when highlighted (and menu is) it will turn to Yellow
 	menu ${yellowfg}${menu}
-	#item --gap ${horiline}
+	item --gap ${horiline}
 	item --gap ${manufacturer} ${product} in ${fwplatform} Mode using a ${cpuarch_text}
 	item --key p info-pciscan ${defaultfg}> Identify all ${greenfg}P${defaultfg}CI devices
 	#tem --key h info-hdt     ${spaces2}- BIOS-only: identify all devices with (H)DT
 	item --key n info-network ${defaultfg}> Show ${greenfg}N${defaultfg}etwork information
 	item --gap ${horiline}
-	item
 	item
 	item
 	item --gap Boot:
@@ -169,9 +168,9 @@
 		### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 		clear addr
 		menu ${yellowfg}${menu}
-		item --gap ${defaultfg} PCIscan using boot.salstar.sk's PCI.IDs (2018-03-15)
+		item --gap ${defaultfg}PCIscan using boot.salstar.sk's PCI.IDs (2018-03-15)
+		item --gap ${horiline}
 		item
-	
 		:info-pciscan_loop
 			pciscan addr || goto info-pciscan_done
 			clear ven
@@ -227,9 +226,9 @@
 	menu ${yellowfg}${menu}
 	item --gap ${horiline}
 	item --gap Select a different NIC:
-	item info-network-nic0 - NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item info-network-nic1 - NIC 1 (${net1/busloc:busdevfn} ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
-	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
+	item info-network-nic0 ${defaultfg}- NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item info-network-nic1 ${defaultfg}- NIC 1 (${net1/busloc:busdevfn} ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	#tem info-network-nic2 ${defaultfg}- NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
 	item --gap Vendor Name....: ${vendorcleartext-nic0}
@@ -252,9 +251,9 @@
 	menu ${yellowfg}${menu}
 	item --gap ${horiline}
 	item --gap Select a different NIC:
-	item info-network-nic0 - NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
-	item info-network-nic1 - NIC 1 (${net1/busloc:busdevfn} ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
-	#tem info-network-nic2 - NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
+	item info-network-nic0 ${defaultfg}- NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
+	item info-network-nic1 ${defaultfg}- NIC 1 (${net1/busloc:busdevfn} ${pci/${net1/busloc}.0.2}:${pci/${net1/busloc}.2.2})
+	#tem info-network-nic2 ${defaultfg}- NIC 2 (${pci/${net2/busloc}.0.2}:${pci/${net2/busloc}.2.2})
 	item --gap ${horiline}
 	item
 	item --gap Vendor Name....: ${vendorcleartext-nic1}
@@ -341,6 +340,7 @@ goto dasboot-main-menu
 
 :wiping-submenu
 	menu ${yellowfg}${menu}
+	item --gap ${horiline}
 	item --gap Wiping/Media Sanitation Tools
 	item --key 1 dban-i586_info      ${spaces2}${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
 	item --key 2 hdsentinel-dos_info ${spaces2}${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
@@ -350,6 +350,7 @@ goto dasboot-main-menu
 	
 	:dban-i586_info
 		menu ${yellowfg}${menu}
+		item --gap ${horiline}
 		item --gap Wiping/Media Sanitation Tools
 		item --key 1 dban-i586_info      ${spaces2}${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
 		item --key 2 hdsentinel-dos_info ${spaces2}${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
@@ -365,12 +366,13 @@ goto dasboot-main-menu
 			:dban-i586_boot
 			imgfree
 			kernel memdisk604 iso 
-			initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20171205-g72f26b6/dban-20171205-g72f26b6_linux-4.7.2_i586.iso && boot || goto wiping-submenu
+			initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20180328-g311c5ee/dban-20180328-g311c5ee_linux-4.7.2_i586.iso && boot || goto wiping-submenu
 	
 	:hdsentinel-dos_info
 		menu ${yellowfg}${menu}
+		item --gap ${horiline}
 		item --gap Wiping/Media Sanitation Tools
-		item --key 1 dban-i586_info      ${spaces2}${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+		item --key 1 dban-i586_info      ${spaces2}${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2018-03-28) [ISO]
 		item --key 2 hdsentinel-dos_info ${spaces2}${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
 		item --key 3 partedmagic_info    ${spaces2}${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
 		item --gap ${horiline}
@@ -385,9 +387,11 @@ goto dasboot-main-menu
 			imgfree
 			kernel memdisk604 iso
 			initrd hdsdos_cd.zip && boot || goto wiping-submenu
-	
-:reboot
-	reboot
+
+:error
+	echo Dropped out of menu, press any key to return to main menu ...
+	prompt
+	goto dasboot-main-menu
 
 :other
 	### if chaining here, e.g. netboot's main menu.ipxe, the *.ipxe script has to be in the same location as this script
@@ -396,11 +400,13 @@ goto dasboot-main-menu
 	goto exit
 
 :changelog
-	menu ${yellowfg}${menu}
-	item --gap Changelog
+	menu ${yellowfg}${menu} Changelog
+	item ${defaultfg}2018-03-29_v6.00.006
+	echo ====================
+	echo * Wiping/Sanitation menu: updated DBAN Github fork from v2017-12-05 to v2018-03-28
 	item
-	item --gap 2018-03-28_v6.00.005
-	item --gap ====================
+	item ${defaultfg}2018-03-28_v6.00.005
+	item ====================
 	item --gap * Wiping/Sanitation menu: updated HDSentinel from v1.00.05 (2010-04-15) to v1.21 (2016-05-21)
 	item --gap * Wiping/Sanitation menu: updated DBAN Github fork to v2017-12-05
 	item --gap * partially moved changelog here
@@ -422,54 +428,54 @@ goto dasboot-main-menu
 	item --gap 2015-05-06_v5.25.115
 	item --gap ====================
 	item --gap * added to diagnostic_oem.cfg
-	item --gap	->  DELL Diagnostic for 10th, 9th and 8th Gen Servers DOS v5118.3 (2009-06-30)
+	#item --gap	->  DELL Diagnostic for 10th, 9th and 8th Gen Servers DOS v5118.3 (2009-06-30)
 	item --gap -----
 	item --gap * updated diagnostic_oem.cfg
-	item --gap	-> splitted DELL Diag for servers into 2 seperate version
+	#item --gap	-> splitted DELL Diag for servers into 2 seperate version
 	item --gap		a) v5158 (2013-01-29) for 11th generation (R710, R610, T610, R410, T410, R210, T110, M910, M610 etc)
 	item --gap 		b) v5108 (2009-06-30) for 10th, 9th and 8th generation (R805, R200, T100, 2950, 2900, 6850, 2850, 2800, SC1425, SC1435 etc.)
 	item --gap 		reason is this DELL Wiki: http://de.community.dell.com/techcenter/w/wiki/186.dell-32-bit-diagnostics-hardware-diagnose
-	item --gap 	-> renamed and repacked image
+	#item --gap 	-> renamed and repacked image
 	item --gap 		a) from diagnostic_oem_dell_server.img to diagnostic_oem_dell_server11th.img
 	item --gap * updated firmware_hdd.cfg
-	item --gap 	-> added notes that the Nautilus DOS updater is only for 9th, 10th and 11th gen servers
-	item --gap 	-> added Changelog link and direct Download from FTP folder
+	#item --gap 	-> added notes that the Nautilus DOS updater is only for 9th, 10th and 11th gen servers
+	#item --gap 	-> added Changelog link and direct Download from FTP folder
 	item
 	item
 	item --gap 2015-04-28_v5.24.114
 	item --gap ====================
 	item --gap * testing: in syslinux.cfg added "MENU HELP changelog.txt" instead of INCLUDE menu/changelog.cfg
 	item --gap * fixed 'file not found' due uppercase MEMDISK which had to be lowercase'd
-	item --gap	-> bios_server_dell.cfg (PE2500)
-	item --gap	-> bios_portable_dell.cfg (E6420)
-	item --gap	-> diagnostic_oem.cfg
+	#item --gap	-> bios_server_dell.cfg (PE2500)
+	#item --gap	-> bios_portable_dell.cfg (E6420)
+	#item --gap	-> diagnostic_oem.cfg
 	item --gap -----
 	item --gap * updated bios.cfg and diagnostic_oem.cfg
-	item --gap	-> merged ESM log tools into 'DELL ServiceTag Utility' FDD image
-	item --gap	-> GZip bios_tools_dell_servicetag_esmtools.ima
-	item --gap	-> updated PCIid file used by sysinfo.exe from 2005 to 2015-04-20
+	#item --gap	-> merged ESM log tools into 'DELL ServiceTag Utility' FDD image
+	#item --gap	-> GZip bios_tools_dell_servicetag_esmtools.ima
+	#item --gap	-> updated PCIid file used by sysinfo.exe from 2005 to 2015-04-20
 	item
 	item
 	item --gap 2015-04-27_v5.22.111
 	item --gap ====================
 	item --gap * updated diagnostic_nic.cfg
-	item --gap	-> Pro/1xxx Diag from v1.04.66.02/v1x.0 (2005-09-15) to v1.xx.x.x/v20.0.0 (2015-01-27)
-	item --gap	-> renamed from Pro/1xxx Diag to Diagnostic Tool for PRO Series Ethernet Adapter
+	#item --gap	-> Pro/1xxx Diag from v1.04.66.02/v1x.0 (2005-09-15) to v1.xx.x.x/v20.0.0 (2015-01-27)
+	#item --gap	-> renamed from Pro/1xxx Diag to Diagnostic Tool for PRO Series Ethernet Adapter
 	item
 	item
 	item --gap 2015-04-26_v5.22.110
 	item --gap ====================
 	item --gap * added to firmware_ssd.cfg
-	item --gap 	-> OCZ SSD Guru v1.0.1170 (2015-03-05)
+	#item --gap 	-> OCZ SSD Guru v1.0.1170 (2015-03-05)
 	item --gap -----
 	item --gap * updated firmware_ssd.cfg
-	item --gap 	-> OCZ Toolbox from v5.1.227 (2014-02-28) to v4.9.0.634 (2014-11-27)
-	item --gap 	-> renamed file from firmware_ssd_ocz.iso to firmware_ssd_ocztoobox.iso
+	#item --gap 	-> OCZ Toolbox from v5.1.227 (2014-02-28) to v4.9.0.634 (2014-11-27)
+	#item --gap 	-> renamed file from firmware_ssd_ocz.iso to firmware_ssd_ocztoobox.iso
 	item --gap * updated diagnostic_nic.cfg
-	item --gap 	-> NetXtreme I and NetLink 57xx Diag from v16.2.08 (2013-08-30) to v16.6.07 (2014-12-22)
-	item --gap 	-> NetXtreme II Server 1 Gbit/s Diag from v7.8.1 (2013-01-22) to v7.10.2 (2014-02-26)
-	item --gap 	-> NetXtreme II Server 10/20 Gbit/s Diag from v7.8.76 (2013-11-11) to v7.10.9 (2014-03-02)
-	item --gap 	-> minor text changes and cleanup
+	#item --gap 	-> NetXtreme I and NetLink 57xx Diag from v16.2.08 (2013-08-30) to v16.6.07 (2014-12-22)
+	#item --gap 	-> NetXtreme II Server 1 Gbit/s Diag from v7.8.1 (2013-01-22) to v7.10.2 (2014-02-26)
+	#item --gap 	-> NetXtreme II Server 10/20 Gbit/s Diag from v7.8.76 (2013-11-11) to v7.10.9 (2014-03-02)
+	#item --gap 	-> minor text changes and cleanup
 	prompt
 	goto dasboot-main-menu
 
@@ -491,10 +497,8 @@ goto dasboot-main-menu
 	echo Failed to verify a file.
 	goto error
 
-:error
-	echo Error occured, press any key to return to main menu ...
-	prompt
-	goto dasboot-main-menu
+:reboot
+	reboot
 
 :exit
 	imgfree
