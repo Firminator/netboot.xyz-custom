@@ -3,25 +3,25 @@
 ### netboot.xyz-custom menu
 ###
 
-### Set Infohead
-	set menuname DasBoot
-	set menuvers v6.00.006
-	set menudate 2018-03-29
-	set menu ${menuname} ${menuvers} (${menudate})
-	set horiline ==========================================================================
-	#set horiline =====================================================================
+:set-dasboot-header
+set menuname DasBoot
+set menuvers v6.00.006
+set menudate 2018-03-29
+set menu ${menuname} ${menuvers} (${menudate})
+set horiline ==========================================================================
+#set horiline =====================================================================
 
-###Define Indent
-	set spaces2:hex 20:20
-	set spaces4:hex 20:20:20:20
-	set spaces8:hex 20:20:20:20:20:20:20:20
-	set spaces16:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
-	set spaces32:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
-	set spaces2 ${spaces2:string}
-	set spaces4 ${spaces4:string}
-	set spaces8 ${spaces8:string}
-	set spaces16 ${spaces16:string}
-	set spaces32 ${spaces32:string}
+:define-indent
+set spaces2:hex 20:20
+set spaces4:hex 20:20:20:20
+set spaces8:hex 20:20:20:20:20:20:20:20
+set spaces16:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
+set spaces32:hex 20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20:20
+set spaces2 ${spaces2:string}
+set spaces4 ${spaces4:string}
+set spaces8 ${spaces8:string}
+set spaces16 ${spaces16:string}
+set spaces32 ${spaces32:string}
 ### ESC[J Clear screen and home cursor
 	set cls:hex 1b:5b:4a  ### ANSI clear screen sequence - "#^#[#[#J" aka "##[#J ###
 	set cls ${cls:string}
