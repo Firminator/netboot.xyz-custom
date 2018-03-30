@@ -5,7 +5,7 @@
 
 ### Set Infohead
 	set menuname DasBoot
-	set menuvers v6.00.06
+	set menuvers v6.00.006
 	set menudate 2018-03-29
 	set menu ${menuname} ${menuvers} (${menudate})
 	set horiline ==========================================================================
@@ -167,7 +167,7 @@
 		### verify fails; not sure why
 		### imgverify pciids.ipxe http://boot.salstar.sk/sigs/pciids.ipxe.sig || goto failed_verify
 		clear addr
-		menu ${yellowfg}${menu} - Identify all PCI devices
+		menu ${yellowfg}${menu} * Identify all PCI devices
 		item --gap ${horiline}
 		item --gap ${defaultfg}PCIscan using boot.salstar.sk's PCI.IDs from 2018-03-15
 		item --gap ${horiline}
@@ -224,7 +224,7 @@
 		set devicecleartext-nic1 ${dev}
 	
 :info-network-nic0
-	menu ${yellowfg}${menu} - Network Information for NIC 0
+	menu ${yellowfg}${menu} * Network Information for NIC 0
 	item --gap ${horiline}
 	item --gap Select a different NIC:
 	item info-network-nic0 ${greenfg}NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
@@ -249,7 +249,7 @@
 	choose --default info-network-nic1 info-network-nic0_choice && goto ${info-network-nic0_choice} || goto dasboot-main-menu
 	
 :info-network-nic1
-	menu ${yellowfg}${menu} - Network Information for NIC 1
+	menu ${yellowfg}${menu} * Network Information for NIC 1
 	item --gap ${horiline}
 	item --gap Select a different NIC:
 	item info-network-nic0 ${greenfg}NIC 0 (${net0/busloc:busdevfn} ${pci/${net0/busloc}.0.2}:${pci/${net0/busloc}.2.2})
@@ -340,10 +340,10 @@ goto dasboot-main-menu
 	goto dasboot-main-menu
 
 :wiping-submenu
-	menu ${yellowfg}${menu} - Wiping/Media Sanitation Tools
+	menu ${yellowfg}${menu} * Wiping/Media Sanitation Tools
 	item --gap ${horiline}
 	#item --gap Select a different item:
-	item --key 1 dban-i586_info        ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+	item --key 1 dban-i586_info        ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2018-03-28) [ISO]
 	item --key 2 hdsentinel-dos_info   ${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
 	item --key 3 partedmagic_info      ${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
 	item --key 4 lenovodriveerase_info ${defaultfg}(${greenfg}4${defaultfg}) Lenovo Drive Erase for Thinkpads [EFI DOS]
@@ -351,7 +351,7 @@ goto dasboot-main-menu
 	choose --default dban-586_info wiping-submenu_choice && goto ${wiping-submenu_choice} || goto dasboot-main-menu
 	
 	:dban-i586_info
-		menu ${yellowfg}${menu} - Wiping/Media Sanitation Tools
+		menu ${yellowfg}${menu} * Wiping/Media Sanitation Tools
 		item --gap ${horiline}
 		#item --gap Select a different item:
 		item --key 1 dban-i586_info        ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2018-03-28) [ISO]
@@ -372,7 +372,7 @@ goto dasboot-main-menu
 			initrd https://github.com/NHellFire/dban/releases/download/nightly%2F20180328-g311c5ee/dban-20180328-g311c5ee_linux-4.7.2_i586.iso && boot || goto wiping-submenu
 	
 	:hdsentinel-dos_info
-		menu ${yellowfg}${menu} - Wiping/Media Sanitation Tools
+		menu ${yellowfg}${menu} * Wiping/Media Sanitation Tools
 		item --gap ${horiline}
 		#item --gap Select a different item:
 		item --key 1 dban-i586_info        ${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2018-03-28) [ISO]
@@ -406,7 +406,7 @@ goto dasboot-main-menu
 	goto exit
 
 :changelog
-	menu ${yellowfg}${menu} - Changelog
+	menu ${yellowfg}${menu} * Changelog
 	item 2018-03-29_v6.00.006 ${greenfg}${menudate}_${menuvers}
 	item --gap ====================
 	item --gap * Wiping/Sanitation:
