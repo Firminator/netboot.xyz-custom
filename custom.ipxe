@@ -5,9 +5,9 @@
 
 ### Set Infohead
 	set menuname DasBoot
-	set menuvers v6.00.05
-	set menudate (2018-03-28)
-	set menu ${menuname} ${menuvers} ${menudate}
+	set menuvers v6.00.06
+	set menudate 2018-03-29
+	set menu ${menuname} ${menuvers} (${menudate})
 	set horiline ==========================================================================
 	#set horiline =====================================================================
 
@@ -352,7 +352,7 @@ goto dasboot-main-menu
 		menu ${yellowfg}${menu}
 		item --gap ${horiline}
 		item --gap Wiping/Media Sanitation Tools
-		item --key 1 dban-i586_info      ${spaces2}${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2017-12-05) [ISO]
+		item --key 1 dban-i586_info      ${spaces2}${defaultfg}(${greenfg}1${defaultfg}) DBAN i586 (maintained Github fork v2018-03-28) [ISO]
 		item --key 2 hdsentinel-dos_info ${spaces2}${defaultfg}(${greenfg}2${defaultfg}) HDSentinel v1.21 (2016-05-20) [DOS]
 		item --key 3 partedmagic_info    ${spaces2}${defaultfg}(${greenfg}3${defaultfg}) PartedMagic
 		item --gap ${horiline}
@@ -401,23 +401,22 @@ goto dasboot-main-menu
 
 :changelog
 	menu ${yellowfg}${menu} Changelog
-	item ${defaultfg}2018-03-29_v6.00.006
+	item ${defaultfg}${menudate}_${menuvers} 2018-03-29_v6.00.006
 	echo ====================
-	echo * Wiping/Sanitation menu: updated DBAN Github fork from v2017-12-05 to v2018-03-28
+	echo * Wiping/Sanitation: updated DBAN Github fork from v2017-12-05 to v2018-03-28
 	item
-	item ${defaultfg}2018-03-28_v6.00.005
-	item ====================
-	item --gap * Wiping/Sanitation menu: updated HDSentinel from v1.00.05 (2010-04-15) to v1.21 (2016-05-21)
-	item --gap * Wiping/Sanitation menu: updated DBAN Github fork to v2017-12-05
-	item --gap * partially moved changelog here
-	item --gap * minor DasBoot menu adjustments
+	item ${defaultfg}2018-03-28_v6.00.005 2018-03-28_v6.00.005
+	echo ====================
+	echo * Wiping/Sanitation:
+	echo   > updated HDSentinel from v1.00.05 (2010-04-15) to v1.21 (2016-05-21)
+	echo   > updated DBAN Github fork to v2017-12-05
+	echo * partially moved changelog here
+	echo * minor DasBoot menu adjustments
 	item
-	item
-	item --gap 2018-03-23_v6.00.001
-	item --gap ====================
-	item --gap * testing Memtest image loading
-	item --gap * changes to DasBoot main menu
-	item
+	item ${defaultfg}2018-03-23_v6.00.001 2018-03-23_v6.00.001
+	echo ====================
+	echo * testing Memtest image loading
+	echo * changes to DasBoot main menu
 	item
 	item --gap 2018-03-21_v6.00.000
 	item --gap ====================
@@ -429,7 +428,7 @@ goto dasboot-main-menu
 	item --gap ====================
 	item --gap * added to diagnostic_oem.cfg
 	#item --gap	->  DELL Diagnostic for 10th, 9th and 8th Gen Servers DOS v5118.3 (2009-06-30)
-	item --gap -----
+	#item --gap -----
 	item --gap * updated diagnostic_oem.cfg
 	#item --gap	-> splitted DELL Diag for servers into 2 seperate version
 	item --gap		a) v5158 (2013-01-29) for 11th generation (R710, R610, T610, R410, T410, R210, T110, M910, M610 etc)
